@@ -92,9 +92,9 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold mb-1">{t.contact.address}</h3>
                       <p className="text-muted-foreground">
-                        123 Seaside Boulevard<br />
-                        Costa Bella, 12345<br />
-                        Italy
+                        Rue de la Station 15<br />
+                        4101 Jemeppe-sur-Meuse<br />
+                        Belgique
                       </p>
                     </div>
                   </div>
@@ -105,8 +105,8 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1">{t.contact.phone}</h3>
-                      <p className="text-muted-foreground">+39 123 4567 890</p>
-                      <p className="text-muted-foreground">+39 098 7654 321 (Reservations)</p>
+                      <p className="text-muted-foreground">+32 4 XXX XX XX</p>
+                      <p className="text-muted-foreground">+32 4 XXX XX XX (Rendez-vous)</p>
                     </div>
                   </div>
                   
@@ -116,8 +116,8 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1">{t.contact.email}</h3>
-                      <p className="text-muted-foreground">info@maresereno.com</p>
-                      <p className="text-muted-foreground">reservations@maresereno.com</p>
+                      <p className="text-muted-foreground">contact@labarbeapapa.be</p>
+                      <p className="text-muted-foreground">rdv@labarbeapapa.be</p>
                     </div>
                   </div>
                   

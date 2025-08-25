@@ -10,40 +10,40 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Sample apartments data
-const featuredApartments: ApartmentProps[] = [
+// Sample services data - adapted for barbershop
+const featuredServices: ApartmentProps[] = [
   {
     id: "1",
-    name: "Deluxe Sea View Suite",
-    description: "Luxurious suite with panoramic sea views, modern amenities, and a private balcony.",
-    price: 180,
-    capacity: 2,
-    size: 45,
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Balcony"]
+    name: "Coupe Homme Classique",
+    description: "Coupe traditionnelle adaptée à votre morphologie avec finition soignée.",
+    price: 25,
+    capacity: 1,
+    size: 30,
+    image: "/src/assets/barber-service.jpg",
+    location: "30 min",
+    features: ["Coupe", "Lavage", "Séchage", "Produits inclus", "Conseil style"]
   },
   {
     id: "2",
-    name: "Premium Family Apartment",
-    description: "Spacious apartment ideal for families, with full kitchen and stunning coastal views.",
-    price: 250,
-    capacity: 4,
-    size: 75,
-    image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=600&fit=crop",
-    location: "Second row",
-    features: ["Wi-Fi", "Kitchen", "Bathroom", "Air Conditioning", "TV", "Washing Machine"]
+    name: "Coupe & Barbe",
+    description: "Service complet associant coupe moderne et taille de barbe professionnelle.",
+    price: 40,
+    capacity: 1,
+    size: 45,
+    image: "/src/assets/traditional-shaving.jpg",
+    location: "45 min",
+    features: ["Coupe", "Taille barbe", "Produits premium", "Conseil style", "Finition"]
   },
   {
     id: "3",
-    name: "Executive Beach Studio",
-    description: "Elegant studio with direct beach access, modern design, and premium finishes.",
-    price: 150,
-    capacity: 2,
-    size: 35,
-    image: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=800&h=600&fit=crop",
-    location: "Beachfront",
-    features: ["Wi-Fi", "Kitchenette", "Bathroom", "Air Conditioning", "TV"]
+    name: "Rasage Traditionnel",
+    description: "Rasage à l'ancienne au blaireau et savon avec serviettes chaudes.",
+    price: 30,
+    capacity: 1,
+    size: 40,
+    image: "/src/assets/traditional-shaving.jpg",
+    location: "40 min",
+    features: ["Serviettes chaudes", "Blaireau", "Rasoir traditionnel", "Lotion apaisante"]
   }
 ];
 
@@ -124,22 +124,22 @@ export default function Index() {
               <div className="relative animate-fade-in [animation-delay:300ms]">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&h=600&fit=crop"
-                    alt="Seaside view" 
+                    src="/src/assets/salon-interior.jpg"
+                    alt="Intérieur du salon La Barbe à Papa" 
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="absolute -bottom-6 -left-6 w-2/3 rounded-2xl overflow-hidden shadow-xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1545579133-99bb5ab189bd?w=400&h=300&fit=crop"
-                    alt="Luxury apartment interior" 
+                    src="/src/assets/barber-service.jpg"
+                    alt="Service coiffure professionnel" 
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="absolute -top-6 -right-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=400&h=300&fit=crop"
-                    alt="Pool view" 
+                    src="/src/assets/traditional-shaving.jpg"
+                    alt="Rasage traditionnel" 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -201,9 +201,9 @@ export default function Index() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredApartments.map((apartment, index) => (
-                <div key={apartment.id} className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
-                  <ApartmentCard apartment={apartment} />
+              {featuredServices.map((service, index) => (
+                <div key={service.id} className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
+                  <ApartmentCard apartment={service} />
                 </div>
               ))}
             </div>
