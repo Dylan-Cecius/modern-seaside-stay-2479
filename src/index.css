@@ -160,6 +160,25 @@
     50% { background-position: 100% 50%; }
   }
 
+  /* Scrolling text effect inspired by Bayer & Bayer */
+  .scrolling-text {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-horizontal 20s linear infinite;
+    will-change: transform;
+  }
+
+  .scrolling-text span {
+    padding-right: 4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  @keyframes scroll-horizontal {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
 
   /* Premium animations inspired by Bayer & Bayer */
   .premium-reveal {

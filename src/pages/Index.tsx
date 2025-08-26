@@ -132,6 +132,22 @@ export default function Index() {
       <main className="flex-1">
         {/* Hero Section */}
         <HeroSection />
+
+        {/* Scrolling text banner inspired by Bayer & Bayer */}
+        <section className="bg-primary text-primary-foreground py-4 overflow-hidden">
+          <div className="scrolling-text">
+            <span>COIFFURE</span>
+            <span>BARBE</span>
+            <span>STYLE</span>
+            <span>TRADITION</span>
+            <span>EXCELLENCE</span>
+            <span>COIFFURE</span>
+            <span>BARBE</span>
+            <span>STYLE</span>
+            <span>TRADITION</span>
+            <span>EXCELLENCE</span>
+          </div>
+        </section>
         
         {/* Welcome Section */}
         <section id="welcome" className="section relative overflow-hidden bg-gradient-to-br from-background via-background/80 to-primary/5">
