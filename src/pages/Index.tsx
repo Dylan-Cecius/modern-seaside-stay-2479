@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -72,11 +72,25 @@ const featuredServices: ApartmentProps[] = [
 
 export default function Index() {
   const { t } = useLanguage();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const totalSlides = 6;
   
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
   }, []);
+  
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+  
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
+  
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
   
   // Feature items
   const features = [
@@ -146,9 +160,12 @@ export default function Index() {
               
               <div className="relative animate-fade-in [animation-delay:300ms]">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
-                  {/* Carousel container */}
-                  <div className="relative w-full h-full">
-                    <div className="flex transition-transform duration-500 ease-in-out h-full">
+                  {/* Carousel with real salon photos */}
+                  <div className="relative w-full h-full group">
+                    <div 
+                      className="flex transition-transform duration-500 ease-in-out h-full"
+                      style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                    >
                       <div className="min-w-full h-full">
                         <img 
                           src="/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png"
@@ -159,24 +176,65 @@ export default function Index() {
                       <div className="min-w-full h-full">
                         <img 
                           src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png"
-                          alt="Coupe réalisée chez La Barbe à Papa" 
+                          alt="Coupe dégradée classique" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-full h-full">
+                        <img 
+                          src="/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png"
+                          alt="Coupe moderne avec dégradé" 
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="min-w-full h-full">
                         <img 
                           src="/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png"
-                          alt="Coupe avec barbe - La Barbe à Papa" 
+                          alt="Coupe avec barbe taillée" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-full h-full">
+                        <img 
+                          src="/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png"
+                          alt="Dégradé progressif avec barbe" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-full h-full">
+                        <img 
+                          src="/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png"
+                          alt="Coupe précise avec finitions" 
                           className="w-full h-full object-cover"
                         />
                       </div>
                     </div>
                     
+                    {/* Navigation arrows */}
+                    <button 
+                      onClick={prevSlide}
+                      className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/70"
+                    >
+                      ‹
+                    </button>
+                    <button 
+                      onClick={nextSlide}
+                      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/70"
+                    >
+                      ›
+                    </button>
+                    
                     {/* Carousel dots */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                      <div className="w-2 h-2 rounded-full bg-white/50"></div>
-                      <div className="w-2 h-2 rounded-full bg-white/80"></div>
-                      <div className="w-2 h-2 rounded-full bg-white/50"></div>
+                      {Array.from({ length: totalSlides }).map((_, index) => (
+                        <div
+                          key={index}
+                          onClick={() => goToSlide(index)}
+                          className={`w-2 h-2 rounded-full cursor-pointer transition-colors ${
+                            currentSlide === index ? 'bg-white/80' : 'bg-white/50'
+                          }`}
+                        />
+                      ))}
                     </div>
                   </div>
                 </div>
