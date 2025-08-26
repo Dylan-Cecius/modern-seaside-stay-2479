@@ -29,39 +29,45 @@ export default function ApartmentCard({
   // Use translated name and description if available
   const translatedName = language !== 'en' && t.apartmentDescriptions[apartment.id]?.name ? t.apartmentDescriptions[apartment.id].name : apartment.name;
   const translatedDescription = language !== 'en' && t.apartmentDescriptions[apartment.id]?.description ? t.apartmentDescriptions[apartment.id].description : apartment.description;
-  return <div className="rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl bg-card group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <div className="relative overflow-hidden h-64">
-        <img 
-          src={apartment.image} 
-          alt={translatedName} 
-          className={cn("w-full h-full object-cover transition-transform duration-700", isHovered ? "scale-110" : "scale-100")}
-          onError={(e) => {
-            console.error(`Failed to load image: ${apartment.image}`);
-            e.currentTarget.style.backgroundColor = '#f3f4f6';
-            e.currentTarget.alt = 'Image non disponible';
-          }}
-          onLoad={() => console.log(`Image loaded successfully: ${apartment.image}`)}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 flex items-end p-6">
-          <div>
-            <h3 className="text-white text-xl font-bold mb-1">{translatedName}</h3>
-            <div className="flex items-center text-white/80 text-sm mb-2">
-              
-              <span>{apartment.location}</span>
-            </div>
-            
+  return <div className="rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl bg-card group border border-border/50 hover:border-primary/30" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+      {/* Header with service name and duration */}
+      <div className="relative bg-gradient-to-r from-primary/10 via-primary/5 to-accent/10 p-6 border-b border-border/30">
+        <div className="flex justify-between items-start mb-2">
+          <h3 className="text-xl font-bold text-foreground">{translatedName}</h3>
+          <div className="flex items-center text-primary font-medium bg-primary/10 px-3 py-1 rounded-full">
+            <span className="text-sm">{apartment.location}</span>
           </div>
         </div>
+        <p className="text-muted-foreground">{translatedDescription}</p>
       </div>
       
+      {/* Content with features and pricing */}
       <div className="p-6 space-y-4">
-        <p className="text-muted-foreground line-clamp-2">{translatedDescription}</p>
+        {/* Features list */}
+        {apartment.features && apartment.features.length > 0 && (
+          <div className="space-y-2">
+            <h4 className="font-medium text-foreground text-sm uppercase tracking-wider">Inclus dans le service</h4>
+            <div className="grid grid-cols-2 gap-2">
+              {apartment.features.map((feature, index) => (
+                <div key={index} className="flex items-center text-sm text-muted-foreground">
+                  <div className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></div>
+                  {feature}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
         
-        
-        <div className="pt-2">
-          <div>
-            <span className="text-xl font-bold">{apartment.price}€</span>
-            <span className="text-muted-foreground text-sm"> / {t.booking.summary.night}</span>
+        {/* Pricing */}
+        <div className="pt-4 border-t border-border/30">
+          <div className="flex justify-between items-center">
+            <div>
+              <span className="text-2xl font-bold text-foreground">{apartment.price}€</span>
+              <span className="text-muted-foreground text-sm"> / {t.booking.summary.night}</span>
+            </div>
+            <div className="bg-gradient-to-r from-primary/20 to-accent/20 px-4 py-2 rounded-lg">
+              <span className="text-sm font-medium text-primary">Réserver</span>
+            </div>
           </div>
         </div>
       </div>
