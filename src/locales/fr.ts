@@ -112,7 +112,7 @@ export const fr = {
       onePlus: "Coupe cheveux",
       twoPlus: "Barbe",
       threePlus: "Soin visage",
-      fourPlus: "Pack complet",
+      fourPlus: "Double ancienne",
       location: "Durée",
       allLocations: "Toutes durées",
       priceRange: "Gamme de Prix",
@@ -295,7 +295,7 @@ export const fr = {
       description: "Mise en forme et entretien de votre barbe selon vos préférences."
     },
     "6": {
-      name: "Pack Complet",
+      name: "Double ancienne",
       description: "Service premium incluant coupe, barbe, rasage et soin visage."
     }
   },
@@ -381,7 +381,7 @@ export const fr = {
       onePlus: "Coupe cheveux",
       twoPlus: "Barbe",
       threePlus: "Soin visage",
-      fourPlus: "Pack complet",
+      fourPlus: "Double ancienne",
       location: "Durée",
       allLocations: "Toutes durées",
       priceRange: "Gamme de Prix",
@@ -418,7 +418,7 @@ export const fr = {
       description: "Mise en forme et entretien de votre barbe selon vos préférences."
     },
     "6": {
-      name: "Pack Complet",
+      name: "Double ancienne",
       description: "Service premium incluant coupe, barbe, rasage et soin visage."
     }
   },
