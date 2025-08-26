@@ -44,30 +44,21 @@ export default function ApartmentCard({
       {/* Content with features and pricing */}
       <div className="p-6 space-y-4">
         {/* Features list */}
-        {apartment.features && apartment.features.length > 0 && (
-          <div className="space-y-2">
-            <h4 className="font-medium text-foreground text-sm uppercase tracking-wider">Inclus dans le service</h4>
+        {apartment.features && apartment.features.length > 0 && <div className="space-y-2">
+            
             <div className="grid grid-cols-2 gap-2">
-              {apartment.features.map((feature, index) => (
-                <div key={index} className="flex items-center text-sm text-muted-foreground">
-                  <div className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></div>
-                  {feature}
-                </div>
-              ))}
+              {apartment.features.map((feature, index) => {})}
             </div>
-          </div>
-        )}
+          </div>}
         
         {/* Pricing */}
         <div className="pt-4 border-t border-border/30">
           <div className="flex justify-between items-center">
             <div>
               <span className="text-2xl font-bold text-foreground">{apartment.price}€</span>
-              <span className="text-muted-foreground text-sm"> / {t.booking.summary.night}</span>
+              
             </div>
-            <div className="bg-gradient-to-r from-primary/20 to-accent/20 px-4 py-2 rounded-lg">
-              <span className="text-sm font-medium text-primary">Réserver</span>
-            </div>
+            
           </div>
         </div>
       </div>
