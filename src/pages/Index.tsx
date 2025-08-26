@@ -14,36 +14,69 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const featuredServices: ApartmentProps[] = [
   {
     id: "1",
-    name: "Coupe Homme Classique",
-    description: "Coupe traditionnelle adaptée à votre morphologie avec finition soignée.",
-    price: 25,
+    name: "Coupe Homme",
+    description: "Coupe classique masculine adaptée à votre style et morphologie.",
+    price: 18,
     capacity: 1,
     size: 30,
-    image: "/src/assets/barber-service.jpg",
+    image: "/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png",
     location: "30 min",
     features: ["Coupe", "Lavage", "Séchage", "Produits inclus", "Conseil style"]
   },
   {
     id: "2",
-    name: "Coupe & Barbe",
+    name: "Coupe + Barbe",
     description: "Service complet associant coupe moderne et taille de barbe professionnelle.",
-    price: 40,
+    price: 23,
     capacity: 1,
     size: 45,
-    image: "/src/assets/traditional-shaving.jpg",
+    image: "/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png",
     location: "45 min",
     features: ["Coupe", "Taille barbe", "Produits premium", "Conseil style", "Finition"]
   },
   {
     id: "3",
-    name: "Rasage Traditionnel",
-    description: "Rasage à l'ancienne au blaireau et savon avec serviettes chaudes.",
-    price: 30,
+    name: "Barbe",
+    description: "Taille et mise en forme de barbe avec produits de qualité.",
+    price: 10,
     capacity: 1,
-    size: 40,
-    image: "/src/assets/traditional-shaving.jpg",
-    location: "40 min",
-    features: ["Serviettes chaudes", "Blaireau", "Rasoir traditionnel", "Lotion apaisante"]
+    size: 15,
+    image: "/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png",
+    location: "15 min",
+    features: ["Taille", "Mise en forme", "Produits premium", "Conseil entretien"]
+  },
+  {
+    id: "4",
+    name: "Coupe + Barbe ancienne",
+    description: "Formule premium avec techniques traditionnelles et soins complets.",
+    price: 28,
+    capacity: 1,
+    size: 50,
+    image: "/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png",
+    location: "50 min",
+    features: ["Coupe", "Barbe ancienne", "Serviettes chaudes", "Produits premium", "Finition soignée"]
+  },
+  {
+    id: "5",
+    name: "Coupe enfant",
+    description: "Coupe spécialement adaptée aux enfants dans une ambiance détendue.",
+    price: 16,
+    capacity: 1,
+    size: 30,
+    image: "/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png",
+    location: "30 min",
+    features: ["Coupe adaptée", "Patience", "Ambiance ludique", "Produits doux"]
+  },
+  {
+    id: "6",
+    name: "Double ancienne",
+    description: "Service haut de gamme avec double prestation et techniques ancestrales.",
+    price: 32,
+    capacity: 1,
+    size: 50,
+    image: "/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png",
+    location: "50 min",
+    features: ["Double prestation", "Techniques ancestrales", "Produits premium", "Service VIP"]
   }
 ];
 
