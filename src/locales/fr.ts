@@ -99,7 +99,7 @@ export const fr = {
     },
     cta: {
       title: "Prêt pour un Nouveau Look ?",
-      description: "Prenez rendez-vous dès aujourd'hui et laissez nos experts révéler votre style.",
+      description: "",
       bookNow: "Réserver Maintenant"
     }
   },
