@@ -136,7 +136,15 @@ export default function Index() {
         {/* Modern Google reviews banner */}
         <section 
           className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6 overflow-hidden relative cursor-pointer hover:from-primary/90 hover:via-primary/90 hover:to-primary-foreground/80 transition-all duration-300"
-          onClick={() => window.open("https://www.google.com/search?q=La+barbe+a+papa+avis", "_blank")}
+          onClick={() => {
+            const link = document.createElement('a');
+            link.href = 'https://g.page/r/CfDGfW7VQzGZEAI/review';
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20"></div>
           <div className="scrolling-text relative z-10">
