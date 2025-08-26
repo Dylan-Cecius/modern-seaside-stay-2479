@@ -136,7 +136,7 @@ export default function Index() {
         {/* Modern Google reviews banner */}
         <section 
           className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6 overflow-hidden relative cursor-pointer hover:from-primary/90 hover:via-primary/90 hover:to-primary-foreground/80 transition-all duration-300"
-          onClick={() => window.open("https://www.google.com/search?q=La+barbe+a+papa+Avis&rlz=1C1FKPE_en-GBBE1076BE1076&oq=la+ba&gs_lcrp=EgZjaHJvbWUqDggAEEUYJxg7GIAEGIoFMg4IABBFGCcYOxiABBiKBTIGCAEQRRg7MgYIAhBFGDkyBggDEEUYOzIYCAQQLhhDGIMBGMcBGLEDGNEDGIAEGIoFMgYIBRBFGDwyBggGEEUYPDIGCAcQRRg80gEIMzc5MmowajSoAgCwAgE&sourceid=chrome&ie=UTF-8#mpd=~7587728091180182910/customers/reviews", "_blank")}
+          onClick={() => window.open("https://www.google.com/search?q=La+barbe+a+papa+avis", "_blank")}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20"></div>
           <div className="scrolling-text relative z-10">
