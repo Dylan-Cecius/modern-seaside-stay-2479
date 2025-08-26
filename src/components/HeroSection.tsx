@@ -81,7 +81,7 @@ export default function HeroSection() {
           href="#welcome" 
           className="flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity"
         >
-          <span className="text-sm mb-2">{t.hero.scrollDown}</span>
+          
           <ChevronDown className="h-6 w-6" />
         </a>
       </div>
