@@ -133,9 +133,10 @@ export default function Index() {
         {/* Hero Section */}
         <HeroSection />
 
-        {/* Scrolling text banner with Google reviews */}
-        <section className="bg-primary text-primary-foreground py-4 overflow-hidden">
-          <div className="scrolling-text">
+        {/* Modern Google reviews banner */}
+        <section className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20"></div>
+          <div className="scrolling-text relative z-10">
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
             <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
