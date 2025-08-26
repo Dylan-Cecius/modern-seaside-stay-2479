@@ -10,10 +10,10 @@ export default function Footer() {
   return (
     <footer className="bg-card text-card-foreground pt-16 pb-8 border-t">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          <div className="animate-fade-in [animation-delay:100ms]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-4xl mx-auto">
+          <div className="animate-fade-in [animation-delay:100ms] text-center">
             <h4 className="text-xl font-bold mb-4">Nos réseaux</h4>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 justify-center">
               <a href="https://www.facebook.com/profile.php?id=100082968710739&locale=fr_FR" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <Facebook size={20} />
                 <span className="sr-only">Facebook</span>
@@ -25,10 +25,10 @@ export default function Footer() {
             </div>
           </div>
           
-          <div className="animate-fade-in [animation-delay:200ms]">
+          <div className="animate-fade-in [animation-delay:200ms] text-center">
             <h4 className="text-xl font-bold mb-4">{t.footer.contact}</h4>
             <ul className="space-y-3">
-              <li className="flex items-start">
+              <li className="flex items-start justify-center">
                 <MapPin className="w-5 h-5 mr-2 mt-0.5 text-primary" />
                 <span className="text-muted-foreground">
                   Rue de jace 189<br />
@@ -39,25 +39,16 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div className="animate-fade-in [animation-delay:300ms]">
-            <h4 className="text-xl font-bold mb-4">{t.footer.newsletter}</h4>
-            <p className="text-muted-foreground mb-4">
-              {t.footer.newsletterDesc}
-            </p>
-            <form className="flex flex-col space-y-2">
-              <input 
-                type="email" 
-                placeholder={t.footer.yourEmail} 
-                className="rounded-md px-4 py-2 bg-muted text-foreground"
-                required 
-              />
-              <button 
-                type="submit" 
-                className="btn-primary mt-2"
-              >
-                {t.footer.subscribe}
-              </button>
-            </form>
+          <div className="animate-fade-in [animation-delay:300ms] text-center">
+            <h4 className="text-xl font-bold mb-4">Horaires</h4>
+            <div className="text-muted-foreground space-y-1">
+              <p>Mardi - Samedi</p>
+              <p className="font-semibold">10h - 19h</p>
+              <p className="text-sm mt-2">
+                Fermé dimanche & lundi<br />
+                Fermé les jours fériés
+              </p>
+            </div>
           </div>
         </div>
         
