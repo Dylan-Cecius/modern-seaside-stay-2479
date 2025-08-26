@@ -86,6 +86,15 @@ export default function Index() {
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
+    
+    // Update page title and meta description dynamically
+    document.title = "Barbier La Barbe à Papa - Salon de Coiffure Homme & Barber Shop";
+    
+    // Add meta description if not exists
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Salon de coiffure homme et barbier professionnel. Coupe moderne, taille de barbe, rasage traditionnel. Service de qualité dans une ambiance conviviale. Réservation en ligne.');
+    }
   }, []);
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
@@ -111,7 +120,7 @@ export default function Index() {
     title: "Parking Facile",
     description: "Stationnement aisé à proximité du salon."
   }];
-  return <div className="min-h-screen flex flex-col relative overflow-hidden">
+  return <div className="min-h-screen flex flex-col relative overflow-hidden" itemScope itemType="https://schema.org/HairSalon">
       {/* Floating barbershop icons */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Left side icons */}
@@ -167,7 +176,7 @@ export default function Index() {
         </section>
         
         {/* Welcome Section */}
-        <section id="welcome" className="section relative overflow-hidden bg-gradient-to-br from-background via-background/80 to-primary/5">
+        <section id="welcome" className="section relative overflow-hidden bg-gradient-to-br from-background via-background/80 to-primary/5" itemScope itemType="https://schema.org/AboutPage">
           <div className="container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="fade-in-up premium-reveal relative z-10">
@@ -284,7 +293,7 @@ export default function Index() {
          */}
         
         {/* Featured Services */}
-        <section id="services-section" className="section">
+        <section id="services-section" className="section" itemScope itemType="https://schema.org/ItemList">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up premium-reveal">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text text-reveal">
