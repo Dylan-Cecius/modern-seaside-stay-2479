@@ -13,10 +13,10 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   
-  // Navigation links - temporairement masqués sauf Accueil
-  const navLinks = [
-    { name: t.nav.home, path: "/" },
+  // Navigation links - tous masqués pour le moment
+  const navLinks: any[] = [
     // Navigation temporairement masquée - À réactiver quand les pages seront prêtes
+    // { name: t.nav.home, path: "/" },
     // { name: t.nav.apartments, path: "/apartments" },
     // { name: t.nav.amenities, path: "/amenities" },
     // { name: t.nav.gallery, path: "/gallery" },
