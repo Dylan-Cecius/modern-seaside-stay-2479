@@ -62,7 +62,7 @@ export const fr = {
     },
     featuredApartments: {
       subtitle: "Nos Services",
-      title: "Services Vedettes",
+      title: "Nos Services",
       description: "Découvrez notre gamme complète de services pour hommes, alliant tradition barbière et modernité.",
       viewAll: "Voir Tous les Services"
     },
@@ -283,7 +283,7 @@ export const fr = {
       description: "Service complet associant coupe moderne et taille de barbe professionnelle."
     },
     "3": {
-      name: "Taille de Barbe",
+      name: "Taille de barbe classique",
       description: "Service spécialisé de taille et mise en forme de la barbe."
     },
     "4": {
@@ -406,7 +406,7 @@ export const fr = {
       description: "Service complet associant coupe moderne et taille de barbe professionnelle."
     },
     "3": {
-      name: "Taille de Barbe",
+      name: "Taille de barbe classique",
       description: "Service spécialisé de taille et mise en forme de la barbe."
     },
     "4": {
