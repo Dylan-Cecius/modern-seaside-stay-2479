@@ -133,19 +133,17 @@ export default function Index() {
         {/* Hero Section */}
         <HeroSection />
 
-        {/* Scrolling text banner inspired by Bayer & Bayer */}
+        {/* Scrolling text banner with Google reviews */}
         <section className="bg-primary text-primary-foreground py-4 overflow-hidden">
           <div className="scrolling-text">
-            <span>COIFFURE</span>
-            <span>BARBE</span>
-            <span>STYLE</span>
-            <span>TRADITION</span>
-            <span>EXCELLENCE</span>
-            <span>COIFFURE</span>
-            <span>BARBE</span>
-            <span>STYLE</span>
-            <span>TRADITION</span>
-            <span>EXCELLENCE</span>
+            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
+            <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
+            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
+            <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
+            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
+            <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
+            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
+            <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
           </div>
         </section>
         
