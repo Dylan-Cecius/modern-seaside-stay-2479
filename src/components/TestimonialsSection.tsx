@@ -6,37 +6,52 @@ import { useLanguage } from "@/contexts/LanguageContext";
 interface Testimonial {
   id: number;
   name: string;
-  location: string;
-  avatar: string;
+  title: string;
   content: string;
   rating: number;
+  image: string;
+  date: string;
+  services?: string;
 }
 
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Sophia Martinez",
-    location: "New York, USA",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces",
-    content: "My family and I had the most wonderful stay at MareSereno. The apartment was immaculate, with breathtaking sea views. The staff went above and beyond to make our vacation special.",
-    rating: 5
+    name: "Boulanger Michaël",
+    title: "Local Guide • 15 avis",
+    content: "Barbier de quartier, sympathique et prend soin du client, travail soigné et impeccable",
+    rating: 5,
+    image: "/lovable-uploads/2944f95e-7a9d-4daf-8ab2-89fdbef4b61e.png",
+    date: "il y a 2 ans"
   },
   {
     id: 2,
-    name: "Marco Rossi",
-    location: "Rome, Italy",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=faces",
-    content: "Absolutely perfect location, steps away from the beach. The apartment had everything we needed and more. The modern amenities combined with the traditional coastal charm created a truly magical experience.",
-    rating: 5
+    name: "Nicolas Van Reeth",
+    title: "1 avis",
+    content: "Meilleur coiffeur de tout liège ! Grave propre et surtout jamais déçu du service",
+    rating: 5,
+    image: "/lovable-uploads/bcc49489-878e-418e-815a-517d163c1a9b.png",
+    date: "il y a 2 ans"
   },
   {
     id: 3,
-    name: "Emma Johnson",
-    location: "London, UK",
-    avatar: "https://images.unsplash.com/photo-1569913486515-b74bf7751574?w=150&h=150&fit=crop&crop=faces",
-    content: "We spent a wonderful week at this beachfront paradise. The sunrise views from our terrace were worth the trip alone. Exceptionally clean and beautifully designed spaces.",
-    rating: 4
+    name: "Julie Magagnoli",
+    title: "Local Guide • 239 avis • 1250 photos",
+    content: "Coiffeur très pro, d'une grande gentillesse. Sans rendez-vous, beaucoup de place dans la rue pour se garer. Salon très propre, très soigné.",
+    services: "Taille de la barbe, Coupes enfants, Coupe au rasoir, Coupe aux ciseaux, Coupe rasée, Entretien de la barbe",
+    rating: 5,
+    image: "/lovable-uploads/54c3307a-f578-4052-8a65-69803bdabda2.png",
+    date: "il y a un an"
   },
+  {
+    id: 4,
+    name: "steve hennuy",
+    title: "2 avis • 8 photos",
+    content: "Salon super conviviale ou l'on sent que le patron aime son boulot et est à l'écoute du client, c'est assez rare de nos jours. Je lui souhaite de rester ouvert très longtemps car je ne voudrais plus aller ailleurs.",
+    rating: 5,
+    image: "/lovable-uploads/d3d18fa1-9575-4ec0-8804-30782e75c1d8.png",
+    date: "Modifié il y a 10 mois"
+  }
 ];
 
 export default function TestimonialsSection() {
@@ -84,12 +99,12 @@ export default function TestimonialsSection() {
         </div>
         
         <div className="relative max-w-4xl mx-auto">
-          <div className="relative h-[400px] md:h-[300px]">
+          <div className="relative h-auto">
             {testimonials.map((testimonial, index) => (
               <div
                 key={testimonial.id}
                 className={cn(
-                  "absolute inset-0 glass-card p-8 md:p-10 transition-all duration-500",
+                  "absolute inset-0 transition-all duration-500",
                   activeIndex === index 
                     ? "opacity-100 translate-x-0 z-10"
                     : index < activeIndex 
@@ -97,32 +112,34 @@ export default function TestimonialsSection() {
                       : "opacity-0 translate-x-full z-0"
                 )}
               >
-                <div className="flex flex-col md:flex-row gap-6 h-full">
-                  <div className="flex flex-col items-center md:items-start">
-                    <div className="rounded-full overflow-hidden w-20 h-20 mb-4 border-2 border-primary">
-                      <img 
-                        src={testimonial.avatar} 
-                        alt={testimonial.name} 
-                        className="w-full h-full object-cover"
-                      />
+                <div className="bg-white dark:bg-card rounded-xl p-8 shadow-lg min-h-[300px]">
+                  {/* Google Review Style */}
+                  <div className="flex items-start space-x-4 mb-6">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-lg">
+                      {testimonial.name.charAt(0).toUpperCase()}
                     </div>
-                    <div className="flex mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          className={`h-4 w-4 ${i < testimonial.rating ? "fill-primary text-primary" : "text-muted-foreground"}`} 
-                        />
-                      ))}
+                    <div className="flex-1">
+                      <h4 className="font-bold text-lg">{testimonial.name}</h4>
+                      <p className="text-sm text-muted-foreground">{testimonial.title}</p>
+                      <div className="flex items-center mt-1">
+                        {Array.from({ length: testimonial.rating }).map((_, i) => (
+                          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                        ))}
+                        <span className="text-sm text-muted-foreground ml-2">{testimonial.date}</span>
+                      </div>
                     </div>
-                    <h4 className="text-lg font-semibold text-center md:text-left">{testimonial.name}</h4>
-                    <p className="text-sm text-muted-foreground text-center md:text-left">{testimonial.location}</p>
                   </div>
                   
-                  <div className="flex-1 flex items-center">
-                    <blockquote className="italic text-muted-foreground">
-                      "{testimonial.content}"
-                    </blockquote>
-                  </div>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    {testimonial.content}
+                  </p>
+                  
+                  {testimonial.services && (
+                    <div className="border-t pt-4 mt-4">
+                      <p className="text-sm font-medium mb-2">Services :</p>
+                      <p className="text-sm text-muted-foreground">{testimonial.services}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
