@@ -31,7 +31,17 @@ export default function ApartmentCard({
   const translatedDescription = language !== 'en' && t.apartmentDescriptions[apartment.id]?.description ? t.apartmentDescriptions[apartment.id].description : apartment.description;
   return <div className="rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl bg-card group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="relative overflow-hidden h-64">
-        <img src={apartment.image} alt={translatedName} className={cn("w-full h-full object-cover transition-transform duration-700", isHovered ? "scale-110" : "scale-100")} />
+        <img 
+          src={apartment.image} 
+          alt={translatedName} 
+          className={cn("w-full h-full object-cover transition-transform duration-700", isHovered ? "scale-110" : "scale-100")}
+          onError={(e) => {
+            console.error(`Failed to load image: ${apartment.image}`);
+            e.currentTarget.style.backgroundColor = '#f3f4f6';
+            e.currentTarget.alt = 'Image non disponible';
+          }}
+          onLoad={() => console.log(`Image loaded successfully: ${apartment.image}`)}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 flex items-end p-6">
           <div>
             <h3 className="text-white text-xl font-bold mb-1">{translatedName}</h3>
