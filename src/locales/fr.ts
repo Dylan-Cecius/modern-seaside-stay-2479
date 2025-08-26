@@ -295,7 +295,7 @@ export const fr = {
       description: "Coupe spécialement adaptée aux enfants dans une ambiance détendue."
     },
     "6": {
-      name: "Service supplémentaire", 
+      name: "Taille de barbe à l'ancienne", 
       description: "Service temporairement non disponible."
     }
   },
@@ -418,7 +418,7 @@ export const fr = {
       description: "Coupe spécialement adaptée aux enfants dans une ambiance détendue."
     },
     "6": {
-      name: "Service supplémentaire",
+      name: "Taille de barbe à l'ancienne",
       description: "Service temporairement non disponible."
     }
   },

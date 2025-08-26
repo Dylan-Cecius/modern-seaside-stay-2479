@@ -47,7 +47,12 @@ export default function ApartmentCard({
         {apartment.features && apartment.features.length > 0 && <div className="space-y-2">
             
             <div className="grid grid-cols-2 gap-2">
-              {apartment.features.map((feature, index) => {})}
+              {apartment.features.map((feature, index) => (
+                <div key={index} className="flex items-center text-sm text-muted-foreground">
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2 flex-shrink-0"></span>
+                  {feature}
+                </div>
+              ))}
             </div>
           </div>}
         
