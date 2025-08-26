@@ -67,6 +67,7 @@ const featuredServices: ApartmentProps[] = [
     location: "30 min",
     features: ["Coupe adaptée", "Patience", "Ambiance ludique", "Produits doux"]
   }
+  // Service "soin visage" retiré car non proposé actuellement
 ];
 
 export default function Index() {
@@ -184,7 +185,8 @@ export default function Index() {
           </div>
         </section>
         
-        {/* Booking Form Section */}
+        {/* Booking Form Section - TEMPORAIREMENT MASQUÉE */}
+        {/* 
         <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
           <div className="container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -214,12 +216,12 @@ export default function Index() {
             </div>
           </div>
           
-          {/* Decorative elements */}
           <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
             <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
             <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
           </div>
         </section>
+        */}
         
         {/* Featured Apartments */}
         <section className="section">
@@ -300,9 +302,10 @@ export default function Index() {
               <p className="text-muted-foreground mb-8">
                 {t.home.cta.description}
               </p>
-              <Button asChild size="lg" className="btn-primary">
+              {/* RÉSERVATION TEMPORAIREMENT DÉSACTIVÉE */}
+              {/* <Button asChild size="lg" className="btn-primary">
                 <Link to="/booking">{t.home.cta.bookNow}</Link>
-              </Button>
+              </Button> */}
             </div>
           </div>
           
