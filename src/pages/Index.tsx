@@ -285,10 +285,7 @@ export default function Index() {
         <section className="section">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
-              <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                {t.home.featuredApartments.subtitle}
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 {t.home.featuredApartments.title}
               </h2>
               <p className="text-muted-foreground">
