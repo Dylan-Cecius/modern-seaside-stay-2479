@@ -7,7 +7,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ApartmentCard, { ApartmentProps } from "@/components/ApartmentCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee, Scissors, Zap, Sparkles } from "lucide-react";
+import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee, Scissors } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -126,61 +126,25 @@ export default function Index() {
   ];
   
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
-      {/* Floating barbershop icons */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Left side icons */}
-        <div className="floating-icon floating-icon-1 left-side">
-          <Scissors className="h-8 w-8 text-primary/20" />
-        </div>
-        <div className="floating-icon floating-icon-2 left-side">
-          <Zap className="h-6 w-6 text-primary/15" />
-        </div>
-        <div className="floating-icon floating-icon-3 left-side">
-          <Sparkles className="h-7 w-7 text-primary/25" />
-        </div>
-        
-        {/* Right side icons */}
-        <div className="floating-icon floating-icon-4 right-side">
-          <Scissors className="h-9 w-9 text-primary/20" />
-        </div>
-        <div className="floating-icon floating-icon-5 right-side">
-          <Zap className="h-5 w-5 text-primary/30" />
-        </div>
-        <div className="floating-icon floating-icon-6 right-side">
-          <Sparkles className="h-8 w-8 text-primary/15" />
-        </div>
-        
-        {/* Additional scattered icons */}
-        <div className="floating-icon floating-icon-7 scattered">
-          <Scissors className="h-6 w-6 text-primary/10" />
-        </div>
-        <div className="floating-icon floating-icon-8 scattered">
-          <Zap className="h-7 w-7 text-primary/20" />
-        </div>
-      </div>
-      
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-1 relative z-10">
+      <main className="flex-1">
         {/* Hero Section */}
         <HeroSection />
 
         {/* Modern Google reviews banner */}
-        <section 
-          className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6 overflow-hidden relative cursor-pointer hover:from-primary/90 hover:via-primary/90 hover:to-primary-foreground/80 transition-all duration-300"
-          onClick={() => window.open("https://g.page/r/CSk701qHT9kJEAE/review", "_blank")}
-        >
+        <section className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6 overflow-hidden relative">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20"></div>
           <div className="scrolling-text relative z-10">
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>LAISSEZ NOUS UN AVIS SUR GOOGLE</span>
+            <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>LAISSEZ NOUS UN AVIS SUR GOOGLE</span>
+            <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>LAISSEZ NOUS UN AVIS SUR GOOGLE</span>
+            <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>LAISSEZ NOUS UN AVIS SUR GOOGLE</span>
+            <span>VENEZ DÉCOUVRIR NOS AVIS SUR GOOGLE</span>
           </div>
         </section>
         
