@@ -13,12 +13,14 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   
+  // Navigation links - temporairement masqués sauf Accueil
   const navLinks = [
     { name: t.nav.home, path: "/" },
-    { name: t.nav.apartments, path: "/apartments" },
-    { name: t.nav.amenities, path: "/amenities" },
-    { name: t.nav.gallery, path: "/gallery" },
-    { name: t.nav.contact, path: "/contact" }
+    // Navigation temporairement masquée - À réactiver quand les pages seront prêtes
+    // { name: t.nav.apartments, path: "/apartments" },
+    // { name: t.nav.amenities, path: "/amenities" },
+    // { name: t.nav.gallery, path: "/gallery" },
+    // { name: t.nav.contact, path: "/contact" },
   ];
 
   useEffect(() => {
@@ -49,9 +51,10 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center space-x-2">
           <ThemeToggle />
-          <Button asChild className="btn-primary">
+          {/* Bouton réserver temporairement masqué */}
+          {/* <Button asChild className="btn-primary">
             <Link to="/booking">{t.nav.bookNow}</Link>
-          </Button>
+          </Button> */}
         </div>
 
         {/* Mobile Navigation */}
@@ -83,11 +86,12 @@ export default function Navbar() {
               </ul>
             </div>
             
-            <Button asChild className="w-full btn-primary mt-6">
+            {/* Bouton réserver mobile temporairement masqué */}
+            {/* <Button asChild className="w-full btn-primary mt-6">
               <Link to="/booking" onClick={() => setMobileMenuOpen(false)}>
                 {t.nav.bookNow}
               </Link>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>

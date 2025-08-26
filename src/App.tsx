@@ -5,12 +5,13 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import Apartments from "./pages/Apartments";
-import BookingPage from "./pages/BookingPage";
-import Gallery from "./pages/Gallery";
-import Contact from "./pages/Contact";
-import Amenities from "./pages/Amenities";
 import NotFound from "./pages/NotFound";
+// Pages temporairement supprimées mais conservées dans les imports pour réactivation future
+// import Apartments from "./pages/Apartments";
+// import Amenities from "./pages/Amenities"; 
+// import Gallery from "./pages/Gallery";
+// import Contact from "./pages/Contact";
+// import BookingPage from "./pages/BookingPage";
 import { LanguageProvider } from "./contexts/LanguageContext";
 
 // Create a react-query client
@@ -25,11 +26,12 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/apartments" element={<Apartments />} />
-            <Route path="/booking" element={<BookingPage />} />
+            {/* Routes temporairement désactivées - À réactiver quand les pages seront prêtes */}
+            {/* <Route path="/apartments" element={<Apartments />} />
+            <Route path="/amenities" element={<Amenities />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/amenities" element={<Amenities />} />
+            <Route path="/booking" element={<BookingPage />} /> */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

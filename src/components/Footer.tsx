@@ -31,8 +31,16 @@ export default function Footer() {
           <div className="animate-fade-in [animation-delay:200ms]">
             <h4 className="text-xl font-bold mb-4">{t.footer.quickLinks}</h4>
             <ul className="space-y-2">
-              {[
-                { name: t.nav.home, path: "/" },
+              <li>
+                <Link 
+                  to="/" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  {t.nav.home}
+                </Link>
+              </li>
+              {/* Navigation footer temporairement masquée */}
+              {/* {[
                 { name: t.nav.apartments, path: "/apartments" },
                 { name: t.nav.amenities, path: "/amenities" },
                 { name: t.nav.gallery, path: "/gallery" },
@@ -47,7 +55,7 @@ export default function Footer() {
                     {link.name}
                   </Link>
                 </li>
-              ))}
+              ))} */}
             </ul>
           </div>
           
