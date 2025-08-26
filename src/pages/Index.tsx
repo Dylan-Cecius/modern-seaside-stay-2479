@@ -123,10 +123,10 @@ export default function Index() {
         <HeroSection />
         
         {/* Welcome Section */}
-        <section id="welcome" className="section">
-          <div className="container">
+        <section id="welcome" className="section relative overflow-hidden bg-gradient-to-br from-background via-background/80 to-primary/5">
+          <div className="container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="fade-in-up">
+              <div className="fade-in-up relative z-10">
                 <span className="text-sm text-primary font-medium uppercase tracking-wider">
                   {t.home.welcome.subtitle}
                 </span>
@@ -146,8 +146,8 @@ export default function Index() {
                 </Button>
               </div>
               
-              <div className="relative scale-in">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+              <div className="relative scale-in group">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-2xl shadow-primary/20 group-hover:shadow-3xl group-hover:shadow-primary/30 transition-all duration-500 transform group-hover:scale-[1.02]">
                   {/* Carousel with real salon photos */}
                   <div className="relative w-full h-full group">
                     <div 
@@ -222,6 +222,11 @@ export default function Index() {
               </div>
             </div>
           </div>
+          
+          {/* Decorative elements */}
+          <div className="absolute top-10 left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl opacity-60"></div>
+          <div className="absolute bottom-20 right-20 w-48 h-48 bg-accent/10 rounded-full blur-3xl opacity-40"></div>
+          <div className="absolute top-1/2 left-0 w-1 h-32 bg-gradient-to-b from-transparent via-primary/30 to-transparent transform -translate-y-1/2"></div>
         </section>
         
         {/* Booking Form Section - TEMPORAIREMENT MASQUÉE */}
