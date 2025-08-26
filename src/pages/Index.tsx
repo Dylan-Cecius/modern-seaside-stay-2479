@@ -122,26 +122,40 @@ export default function Index() {
               </div>
               
               <div className="relative animate-fade-in [animation-delay:300ms]">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png"
-                    alt="Intérieur du salon La Barbe à Papa" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -bottom-6 -left-6 w-2/3 rounded-2xl overflow-hidden shadow-xl">
-                  <img 
-                    src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png"
-                    alt="Coupe réalisée chez La Barbe à Papa" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="absolute -top-6 -right-6 w-1/2 rounded-2xl overflow-hidden shadow-xl">
-                  <img 
-                    src="/src/assets/traditional-shaving.jpg"
-                    alt="Rasage traditionnel" 
-                    className="w-full h-full object-cover"
-                  />
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                  {/* Carousel container */}
+                  <div className="relative w-full h-full">
+                    <div className="flex transition-transform duration-500 ease-in-out h-full">
+                      <div className="min-w-full h-full">
+                        <img 
+                          src="/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png"
+                          alt="Intérieur du salon La Barbe à Papa" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-full h-full">
+                        <img 
+                          src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png"
+                          alt="Coupe réalisée chez La Barbe à Papa" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="min-w-full h-full">
+                        <img 
+                          src="/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png"
+                          alt="Coupe avec barbe - La Barbe à Papa" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Carousel dots */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                      <div className="w-2 h-2 rounded-full bg-white/50"></div>
+                      <div className="w-2 h-2 rounded-full bg-white/80"></div>
+                      <div className="w-2 h-2 rounded-full bg-white/50"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
