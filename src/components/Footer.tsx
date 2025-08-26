@@ -13,9 +13,6 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div className="animate-fade-in [animation-delay:100ms]">
             <h4 className="text-xl font-bold mb-4">Nos réseaux</h4>
-            <p className="text-muted-foreground mb-4">
-              {t.footer.description}
-            </p>
             <div className="flex space-x-4">
               <a href="https://www.facebook.com/profile.php?id=100082968710739&locale=fr_FR" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                 <Facebook size={20} />
@@ -29,37 +26,6 @@ export default function Footer() {
           </div>
           
           <div className="animate-fade-in [animation-delay:200ms]">
-            <h4 className="text-xl font-bold mb-4">{t.footer.quickLinks}</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link 
-                  to="/" 
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {t.nav.home}
-                </Link>
-              </li>
-              {/* Navigation footer temporairement masquée */}
-              {/* {[
-                { name: t.nav.apartments, path: "/apartments" },
-                { name: t.nav.amenities, path: "/amenities" },
-                { name: t.nav.gallery, path: "/gallery" },
-                { name: t.nav.contact, path: "/contact" },
-                { name: t.nav.bookNow, path: "/booking" },
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    to={link.path} 
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))} */}
-            </ul>
-          </div>
-          
-          <div className="animate-fade-in [animation-delay:300ms]">
             <h4 className="text-xl font-bold mb-4">{t.footer.contact}</h4>
             <ul className="space-y-3">
               <li className="flex items-start">
@@ -73,7 +39,7 @@ export default function Footer() {
             </ul>
           </div>
           
-          <div className="animate-fade-in [animation-delay:400ms]">
+          <div className="animate-fade-in [animation-delay:300ms]">
             <h4 className="text-xl font-bold mb-4">{t.footer.newsletter}</h4>
             <p className="text-muted-foreground mb-4">
               {t.footer.newsletterDesc}
