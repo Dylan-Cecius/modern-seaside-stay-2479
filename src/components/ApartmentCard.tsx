@@ -71,33 +71,12 @@ export default function ApartmentCard({ apartment }: { apartment: ApartmentProps
       <div className="p-6 space-y-4">
         <p className="text-muted-foreground line-clamp-2">{translatedDescription}</p>
         
-        <div className="flex flex-wrap gap-2">
-          {apartment.features.slice(0, 3).map((feature, index) => (
-            <div 
-              key={index} 
-              className="flex items-center text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full"
-            >
-              {feature === "Bathroom" && <Bath className="h-3.5 w-3.5 mr-1" />}
-              {feature === "Kitchen" && <Coffee className="h-3.5 w-3.5 mr-1" />}
-              {feature === "Wi-Fi" && <Wifi className="h-3.5 w-3.5 mr-1" />}
-              <span>{feature}</span>
-            </div>
-          ))}
-          {apartment.features.length > 3 && (
-            <div className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
-              +{apartment.features.length - 3} {t.apartments.filters.more}
-            </div>
-          )}
-        </div>
         
-        <div className="flex items-end justify-between pt-2">
+        <div className="pt-2">
           <div>
             <span className="text-xl font-bold">{apartment.price}€</span>
             <span className="text-muted-foreground text-sm"> / {t.booking.summary.night}</span>
           </div>
-          <Button asChild className="btn-primary">
-            <Link to={`/apartments/${apartment.id}`}>{t.apartments.filters.viewDetails}</Link>
-          </Button>
         </div>
       </div>
     </div>

@@ -68,6 +68,17 @@ const featuredServices: ApartmentProps[] = [
     image: "/src/assets/barber-service.jpg",
     location: "30 min",
     features: ["Coupe adaptée", "Patience", "Ambiance ludique", "Produits doux"]
+  },
+  {
+    id: "6",
+    name: "Barbe à l'ancienne",
+    description: "Service traditionnel de rasage à l'ancienne avec techniques authentiques.",
+    price: 15,
+    capacity: 1,
+    size: 25,
+    image: "/src/assets/traditional-shaving.jpg",
+    location: "25 min",
+    features: ["Rasage traditionnel", "Techniques ancestrales", "Produits naturels", "Finition soignée"]
   }
   // Service "soin visage" retiré car non proposé actuellement
 ];
