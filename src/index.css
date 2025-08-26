@@ -160,15 +160,6 @@
     50% { background-position: 100% 50%; }
   }
 
-  /* Floating animation */
-  .float-animation {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
   
   .page-transition-enter {
     opacity: 0;

@@ -317,7 +317,7 @@ export default function Index() {
                   className="glass-card p-6 rounded-xl scale-in flex flex-col items-center text-center"
                   style={{ animationDelay: `${(index + 1) * 100}ms` }}
                 >
-                  <div className="mb-4 p-3 rounded-full bg-primary/10 float-animation" style={{ animationDelay: `${index * 500}ms` }}>
+                  <div className="mb-4 p-3 rounded-full bg-primary/10">
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
