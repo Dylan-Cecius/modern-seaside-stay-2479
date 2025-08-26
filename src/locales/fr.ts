@@ -50,7 +50,7 @@ export const fr = {
     welcome: {
       subtitle: "Bienvenue chez La Barbe à Papa",
       title: "Votre Barbier à Jemeppe-sur-Meuse",
-      description1: "Situé au cœur de Jemeppe-sur-Meuse, La Barbe à Papa vous accueille dans un cadre moderne et chaleureux. Notre salon allie savoir-faire traditionnel et techniques contemporaines pour vous offrir des prestations de qualité.",
+      description1: "Situé à Jemeppe-sur-Meuse, La Barbe à Papa vous accueille dans un cadre moderne et chaleureux. Notre salon allie savoir faire et techniques contemporaines pour vous offrir des prestations de qualité.",
       description2: "Que vous souhaitiez une coupe tendance, un rasage traditionnel ou un soin de barbe, notre équipe de professionnels vous garantit un service personnalisé dans une ambiance détendue et conviviale.",
       learnMore: "En Savoir Plus"
     },
