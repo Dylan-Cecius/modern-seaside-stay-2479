@@ -43,21 +43,39 @@ export default function HeroSection() {
         className="relative h-full flex flex-col justify-center items-center text-center px-4"
         style={{ transform: `translateY(${contentY}px)` }}
       >
-        <div className="max-w-3xl animate-fade-in">
-          <span className="inline-block text-white/90 text-lg mb-4 tracking-wide border-b border-white/30 pb-2">
-            {t.hero.subtitle}
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            {t.hero.title}
+        {/* Floating particles effect */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="particle particle-1"></div>
+          <div className="particle particle-2"></div>
+          <div className="particle particle-3"></div>
+          <div className="particle particle-4"></div>
+          <div className="particle particle-5"></div>
+          <div className="particle particle-6"></div>
+        </div>
+        
+        {/* Glass morphism container */}
+        <div className="relative max-w-4xl backdrop-blur-xl bg-white/10 rounded-3xl border border-white/20 p-8 md:p-12 shadow-2xl hero-glass">
+          {/* Animated subtitle with typewriter effect */}
+          <div className="mb-6 overflow-hidden">
+            <span className="inline-block text-white/90 text-lg md:text-xl font-medium tracking-wider animate-slide-up hero-subtitle">
+              {t.hero.subtitle}
+            </span>
+          </div>
+          
+          {/* Main title with gradient and glow */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 hero-title">
+            <span className="hero-text-gradient drop-shadow-2xl">
+              {t.hero.title}
+            </span>
           </h1>
-          <p className="text-lg md:text-xl text-white/95 mb-8 max-w-2xl mx-auto leading-relaxed font-light tracking-wide drop-shadow-sm">
+          
+          {/* Description with fade-in animation */}
+          <p className="text-lg md:text-xl text-white/95 mb-10 max-w-2xl mx-auto leading-relaxed font-light tracking-wide hero-description">
             {t.hero.description}
           </p>
+          
+          {/* CTA Button with special effects */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {/* RÉSERVATION TEMPORAIREMENT DÉSACTIVÉE - À réactiver quand prêt */}
-            {/* <Button asChild size="lg" variant="heroSolid" className="min-w-[200px] rounded-full transform transition-all duration-300 hover:translate-y-[-2px]">
-              <Link to="/booking">{t.hero.bookStay}</Link>
-            </Button> */}
             <Button 
               onClick={() => {
                 const servicesSection = document.getElementById('services-section');
@@ -67,9 +85,9 @@ export default function HeroSection() {
               }}
               variant="hero" 
               size="lg" 
-              className="min-w-[200px] rounded-full transform transition-all duration-300 hover:translate-y-[-2px]"
+              className="hero-cta-button"
             >
-              {t.hero.exploreApartments}
+              <span className="relative z-10">{t.hero.exploreApartments}</span>
             </Button>
           </div>
         </div>
