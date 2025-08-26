@@ -71,7 +71,7 @@ const featuredServices: ApartmentProps[] = [
   },
   {
     id: "6",
-    name: "Barbe à l'ancienne",
+    name: "Taille de barbe à l'ancienne",
     description: "Service traditionnel de rasage à l'ancienne avec techniques authentiques.",
     price: 15,
     capacity: 1,
