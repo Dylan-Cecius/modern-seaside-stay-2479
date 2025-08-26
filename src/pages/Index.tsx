@@ -20,7 +20,7 @@ const featuredServices: ApartmentProps[] = [{
   price: 18,
   capacity: 1,
   size: 30,
-  image: "/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png",
+  image: "/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png", // Coupe homme moderne
   location: "30 min",
   features: ["Coupe", "Lavage", "Séchage", "Produits inclus", "Conseil style"]
 }, {
@@ -30,7 +30,7 @@ const featuredServices: ApartmentProps[] = [{
   price: 23,
   capacity: 1,
   size: 45,
-  image: "/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png",
+  image: "/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png", // Coupe avec barbe
   location: "45 min",
   features: ["Coupe", "Taille barbe", "Produits premium", "Conseil style", "Finition"]
 }, {
@@ -40,7 +40,7 @@ const featuredServices: ApartmentProps[] = [{
   price: 10,
   capacity: 1,
   size: 15,
-  image: "/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png",
+  image: "/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png", // Barbe seule
   location: "15 min",
   features: ["Taille", "Mise en forme", "Produits premium", "Conseil entretien"]
 }, {
@@ -50,7 +50,7 @@ const featuredServices: ApartmentProps[] = [{
   price: 32,
   capacity: 1,
   size: 50,
-  image: "/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png",
+  image: "/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png", // Service traditionnel
   location: "50 min",
   features: ["Double prestation", "Techniques ancestrales", "Produits premium", "Service VIP"]
 }, {
@@ -60,7 +60,7 @@ const featuredServices: ApartmentProps[] = [{
   price: 16,
   capacity: 1,
   size: 30,
-  image: "/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png",
+  image: "/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png", // Coupe enfant
   location: "30 min",
   features: ["Coupe adaptée", "Patience", "Ambiance ludique", "Produits doux"]
 }, {
@@ -70,7 +70,7 @@ const featuredServices: ApartmentProps[] = [{
   price: 15,
   capacity: 1,
   size: 25,
-  image: "/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png",
+  image: "/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png", // Rasage traditionnel
   location: "25 min",
   features: ["Rasage traditionnel", "Techniques ancestrales", "Produits naturels", "Finition soignée"]
 }
