@@ -332,14 +332,14 @@
     @apply min-w-[250px] rounded-full px-8 py-4 text-lg font-semibold;
     @apply bg-gradient-to-r from-primary via-primary/90 to-primary;
     @apply text-white border-2 border-white/30;
-    @apply transition-all duration-500 ease-out;
+    @apply transition-all duration-300 ease-out;
     @apply hover:from-white hover:via-white/95 hover:to-white/90;
     @apply hover:text-primary hover:border-primary/30;
-    @apply hover:shadow-2xl hover:shadow-white/25;
-    @apply active:scale-95;
+    @apply hover:shadow-xl hover:shadow-white/20;
+    @apply hover:scale-105 active:scale-95;
     @apply relative overflow-hidden;
-    animation: hero-pulse 2s ease-in-out infinite;
     backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   }
 
   .hero-cta-button::before {
@@ -351,11 +351,6 @@
 
   .hero-cta-button:hover::before {
     @apply translate-x-[100%];
-  }
-
-  @keyframes hero-pulse {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
-    50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.4); }
   }
 
   /* Floating Particles */
