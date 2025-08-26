@@ -121,17 +121,34 @@ export default function Index() {
       <main className="flex-1">
         {/* Hero Section */}
         <HeroSection />
+
+        {/* Scrolling text banner inspired by Bayer & Bayer */}
+        <section className="bg-primary text-primary-foreground py-4 overflow-hidden">
+          <div className="scrolling-text">
+            <span>COIFFURE</span>
+            <span>BARBE</span>
+            <span>STYLE</span>
+            <span>TRADITION</span>
+            <span>EXCELLENCE</span>
+            <span>COIFFURE</span>
+            <span>BARBE</span>
+            <span>STYLE</span>
+            <span>TRADITION</span>
+            <span>EXCELLENCE</span>
+          </div>
+        </section>
         
         {/* Welcome Section */}
         <section id="welcome" className="section relative overflow-hidden bg-gradient-to-br from-background via-background/80 to-primary/5">
           <div className="container relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="fade-in-up relative z-10">
+              <div className="fade-in-up premium-reveal relative z-10">
                 <span className="text-sm text-primary font-medium uppercase tracking-wider">
                   {t.home.welcome.subtitle}
                 </span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
-                  {t.home.welcome.title}
+                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6 text-reveal">
+                  <span style={{"--delay": 1} as React.CSSProperties}>{t.home.welcome.title.split(' ')[0]}</span>{' '}
+                  <span style={{"--delay": 2} as React.CSSProperties}>{t.home.welcome.title.split(' ').slice(1).join(' ')}</span>
                 </h2>
                 <p className="text-muted-foreground mb-6">
                   {t.home.welcome.description1}
@@ -139,15 +156,15 @@ export default function Index() {
                 <p className="text-muted-foreground mb-8">
                   {t.home.welcome.description2}
                 </p>
-                <Button asChild className="btn-primary">
+                <Button asChild className="btn-primary elegant-hover">
                   <Link to="/about">
                     {t.home.welcome.learnMore} <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
               
-              <div className="relative scale-in group">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-2xl shadow-primary/20 group-hover:shadow-3xl group-hover:shadow-primary/30 transition-all duration-500 transform group-hover:scale-[1.02]">
+              <div className="relative scale-in premium-reveal group">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-2xl shadow-primary/20 group-hover:shadow-3xl group-hover:shadow-primary/30 transition-all duration-500 transform group-hover:scale-[1.02] elegant-hover">
                   {/* Carousel with real salon photos */}
                   <div className="relative w-full h-full group">
                     <div 
@@ -270,9 +287,10 @@ export default function Index() {
         {/* Featured Services */}
         <section id="services-section" className="section">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-                {t.home.featuredApartments.title}
+            <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up premium-reveal">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text text-reveal">
+                <span style={{"--delay": 1} as React.CSSProperties}>{t.home.featuredApartments.title.split(' ')[0]}</span>{' '}
+                <span style={{"--delay": 2} as React.CSSProperties}>{t.home.featuredApartments.title.split(' ').slice(1).join(' ')}</span>
               </h2>
               <p className="text-muted-foreground">
                 {t.home.featuredApartments.description}
@@ -281,14 +299,14 @@ export default function Index() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredServices.map((service, index) => (
-                <div key={service.id} className="fade-in-up" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
+                <div key={service.id} className="fade-in-up premium-reveal elegant-hover" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
                   <ApartmentCard apartment={service} />
                 </div>
               ))}
             </div>
             
             <div className="text-center mt-12">
-              <Button asChild className="btn-primary">
+              <Button asChild className="btn-primary elegant-hover">
                 <Link to="/apartments">
                   {t.home.featuredApartments.viewAll} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
