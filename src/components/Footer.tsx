@@ -48,7 +48,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-border pt-8 mt-8 text-center text-muted-foreground">
-          <p>&copy; 2025 La Barbe à Papa. {t.footer.allRights}</p>
+          <p>&copy; 2022 La Barbe à Papa. {t.footer.allRights}</p>
         </div>
       </div>
     </footer>
