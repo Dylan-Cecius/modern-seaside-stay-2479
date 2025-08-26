@@ -27,16 +27,11 @@ export default function Footer() {
           
           <div className="animate-fade-in [animation-delay:200ms] text-center">
             <h4 className="text-xl font-bold mb-4">{t.footer.contact}</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start justify-center">
-                <MapPin className="w-5 h-5 mr-2 mt-0.5 text-primary" />
-                <span className="text-muted-foreground">
-                  Rue de jace 189<br />
-                  4101 Jemeppe-sur-Meuse<br />
-                  Belgique
-                </span>
-              </li>
-            </ul>
+            <div className="text-muted-foreground">
+              Rue de jace 189<br />
+              4101 Jemeppe-sur-Meuse<br />
+              Belgique
+            </div>
           </div>
           
           <div className="animate-fade-in [animation-delay:300ms] text-center">
