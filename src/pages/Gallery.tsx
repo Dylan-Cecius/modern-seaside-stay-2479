@@ -6,80 +6,56 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Sample gallery images
+// Photos de coupes réalisées au salon
 const galleryImages = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=600&fit=crop",
-    alt: "Beachfront view",
-    category: "exterior"
+    src: "/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png",
+    alt: "Coupe dégradée classique - profil",
+    category: "coupes"
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=600&fit=crop",
-    alt: "Luxury suite interior",
-    category: "rooms"
+    src: "/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png",
+    alt: "Coupe moderne avec dégradé",
+    category: "coupes"
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1584132905271-512c958d674a?w=800&h=600&fit=crop",
-    alt: "Swimming pool",
-    category: "amenities"
+    src: "/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png",
+    alt: "Coupe avec barbe taillée",
+    category: "barbe"
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?w=800&h=600&fit=crop",
-    alt: "Premium apartment",
-    category: "rooms"
+    src: "/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png",
+    alt: "Dégradé progressif avec barbe",
+    category: "barbe"
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=800&h=600&fit=crop",
-    alt: "Beach sunset",
-    category: "exterior"
+    src: "/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png",
+    alt: "Coupe précise avec finitions",
+    category: "coupes"
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&h=600&fit=crop",
-    alt: "Dining area",
-    category: "amenities"
+    src: "/src/assets/salon-interior.jpg",
+    alt: "Intérieur du salon moderne",
+    category: "salon"
   },
   {
     id: 7,
-    src: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&h=600&fit=crop",
-    alt: "Bathroom",
-    category: "rooms"
+    src: "/src/assets/barber-service.jpg",
+    alt: "Service de coiffure professionnel",
+    category: "salon"
   },
   {
     id: 8,
-    src: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop",
-    alt: "Beach pathway",
-    category: "exterior"
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&h=600&fit=crop",
-    alt: "Restaurant",
-    category: "amenities"
-  },
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?w=800&h=600&fit=crop",
-    alt: "Bedroom",
-    category: "rooms"
-  },
-  {
-    id: 11,
-    src: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&h=600&fit=crop",
-    alt: "Beach umbrellas",
-    category: "exterior"
-  },
-  {
-    id: 12,
-    src: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&h=600&fit=crop",
-    alt: "Spa",
-    category: "amenities"
-  },
+    src: "/src/assets/traditional-shaving.jpg",
+    alt: "Rasage traditionnel au rasoir",
+    category: "rasage"
+  }
 ];
 
 export default function Gallery() {
@@ -167,7 +143,7 @@ export default function Gallery() {
         <section className="py-8">
           <div className="container">
             <div className="flex flex-wrap justify-center gap-2 mb-8 animate-fade-in">
-              {["all", "exterior", "rooms", "amenities"].map((category) => (
+              {["all", "coupes", "barbe", "rasage", "salon"].map((category) => (
                 <button
                   key={category}
                   onClick={() => filterGallery(category)}
@@ -179,12 +155,14 @@ export default function Gallery() {
                   )}
                 >
                   {category === "all" 
-                    ? t.gallery.filters.all 
-                    : category === "exterior" 
-                      ? t.gallery.filters.exterior 
-                      : category === "rooms" 
-                        ? t.gallery.filters.rooms 
-                        : t.gallery.filters.amenities}
+                    ? "Tout" 
+                    : category === "coupes" 
+                      ? "Coupes" 
+                      : category === "barbe" 
+                        ? "Barbe" 
+                        : category === "rasage"
+                          ? "Rasage"
+                          : "Salon"}
                 </button>
               ))}
             </div>
