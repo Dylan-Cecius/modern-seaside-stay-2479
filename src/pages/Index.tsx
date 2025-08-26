@@ -303,7 +303,7 @@ export default function Index() {
                 {t.home.amenities.title}
               </h2>
               <p className="text-muted-foreground">
-                {t.home.amenities.description}
+                Découvrez nos atouts qui font la différence.
               </p>
             </div>
             

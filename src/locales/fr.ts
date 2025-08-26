@@ -69,7 +69,7 @@ export const fr = {
     amenities: {
       subtitle: "Nos Atouts",
       title: "L'Excellence à Votre Service",
-      description: "Profitez de nos services premium et de notre expertise pour une expérience unique.",
+      description: "Découvrez nos atouts qui font la différence.",
       features: {
         beachfront: {
           title: "Localisation Centrale",
