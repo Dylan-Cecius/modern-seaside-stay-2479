@@ -7,7 +7,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ApartmentCard, { ApartmentProps } from "@/components/ApartmentCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee } from "lucide-react";
+import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee, Scissors } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 // Sample services data - adapted for barbershop
@@ -95,34 +95,19 @@ export default function Index() {
   // Feature items
   const features = [
     {
-      icon: <Waves className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.beachfront.title,
-      description: t.home.amenities.features.beachfront.description
-    },
-    {
-      icon: <LifeBuoy className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.pools.title,
-      description: t.home.amenities.features.pools.description
-    },
-    {
-      icon: <Utensils className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.restaurant.title,
-      description: t.home.amenities.features.restaurant.description
-    },
-    {
-      icon: <Wifi className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.wifi.title,
-      description: t.home.amenities.features.wifi.description
+      icon: <Scissors className="h-8 w-8 text-primary" />,
+      title: "Expertise Reconnue",
+      description: "Des barbiers expérimentés et passionnés."
     },
     {
       icon: <Coffee className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.bar.title,
-      description: t.home.amenities.features.bar.description
+      title: "Ambiance Conviviale",
+      description: "Un accueil chaleureux dans une atmosphère détendue."
     },
     {
       icon: <MapPin className="h-8 w-8 text-primary" />,
-      title: t.home.amenities.features.location.title,
-      description: t.home.amenities.features.location.description
+      title: "Parking Facile",
+      description: "Stationnement aisé à proximité du salon."
     }
   ];
   
