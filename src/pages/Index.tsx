@@ -73,7 +73,7 @@ const featuredServices: ApartmentProps[] = [
 export default function Index() {
   const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 6;
+  const totalSlides = 5;
   
   useEffect(() => {
     // Scroll to top when component mounts
@@ -166,13 +166,6 @@ export default function Index() {
                       className="flex transition-transform duration-500 ease-in-out h-full"
                       style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                     >
-                      <div className="min-w-full h-full">
-                        <img 
-                          src="/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png"
-                          alt="Intérieur du salon La Barbe à Papa" 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
                       <div className="min-w-full h-full">
                         <img 
                           src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png"
