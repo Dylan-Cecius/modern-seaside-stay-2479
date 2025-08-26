@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee, Scissors } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import ScrollToTop from "@/components/ScrollToTop";
 
 // Sample services data - adapted for barbershop
 const featuredServices: ApartmentProps[] = [
@@ -72,6 +74,7 @@ const featuredServices: ApartmentProps[] = [
 
 export default function Index() {
   const { t } = useLanguage();
+  useScrollAnimation();
   const [currentSlide, setCurrentSlide] = useState(0);
   const totalSlides = 5;
   
@@ -123,7 +126,7 @@ export default function Index() {
         <section id="welcome" className="section">
           <div className="container">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-fade-in [animation-delay:100ms]">
+              <div className="fade-in-up">
                 <span className="text-sm text-primary font-medium uppercase tracking-wider">
                   {t.home.welcome.subtitle}
                 </span>
@@ -143,7 +146,7 @@ export default function Index() {
                 </Button>
               </div>
               
-              <div className="relative animate-fade-in [animation-delay:300ms]">
+              <div className="relative scale-in">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
                   {/* Carousel with real salon photos */}
                   <div className="relative w-full h-full group">
@@ -262,8 +265,8 @@ export default function Index() {
         {/* Featured Services */}
         <section id="services-section" className="section">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
                 {t.home.featuredApartments.title}
               </h2>
               <p className="text-muted-foreground">
@@ -273,7 +276,7 @@ export default function Index() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredServices.map((service, index) => (
-                <div key={service.id} className="animate-fade-in" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
+                <div key={service.id} className="fade-in-up" style={{ animationDelay: `${(index + 1) * 100}ms` }}>
                   <ApartmentCard apartment={service} />
                 </div>
               ))}
@@ -295,7 +298,7 @@ export default function Index() {
         {/* Features Section */}
         <section className="section bg-card">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in">
+            <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up">
               <span className="text-sm text-primary font-medium uppercase tracking-wider">
                 {t.home.amenities.subtitle}
               </span>
@@ -311,10 +314,10 @@ export default function Index() {
               {features.map((feature, index) => (
                 <div 
                   key={index} 
-                  className="glass-card p-6 rounded-xl animate-fade-in flex flex-col items-center text-center"
+                  className="glass-card p-6 rounded-xl scale-in flex flex-col items-center text-center"
                   style={{ animationDelay: `${(index + 1) * 100}ms` }}
                 >
-                  <div className="mb-4 p-3 rounded-full bg-primary/10">
+                  <div className="mb-4 p-3 rounded-full bg-primary/10 float-animation" style={{ animationDelay: `${index * 500}ms` }}>
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -328,7 +331,7 @@ export default function Index() {
         {/* CTA Section */}
         <section className="relative py-24 bg-primary/5">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center animate-fade-in">
+            <div className="max-w-3xl mx-auto text-center scale-in">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {t.home.cta.title}
               </h2>
@@ -364,6 +367,7 @@ export default function Index() {
       </main>
       
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
