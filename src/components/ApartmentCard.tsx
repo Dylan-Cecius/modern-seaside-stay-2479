@@ -33,14 +33,7 @@ export default function ApartmentCard({
       <div className="relative overflow-hidden h-64">
         <img src={apartment.image} alt={translatedName} className={cn("w-full h-full object-cover transition-transform duration-700", isHovered ? "scale-110" : "scale-100")} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 flex items-end p-6">
-          <div>
-            <h3 className="text-white text-xl font-bold mb-1">{translatedName}</h3>
-            <div className="flex items-center text-white/80 text-sm mb-2">
-              <MapPin className="h-4 w-4 mr-1" />
-              <span>{apartment.location}</span>
-            </div>
-            
-          </div>
+          
         </div>
       </div>
       
