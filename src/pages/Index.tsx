@@ -36,8 +36,8 @@ const featuredServices: ApartmentProps[] = [
   },
   {
     id: "3",
-    name: "Barbe",
-    description: "Taille et mise en forme de barbe avec produits de qualité.",
+    name: "Taille de Barbe",
+    description: "Service spécialisé de taille et mise en forme de la barbe.",
     price: 10,
     capacity: 1,
     size: 15,

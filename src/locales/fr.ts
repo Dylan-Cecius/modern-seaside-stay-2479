@@ -111,8 +111,8 @@ export const fr = {
       anyGuests: "Tous les services",
       onePlus: "Coupe cheveux",
       twoPlus: "Barbe",
-      threePlus: "Soin visage",
-      fourPlus: "Double ancienne",
+      threePlus: "Double ancienne",
+      fourPlus: "Coupe enfant",
       location: "Durée",
       allLocations: "Toutes durées",
       priceRange: "Gamme de Prix",
@@ -275,7 +275,7 @@ export const fr = {
   },
   serviceDescriptions: {
     "1": {
-      name: "Coupe Homme Classique",
+      name: "Coupe Homme",
       description: "Coupe traditionnelle adaptée à votre morphologie avec finition soignée."
     },
     "2": {
@@ -283,20 +283,20 @@ export const fr = {
       description: "Service complet associant coupe moderne et taille de barbe professionnelle."
     },
     "3": {
-      name: "Rasage Traditionnel",
-      description: "Rasage à l'ancienne au blaireau et savon avec serviettes chaudes."
+      name: "Taille de Barbe",
+      description: "Service spécialisé de taille et mise en forme de la barbe."
     },
     "4": {
-      name: "Soin Visage Homme",
-      description: "Nettoyage en profondeur et hydratation pour une peau revitalisée."
+      name: "Double ancienne",
+      description: "Formule premium avec techniques traditionnelles et soins complets."
     },
     "5": {
-      name: "Taille de Barbe",
-      description: "Mise en forme et entretien de votre barbe selon vos préférences."
+      name: "Coupe enfant",
+      description: "Coupe spécialement adaptée aux enfants dans une ambiance détendue."
     },
     "6": {
-      name: "Double ancienne",
-      description: "Service premium incluant coupe, barbe, rasage et soin visage."
+      name: "Service supplémentaire", 
+      description: "Service temporairement non disponible."
     }
   },
   about: {
@@ -380,8 +380,8 @@ export const fr = {
       anyGuests: "Tous les services",
       onePlus: "Coupe cheveux",
       twoPlus: "Barbe",
-      threePlus: "Soin visage",
-      fourPlus: "Double ancienne",
+      threePlus: "Double ancienne",
+      fourPlus: "Coupe enfant",
       location: "Durée",
       allLocations: "Toutes durées",
       priceRange: "Gamme de Prix",
@@ -398,7 +398,7 @@ export const fr = {
   },
   apartmentDescriptions: {
     "1": {
-      name: "Coupe Homme Classique",
+      name: "Coupe Homme",
       description: "Coupe traditionnelle adaptée à votre morphologie avec finition soignée."
     },
     "2": {
@@ -406,20 +406,20 @@ export const fr = {
       description: "Service complet associant coupe moderne et taille de barbe professionnelle."
     },
     "3": {
-      name: "Rasage Traditionnel",
-      description: "Rasage à l'ancienne au blaireau et savon avec serviettes chaudes."
+      name: "Taille de Barbe",
+      description: "Service spécialisé de taille et mise en forme de la barbe."
     },
     "4": {
-      name: "Soin Visage Homme",
-      description: "Nettoyage en profondeur et hydratation pour une peau revitalisée."
+      name: "Double ancienne",
+      description: "Formule premium avec techniques traditionnelles et soins complets."
     },
     "5": {
-      name: "Taille de Barbe",
-      description: "Mise en forme et entretien de votre barbe selon vos préférences."
+      name: "Coupe enfant",
+      description: "Coupe spécialement adaptée aux enfants dans une ambiance détendue."
     },
     "6": {
-      name: "Double ancienne",
-      description: "Service premium incluant coupe, barbe, rasage et soin visage."
+      name: "Service supplémentaire",
+      description: "Service temporairement non disponible."
     }
   },
   amenitiesPage: {
