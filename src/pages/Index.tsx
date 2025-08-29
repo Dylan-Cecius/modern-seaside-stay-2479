@@ -161,15 +161,11 @@ export default function Index() {
         <HeroSection />
 
         {/* Modern Google reviews banner */}
-        <section className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6 overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-primary/20"></div>
-          <div className="scrolling-text relative z-10">
-            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
-            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
+        <section className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6">
+          <div className="container">
+            <div className="text-center">
+              <span className="text-lg font-bold">⭐⭐⭐⭐⭐ 5 étoiles sur 5 sur Google</span>
+            </div>
           </div>
         </section>
         
