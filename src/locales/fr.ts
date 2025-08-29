@@ -296,7 +296,7 @@ export const fr = {
     },
     "6": {
       name: "Taille de barbe à l'ancienne", 
-      description: "Service temporairement non disponible."
+      description: "Taille de barbe traditionnelle, avec serviettes chaudes et produits pour préparer la peau au rasage, détente assurée."
     }
   },
   about: {
@@ -419,7 +419,7 @@ export const fr = {
     },
     "6": {
       name: "Taille de barbe à l'ancienne",
-      description: "Service temporairement non disponible."
+      description: "Taille de barbe traditionnelle, avec serviettes chaudes et produits pour préparer la peau au rasage, détente assurée."
     }
   },
   amenitiesPage: {
