@@ -168,6 +168,8 @@ export default function Index() {
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
             <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
+            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
+            <span>⭐⭐⭐⭐⭐ 5/5 SUR GOOGLE</span>
           </div>
         </section>
         
