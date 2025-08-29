@@ -41,20 +41,8 @@ export default function ApartmentCard({
         <p className="text-muted-foreground">{translatedDescription}</p>
       </div>
       
-      {/* Content with features and pricing */}
+      {/* Content with pricing */}
       <div className="p-6 space-y-4">
-        {/* Features list */}
-        {apartment.features && apartment.features.length > 0 && <div className="space-y-2">
-            
-            <div className="grid grid-cols-2 gap-2">
-              {apartment.features.map((feature, index) => (
-                <div key={index} className="flex items-center text-sm text-muted-foreground">
-                  <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2 flex-shrink-0"></span>
-                  {feature}
-                </div>
-              ))}
-            </div>
-          </div>}
         
         {/* Pricing */}
         <div className="pt-4 border-t border-border/30">
