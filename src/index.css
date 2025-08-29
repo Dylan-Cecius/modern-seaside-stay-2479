@@ -160,40 +160,78 @@
     50% { background-position: 100% 50%; }
   }
 
-  /* Modern scrolling banner with Google reviews styling */
+  /* Modern scrolling banner with Google reviews styling - Enhanced */
   .scrolling-text {
     display: flex;
     white-space: nowrap;
-    animation: scroll-horizontal 25s linear infinite;
+    animation: scroll-horizontal 15s linear infinite;
     will-change: transform;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .scrolling-text span {
-    padding: 0.75rem 2rem;
-    font-weight: 700;
+    padding: 1rem 2.5rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    border-radius: 2rem;
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    font-size: 0.875rem;
+    letter-spacing: 0.2em;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+    border-radius: 3rem;
+    border: 2px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(15px);
+    font-size: 1rem;
     display: flex;
     align-items: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      0 8px 25px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .scrolling-text span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.8s ease;
+  }
+
+  .scrolling-text span:hover::before {
+    left: 100%;
   }
 
   .scrolling-text span:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    transform: scale(1.1) rotate(1deg);
+    background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.15));
+    box-shadow: 
+      0 12px 35px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.5);
   }
 
   @keyframes scroll-horizontal {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 
+        0 8px 25px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.2),
+        0 0 0 rgba(255,255,255,0);
+    }
+    50% { 
+      box-shadow: 
+        0 8px 25px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.2),
+        0 0 20px rgba(255,255,255,0.4);
+    }
   }
 
   /* Premium animations inspired by Bayer & Bayer */
