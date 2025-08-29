@@ -276,7 +276,7 @@ export const fr = {
   serviceDescriptions: {
     "1": {
       name: "Coupe Homme",
-      description: "Coupe traditionnelle adaptée à votre morphologie avec finition soignée."
+      description: "Coupe classique ou tendance, nous prenons le temps de vous écouter et de réaliser la coupe qui vous plait vraiment."
     },
     "2": {
       name: "Coupe & Barbe",
@@ -399,7 +399,7 @@ export const fr = {
   apartmentDescriptions: {
     "1": {
       name: "Coupe Homme",
-      description: "Coupe traditionnelle adaptée à votre morphologie avec finition soignée."
+      description: "Coupe classique ou tendance, nous prenons le temps de vous écouter et de réaliser la coupe qui vous plait vraiment."
     },
     "2": {
       name: "Coupe & Barbe",
