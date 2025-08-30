@@ -8,15 +8,15 @@ export const fr = {
     bookNow: "Réserver"
   },
   hero: {
-    subtitle: "SALON DE COIFFURE & BARBIER",
+    subtitle: "BARBIER LIÈGE & COIFFEUR HOMME",
     title: "La Barbe à Papa",
-    description: "Votre salon de coiffure homme et barbier à Jemeppe-sur-Meuse. Un cadre moderne et chaleureux où tradition et modernité se rencontrent pour sublimer votre style.",
+    description: "Votre barbier à Liège et coiffeur homme à Jemeppe-sur-Meuse. Barber shop moderne et chaleureux où tradition et modernité se rencontrent pour sublimer votre style.",
     bookStay: "Prendre Rendez-vous",
     exploreApartments: "Découvrir nos Services",
     scrollDown: "Défiler"
   },
   footer: {
-    description: "Salon de coiffure homme et barbier moderne à Jemeppe-sur-Meuse, offrant des services de qualité dans une ambiance conviviale et professionnelle.",
+    description: "La Barbe à Papa, barbier professionnel à Liège et Jemeppe-sur-Meuse. Barber shop moderne offrant des services de coiffure homme de qualité dans une ambiance conviviale.",
     quickLinks: "Liens Rapides",
     contact: "Contact",
     newsletter: "Newsletter",
@@ -49,9 +49,9 @@ export const fr = {
   home: {
     welcome: {
       subtitle: "Bienvenue chez La Barbe à Papa",
-      title: "Votre Barbier à Jemeppe-sur-Meuse",
-      description1: "Situé à Jemeppe-sur-Meuse, La Barbe à Papa vous accueille dans un cadre moderne et chaleureux. Notre salon allie savoir faire et techniques contemporaines pour vous offrir des prestations de qualité.",
-      description2: "Que vous souhaitiez une coupe tendance, un rasage traditionnel ou un soin de barbe, notre équipe de professionnels vous garantit un service personnalisé dans une ambiance détendue et conviviale.",
+      title: "Votre Barbier à Liège et Jemeppe-sur-Meuse",
+      description1: "La Barbe à Papa, votre barbier professionnel à Liège et Jemeppe-sur-Meuse, vous accueille dans un cadre moderne et chaleureux. Notre barber shop allie savoir-faire traditionnel et techniques contemporaines pour vous offrir des prestations de qualité.",
+      description2: "Que vous souhaitiez une coupe tendance, un rasage traditionnel à l'ancienne ou un soin de barbe, notre équipe de barbiers expérimentés vous garantit un service personnalisé dans une ambiance détendue et conviviale.",
       learnMore: "En Savoir Plus"
     },
     booking: {
