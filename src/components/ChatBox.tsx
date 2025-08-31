@@ -45,7 +45,7 @@ export const ChatBox = () => {
     }
     
     if (message.includes('horaire') || message.includes('ouvert') || message.includes('heure')) {
-      return 'Nous sommes ouverts du mardi au samedi de 9h à 19h. Fermé le dimanche et lundi.';
+      return 'Nous sommes ouverts du mardi au samedi de 10h à 19h. Fermé le dimanche et lundi.';
     }
     
     if (message.includes('rendez-vous') || message.includes('réserver') || message.includes('booking')) {
