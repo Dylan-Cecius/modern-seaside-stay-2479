@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import BookingForm from "@/components/BookingForm";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ApartmentCard, { ApartmentProps } from "@/components/ApartmentCard";
+import { ChatBox } from "@/components/ChatBox";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee, Scissors, Zap, Sparkles } from "lucide-react";
@@ -380,5 +381,6 @@ export default function Index() {
       
       <Footer />
       <ScrollToTop />
+      <ChatBox />
     </div>;
 }
