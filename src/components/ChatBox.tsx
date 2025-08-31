@@ -41,7 +41,7 @@ export const ChatBox = () => {
     const message = userMessage.toLowerCase();
     
     if (message.includes('prix') || message.includes('tarif') || message.includes('coût')) {
-      return 'Nos tarifs varient selon le service : Coupe classique 25€, Coupe + barbe 35€, Rasage traditionnel 20€. Contactez-nous pour plus de détails !';
+      return 'Nos tarifs : Coupe Homme 18€, Coupe + Barbe 23€, Taille de barbe classique 10€, Double ancienne 32€, Coupe enfant 16€, Taille de barbe à l\'ancienne 15€. Contactez-nous pour plus de détails !';
     }
     
     if (message.includes('horaire') || message.includes('ouvert') || message.includes('heure')) {
