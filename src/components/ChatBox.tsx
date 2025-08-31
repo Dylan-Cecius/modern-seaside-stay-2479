@@ -49,7 +49,7 @@ export const ChatBox = () => {
     }
     
     if (message.includes('rendez-vous') || message.includes('réserver') || message.includes('booking')) {
-      return 'Pour prendre rendez-vous, vous pouvez nous appeler au 04/123.45.67 ou utiliser notre formulaire de réservation en ligne !';
+      return 'Nous travaillons exclusivement sans rendez-vous. Vous pouvez venir au salon quand vous le souhaitez !';
     }
     
     if (message.includes('adresse') || message.includes('où') || message.includes('localisation')) {
