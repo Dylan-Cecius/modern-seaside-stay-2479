@@ -53,7 +53,7 @@ export const ChatBox = () => {
     }
     
     if (message.includes('adresse') || message.includes('où') || message.includes('localisation')) {
-      return 'Nous sommes situés au cœur de Liège. Contactez-nous pour notre adresse exacte !';
+      return 'Nous sommes situés Rue de Jace 189, 4101 Jemeppe-sur-Meuse. Parking facile à proximité !';
     }
     
     if (message.includes('service') || message.includes('coupe') || message.includes('barbe')) {
