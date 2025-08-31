@@ -57,7 +57,7 @@ export const ChatBox = () => {
     }
     
     if (message.includes('service') || message.includes('coupe') || message.includes('barbe')) {
-      return 'Nous proposons des coupes modernes et classiques, taille de barbe, rasage traditionnel, et soins du visage. Tous nos services sont réalisés par des professionnels expérimentés !';
+      return 'Nous proposons : Coupe Homme (18€), Coupe + Barbe (23€), Taille de barbe classique (10€), Double ancienne (32€), Coupe enfant (16€), et Taille de barbe à l\'ancienne (15€). Tous nos services sont réalisés par des professionnels expérimentés !';
     }
     
     return 'Merci pour votre message ! Pour une réponse personnalisée, n\'hésitez pas à nous contacter directement. Nous serons ravis de vous aider !';
