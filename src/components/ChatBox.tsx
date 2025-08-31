@@ -60,7 +60,7 @@ export const ChatBox = () => {
       return 'Nous proposons : Coupe Homme (18€), Coupe + Barbe (23€), Taille de barbe classique (10€), Double ancienne (32€), Coupe enfant (16€), et Taille de barbe à l\'ancienne (15€). Tous nos services sont réalisés par des professionnels expérimentés !';
     }
     
-    return 'Merci pour votre message ! Pour une réponse personnalisée, n\'hésitez pas à nous contacter directement. Nous serons ravis de vous aider !';
+    return 'Nous travaillons exclusivement sans rendez-vous. Vous pouvez vous présenter au salon quand vous le souhaitez.';
   };
 
   const handleSendMessage = async () => {
