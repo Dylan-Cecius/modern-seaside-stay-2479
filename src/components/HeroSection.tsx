@@ -22,19 +22,25 @@ export default function HeroSection() {
   const contentY = scrollY * 0.2;
   return <section className="relative h-screen overflow-hidden">
       {/* Background image with parallax */}
-      <div className="absolute inset-0 bg-cover bg-center" style={{
-      backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')",
-      transform: `translateY(${backgroundY}px)`,
-      backgroundPosition: `center ${50 + scrollY * 0.05}%`
-    }} />
+      <div 
+        className="absolute inset-0 bg-cover bg-center will-change-transform" 
+        style={{
+          backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')",
+          transform: `translate3d(0, ${backgroundY}px, 0)`,
+          backgroundPosition: `center ${50 + scrollY * 0.05}%`
+        }} 
+      />
       
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
       
       {/* Content */}
-      <div className="relative h-full flex flex-col justify-center items-center text-center px-4" style={{
-      transform: `translateY(${contentY}px)`
-    }}>
+      <div 
+        className="relative h-full flex flex-col justify-center items-center text-center px-4 will-change-transform" 
+        style={{
+          transform: `translate3d(0, ${contentY}px, 0)`
+        }}
+      >
         {/* Floating particles effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="particle particle-1"></div>

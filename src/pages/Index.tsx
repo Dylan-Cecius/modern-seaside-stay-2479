@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import BookingForm from "@/components/BookingForm";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import ApartmentCard, { ApartmentProps } from "@/components/ApartmentCard";
-import { ChatBox } from "@/components/ChatBox";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee, Scissors, Zap, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import ScrollToTop from "@/components/ScrollToTop";
+
+// Lazy load non-critical components
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const ChatBox = lazy(() => import("@/components/ChatBox").then(module => ({ default: module.ChatBox })));
+const ScrollToTop = lazy(() => import("@/components/ScrollToTop"));
 
 // Sample services data - adapted for barbershop
 const featuredServices: ApartmentProps[] = [{
@@ -203,25 +204,25 @@ export default function Index() {
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-2xl shadow-primary/20 group-hover:shadow-3xl group-hover:shadow-primary/30 transition-all duration-500 transform group-hover:scale-[1.02] elegant-hover">
                   {/* Carousel with real salon photos */}
                   <div className="relative w-full h-full group">
-                    <div className="flex transition-transform duration-500 ease-in-out h-full" style={{
-                    transform: `translateX(-${currentSlide * 100}%)`
-                  }}>
-                      <div className="min-w-full h-full">
-                        <img src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png" alt="Coupe dégradée classique" className="w-full h-full object-cover" />
-                      </div>
-                      <div className="min-w-full h-full">
-                        <img src="/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png" alt="Coupe moderne avec dégradé" className="w-full h-full object-cover" />
-                      </div>
-                      <div className="min-w-full h-full">
-                        <img src="/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png" alt="Coupe avec barbe taillée" className="w-full h-full object-cover" />
-                      </div>
-                      <div className="min-w-full h-full">
-                        <img src="/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png" alt="Dégradé progressif avec barbe" className="w-full h-full object-cover" />
-                      </div>
-                      <div className="min-w-full h-full">
-                        <img src="/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png" alt="Coupe précise avec finitions" className="w-full h-full object-cover" />
-                      </div>
-                    </div>
+                     <div className="flex transition-transform duration-500 ease-in-out h-full" style={{
+                     transform: `translateX(-${currentSlide * 100}%)`
+                   }}>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png" alt="Coupe dégradée classique" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png" alt="Coupe moderne avec dégradé" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png" alt="Coupe avec barbe taillée" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png" alt="Dégradé progressif avec barbe" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png" alt="Coupe précise avec finitions" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                     </div>
                     
                     {/* Navigation arrows */}
                     <button onClick={prevSlide} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/70">
@@ -321,7 +322,9 @@ export default function Index() {
         </section>
         
         {/* Testimonials Section */}
-        <TestimonialsSection />
+        <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
+          <TestimonialsSection />
+        </Suspense>
         
         {/* Features Section */}
         <section className="section bg-card">
@@ -380,7 +383,13 @@ export default function Index() {
       </main>
       
       <Footer />
-      <ScrollToTop />
-      <ChatBox />
+      
+      {/* Chat and scroll components - lazy loaded */}
+      <Suspense fallback={null}>
+        <ScrollToTop />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ChatBox />
+      </Suspense>
     </div>;
 }
