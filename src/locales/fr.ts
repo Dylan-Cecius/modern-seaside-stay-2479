@@ -10,7 +10,7 @@ export const fr = {
   hero: {
     subtitle: "COIFFEUR HOMME BARBIER À LIÈGE",
     title: "La Barbe à Papa",
-    description: "Votre barbier à Liège et coiffeur homme à Jemeppe-sur-Meuse. Barber shop moderne et chaleureux où tradition et modernité se rencontrent pour sublimer votre style.",
+    description: "Votre coiffeur homme et barbier à Jemeppe-sur-Meuse. Barber shop moderne et chaleureux où tradition et modernité se rencontrent pour sublimer votre style.",
     bookStay: "Prendre Rendez-vous",
     exploreApartments: "Découvrir nos Services",
     scrollDown: "Défiler"
