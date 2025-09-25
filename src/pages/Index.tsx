@@ -123,38 +123,6 @@ export default function Index() {
     description: "Stationnement aisé à proximité du salon."
   }];
   return <div className="min-h-screen flex flex-col relative overflow-hidden" itemScope itemType="https://schema.org/HairSalon">
-      {/* Floating barbershop icons */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Left side icons */}
-        <div className="floating-icon floating-icon-1 left-side">
-          <Scissors className="h-8 w-8 text-primary/20" />
-        </div>
-        <div className="floating-icon floating-icon-2 left-side">
-          <Zap className="h-6 w-6 text-primary/15" />
-        </div>
-        <div className="floating-icon floating-icon-3 left-side">
-          <Sparkles className="h-7 w-7 text-primary/25" />
-        </div>
-        
-        {/* Right side icons */}
-        <div className="floating-icon floating-icon-4 right-side">
-          <Scissors className="h-9 w-9 text-primary/20" />
-        </div>
-        <div className="floating-icon floating-icon-5 right-side">
-          <Zap className="h-5 w-5 text-primary/30" />
-        </div>
-        <div className="floating-icon floating-icon-6 right-side">
-          <Sparkles className="h-8 w-8 text-primary/15" />
-        </div>
-        
-        {/* Additional scattered icons */}
-        <div className="floating-icon floating-icon-7 scattered">
-          <Scissors className="h-6 w-6 text-primary/10" />
-        </div>
-        <div className="floating-icon floating-icon-8 scattered">
-          <Zap className="h-7 w-7 text-primary/20" />
-        </div>
-      </div>
       
       <Navbar />
       
@@ -244,10 +212,6 @@ export default function Index() {
             </div>
           </div>
           
-          {/* Decorative elements */}
-          <div className="absolute top-10 left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl opacity-60"></div>
-          <div className="absolute bottom-20 right-20 w-48 h-48 bg-accent/10 rounded-full blur-3xl opacity-40"></div>
-          <div className="absolute top-1/2 left-0 w-1 h-32 bg-gradient-to-b from-transparent via-primary/30 to-transparent transform -translate-y-1/2"></div>
         </section>
         
         {/* Booking Form Section - TEMPORAIREMENT MASQUÉE */}
