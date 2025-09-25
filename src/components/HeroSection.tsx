@@ -27,9 +27,9 @@ export default function HeroSection() {
         
         {/* Glass morphism container */}
         <div className="relative max-w-4xl backdrop-blur-xl bg-white/10 rounded-3xl border border-white/20 p-8 md:p-12 shadow-2xl hero-glass">
-          {/* Animated subtitle with typewriter effect */}
+          {/* Subtitle */}
           <div className="mb-6 overflow-hidden">
-            <span className="inline-block text-white/90 text-lg md:text-xl font-medium tracking-wider animate-slide-up hero-subtitle">
+            <span className="inline-block text-white/90 text-lg md:text-xl font-medium tracking-wider">
               {t.hero.subtitle}
             </span>
           </div>
@@ -41,8 +41,8 @@ export default function HeroSection() {
             </span>
           </h1>
           
-          {/* Description with fade-in animation */}
-          <p className="text-lg md:text-xl text-white/95 mb-10 max-w-2xl mx-auto leading-relaxed font-light tracking-wide hero-description">
+          {/* Description */}
+          <p className="text-lg md:text-xl text-white/95 mb-10 max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
             {t.hero.description}
           </p>
           
@@ -61,16 +61,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      
-      {/* Scroll down indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-        <a href="#welcome" className="flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity">
-          
-          
-        </a>
-      </div>
-      
-      {/* Animated wave */}
       
     </section>;
 }
