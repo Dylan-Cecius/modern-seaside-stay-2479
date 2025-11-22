@@ -11,28 +11,28 @@ export default function HeroSection() {
   return <section className="relative h-screen overflow-hidden bg-black">
       {/* Background image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-70" 
+        className="absolute inset-0 bg-cover bg-center opacity-60" 
         style={{
           backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')"
         }} 
       />
       
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
       
       {/* Content */}
-      <div className="relative h-full flex flex-col justify-center items-start px-6 md:px-12 lg:px-24">
-        <div className="max-w-3xl space-y-8">
+      <div className="relative h-full flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
+        <div className="max-w-2xl space-y-6">
           {/* Main title */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight">
-            <div className="mb-2">CRAFT.</div>
-            <div className="mb-2">STYLE.</div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none">
+            <div className="mb-3">CRAFT.</div>
+            <div className="mb-3">STYLE.</div>
             <div>LEGACY.</div>
           </h1>
           
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-white/90 font-light tracking-wide max-w-2xl">
-            {t.hero.description}
+          <p className="text-base md:text-lg text-white/90 font-normal tracking-wide max-w-lg">
+            VOTRE BARBIER PROFESSIONNEL À LIÈGE ET JEMEPPE SUR MEUSE.
           </p>
           
           {/* CTA Button */}
@@ -44,9 +44,9 @@ export default function HeroSection() {
                   servicesSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }} 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-8 py-6 text-base md:text-lg uppercase font-bold tracking-wider"
+              className="bg-primary text-black hover:bg-primary/90 rounded-none px-8 py-6 text-sm md:text-base uppercase font-bold tracking-wider"
             >
-              {t.hero.exploreApartments}
+              RÉSERVER VOTRE TRANSFORMATION
             </Button>
           </div>
         </div>

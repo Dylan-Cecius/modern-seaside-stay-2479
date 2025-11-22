@@ -129,156 +129,104 @@ export default function Index() {
       <main className="flex-1 relative z-10">
         {/* Hero Section */}
         <HeroSection />
-
-        {/* Modern Google reviews banner */}
-        <section className="bg-primary text-primary-foreground py-6">
-          <div className="container">
-            <div className="text-center">
-              <span className="text-lg font-bold">⭐⭐⭐⭐⭐ 5 étoiles sur 5 sur Google</span>
-            </div>
-          </div>
-        </section>
-        
-        {/* Welcome Section */}
-        <section id="welcome" className="section bg-card" itemScope itemType="https://schema.org/AboutPage">
-          <div className="container">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="mb-12">
-                <h2 className="text-3xl md:text-5xl font-bold mb-6 text-foreground">
-                  {t.home.welcome.title}
-                </h2>
-                <div className="space-y-4">
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {t.home.welcome.description1}
-                  </p>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {t.home.welcome.description2}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* Booking Form Section - TEMPORAIREMENT MASQUÉE */}
-        {/* 
-         <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
-          <div className="container relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-fade-in">
-                <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                  {t.home.booking.subtitle}
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
-                  {t.home.booking.title}
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  {t.home.booking.description}
-                </p>
-                <ul className="space-y-3 mb-8">
-                  {t.home.booking.benefits.map((item, index) => (
-                    <li key={index} className="flex items-center">
-                      <div className="h-5 w-5 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
-                        <ArrowRight className="h-3 w-3" />
-                      </div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <BookingForm />
-            </div>
-          </div>
-          
-          <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-            <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
-            <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
-          </div>
-         </section>
-         */}
         
         {/* Featured Services */}
-        <section id="services-section" className="section bg-black/95 relative" itemScope itemType="https://schema.org/ItemList">
+        <section id="services-section" className="section bg-black relative" itemScope itemType="https://schema.org/ItemList">
           <div className="container">
-            <div className="mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                NOS SERVICES
-              </h2>
-              <div className="h-1 w-24 bg-primary"></div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredServices.map((service, index) => (
-                <div 
-                  key={service.id} 
-                  className="group relative border-l-4 border-primary pl-6 py-4 hover:border-primary/80 transition-all duration-300"
-                  style={{ animationDelay: `${(index + 1) * 100}ms` }}
-                >
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
-                    {service.name}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+              {/* Left column - Services */}
+              <div>
+                <div className="mb-12">
+                  <h2 className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                    NOS SERVICES
+                  </h2>
+                  <div className="h-1 w-24 bg-primary"></div>
+                </div>
+                
+                <div className="space-y-8">
+                  {featuredServices.map((service, index) => (
+                    <div 
+                      key={service.id} 
+                      className="group relative border-l-4 border-primary pl-6 py-2"
+                      style={{ animationDelay: `${(index + 1) * 100}ms` }}
+                    >
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+                        {service.name}
+                      </h3>
+                      <p className="text-white/60 text-sm mb-3 leading-relaxed">
+                        {service.description}
+                      </p>
+                      <div className="text-2xl md:text-3xl font-bold text-white mb-3">
+                        {service.price}.00K
+                      </div>
+                      <Button 
+                        className="bg-primary text-black hover:bg-primary/90 rounded-none px-6 py-2 text-xs uppercase font-bold tracking-wider"
+                        onClick={() => {
+                          const contactSection = document.getElementById('contact-section');
+                          if (contactSection) {
+                            contactSection.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                      >
+                        VOIR DÉTAILS
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Right column - Testimonial and Gallery */}
+              <div className="space-y-12">
+                {/* Testimonial Card */}
+                <div className="bg-card border border-border/20 p-8 rounded-lg">
+                  <h3 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+                    TÉMOIGNAGE
                   </h3>
-                  <p className="text-white/70 text-sm mb-4 leading-relaxed">
-                    {service.description}
+                  <p className="text-white/80 italic mb-6 leading-relaxed">
+                    "Meilleur coiffeur de tout Liège ! Gravé propre et surtout jamais déçu de service."
                   </p>
-                  <div className="text-3xl font-bold text-white mb-4">
-                    {service.price}.00K
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-primary text-xl">★</span>
+                    ))}
                   </div>
-                  <Button 
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-6 py-2 text-xs uppercase font-bold tracking-wider"
-                    onClick={() => {
-                      // Scroll to contact or booking section
-                      const contactSection = document.getElementById('contact-section');
-                      if (contactSection) {
-                        contactSection.scrollIntoView({ behavior: 'smooth' });
-                      }
-                    }}
-                  >
-                    VOIR DÉTAILS
-                  </Button>
+                  <p className="text-white/60 text-sm">
+                    Alexandre • 5 étoiles sur 5 ⭐⭐
+                  </p>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        
-        {/* Testimonials Section */}
-        <section id="testimonials-section" className="section bg-card">
-          <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
-            <TestimonialsSection />
-          </Suspense>
-        </section>
-        
-        {/* Features Section */}
-        <section id="gallery-section" className="section bg-black/95">
-          <div className="container">
-            <div className="mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                GALLERIE
-              </h2>
-              <div className="h-1 w-24 bg-primary"></div>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[
-                '/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png',
-                '/lovable-uploads/2944f95e-7a9d-4daf-8ab2-89fdbef4b61e.png',
-                '/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png',
-                '/lovable-uploads/54c3307a-f578-4052-8a65-69803bdabda2.png',
-                '/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png',
-                '/lovable-uploads/bcc49489-878e-418e-815a-517d163c1a9b.png'
-              ].map((image, index) => (
-                <div 
-                  key={index} 
-                  className="aspect-square overflow-hidden group cursor-pointer"
-                >
-                  <img 
-                    src={image} 
-                    alt={`Galerie ${index + 1}`}
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
-                  />
+                
+                {/* Gallery Section */}
+                <div id="gallery-section">
+                  <div className="mb-6">
+                    <h3 className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                      GALLERIE
+                    </h3>
+                    <div className="h-1 w-24 bg-primary"></div>
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      '/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png',
+                      '/lovable-uploads/2944f95e-7a9d-4daf-8ab2-89fdbef4b61e.png',
+                      '/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png',
+                      '/lovable-uploads/54c3307a-f578-4052-8a65-69803bdabda2.png',
+                      '/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png',
+                      '/lovable-uploads/bcc49489-878e-418e-815a-517d163c1a9b.png'
+                    ].map((image, index) => (
+                      <div 
+                        key={index} 
+                        className="aspect-square overflow-hidden group cursor-pointer rounded-lg"
+                      >
+                        <img 
+                          src={image} 
+                          alt={`Galerie ${index + 1}`}
+                          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </section>
@@ -315,7 +263,7 @@ export default function Index() {
                 {t.home.cta.description}
               </p>
               <Button 
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-8 py-4 text-base uppercase font-bold tracking-wider"
+                className="bg-primary text-black hover:bg-primary/90 rounded-none px-8 py-4 text-base uppercase font-bold tracking-wider"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 PRENDRE RENDEZ-VOUS
