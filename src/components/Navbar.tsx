@@ -34,64 +34,136 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
   
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/80 dark:bg-card/80 backdrop-blur-lg py-3 shadow-md" : "bg-transparent py-5")}>
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-black/90 backdrop-blur-lg py-4 shadow-lg shadow-primary/10" : "bg-black/50 backdrop-blur-sm py-6")}>
       <nav className="container flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <LanguageSelector />
+        {/* Logo */}
+        <div className="flex items-center">
+          <Link to="/" className="text-2xl md:text-3xl font-bold tracking-tight">
+            <span className="text-primary font-serif">LA BARBE À PAPA</span>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-8">
-          {navLinks.map(link => <li key={link.name} className="relative">
-              <Link to={link.path} className="font-medium transition-colors hover:text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">
-                {link.name}
-              </Link>
-            </li>)}
+        <ul className="hidden lg:flex items-center space-x-8 text-sm uppercase tracking-wider font-medium">
+          <li>
+            <Link to="/" className="text-foreground hover:text-primary transition-colors border-b-2 border-primary pb-1">
+              HOME
+            </Link>
+          </li>
+          <li>
+            <button onClick={() => document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors">
+              SERVICES
+            </button>
+          </li>
+          <li>
+            <button onClick={() => document.getElementById('gallery-section')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors">
+              GALLERY
+            </button>
+          </li>
+          <li>
+            <button onClick={() => document.getElementById('testimonials-section')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors">
+              TESTIMONIALS
+            </button>
+          </li>
+          <li>
+            <button onClick={() => document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' })} className="text-foreground hover:text-primary transition-colors">
+              CONTACT
+            </button>
+          </li>
+          <li>
+            <LanguageSelector />
+          </li>
+          <li>
+            <ThemeToggle />
+          </li>
+          <li>
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-6 py-2 uppercase text-sm font-bold">
+              BOOK NOW
+            </Button>
+          </li>
         </ul>
 
-        <div className="hidden md:flex items-center space-x-2">
-          <ThemeToggle />
-          {/* Bouton réserver temporairement masqué */}
-          {/* <Button asChild className="btn-primary">
-            <Link to="/booking">{t.nav.bookNow}</Link>
-          </Button> */}
-        </div>
-
         {/* Mobile Navigation */}
-        <div className="md:hidden flex items-center space-x-2">
+        <div className="lg:hidden flex items-center space-x-2">
+          <LanguageSelector />
           <ThemeToggle />
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="rounded-full">
+          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-foreground">
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
       </nav>
 
       {/* Mobile Menu */}
-      <div className={cn("fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden transition-opacity duration-300", mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none")}>
-        <div className={cn("fixed inset-y-0 right-0 w-3/4 max-w-sm bg-card shadow-xl p-6 transition-transform duration-300 ease-in-out", mobileMenuOpen ? "translate-x-0" : "translate-x-full")}>
-          <div className="flex flex-col h-full justify-between">
-            <div>
-              <div className="flex justify-between mb-8">
-                <LanguageSelector />
-                <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)} className="rounded-full">
-                  <X className="h-6 w-6" />
-                </Button>
-              </div>
-              <ul className="space-y-6">
-                {navLinks.map(link => <li key={link.name}>
-                    <Link to={link.path} className="text-lg font-medium transition-colors hover:text-primary" onClick={() => setMobileMenuOpen(false)}>
-                      {link.name}
-                    </Link>
-                  </li>)}
-              </ul>
+      <div className={cn("fixed inset-0 z-40 bg-black/90 backdrop-blur-sm lg:hidden transition-opacity duration-300", mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none")}>
+        <div className={cn("fixed inset-y-0 right-0 w-3/4 max-w-sm bg-black border-l border-primary/20 shadow-xl p-6 transition-transform duration-300 ease-in-out", mobileMenuOpen ? "translate-x-0" : "translate-x-full")}>
+          <div className="flex flex-col h-full">
+            <div className="flex justify-between mb-8">
+              <Link to="/" className="text-xl font-bold text-primary font-serif" onClick={() => setMobileMenuOpen(false)}>
+                LA BARBE À PAPA
+              </Link>
+              <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)} className="text-foreground">
+                <X className="h-6 w-6" />
+              </Button>
             </div>
             
-            {/* Bouton réserver mobile temporairement masqué */}
-            {/* <Button asChild className="w-full btn-primary mt-6">
-              <Link to="/booking" onClick={() => setMobileMenuOpen(false)}>
-                {t.nav.bookNow}
-              </Link>
-            </Button> */}
+            <ul className="space-y-6 flex-1">
+              <li>
+                <Link to="/" className="text-lg font-medium text-foreground hover:text-primary transition-colors uppercase" onClick={() => setMobileMenuOpen(false)}>
+                  HOME
+                </Link>
+              </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' });
+                    setMobileMenuOpen(false);
+                  }} 
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors uppercase"
+                >
+                  SERVICES
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    document.getElementById('gallery-section')?.scrollIntoView({ behavior: 'smooth' });
+                    setMobileMenuOpen(false);
+                  }} 
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors uppercase"
+                >
+                  GALLERY
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    document.getElementById('testimonials-section')?.scrollIntoView({ behavior: 'smooth' });
+                    setMobileMenuOpen(false);
+                  }} 
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors uppercase"
+                >
+                  TESTIMONIALS
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => {
+                    document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+                    setMobileMenuOpen(false);
+                  }} 
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors uppercase"
+                >
+                  CONTACT
+                </button>
+              </li>
+            </ul>
+            
+            <Button 
+              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-6 py-3 uppercase text-sm font-bold mt-6"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              BOOK NOW
+            </Button>
           </div>
         </div>
       </div>
