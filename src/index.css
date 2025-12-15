@@ -103,9 +103,7 @@
     @apply py-16 md:py-24 lg:py-32;
   }
   
-  .glass-card {
-    @apply bg-card/50 backdrop-blur-lg border border-border/30 rounded-sm shadow-lg hover:shadow-2xl transition-all duration-300 hover:border-primary/30;
-  }
+  /* Glass card is now defined below with glow effect */
   
   /* Scroll animations */
   .fade-in-up {
@@ -130,13 +128,79 @@
     transform: scale(1);
   }
 
-  /* Service cards - blue style */
+  /* Service cards - blue style with glow */
   .service-card {
     @apply bg-sky/10 border border-sky/30 p-8 transition-all duration-500 hover:border-sky/50;
+    transform: scale(1);
   }
 
   .service-card:hover {
-    box-shadow: 0 0 30px hsla(207, 100%, 50%, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 0 40px hsla(207, 100%, 50%, 0.4), 0 0 80px hsla(207, 100%, 50%, 0.2);
+  }
+
+  /* Glass card with glow hover */
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-lg border border-border/30 rounded-sm shadow-lg transition-all duration-500 hover:border-primary/30;
+    transform: scale(1);
+  }
+
+  .glass-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px hsla(207, 100%, 50%, 0.3), 0 0 80px hsla(207, 100%, 50%, 0.15);
+  }
+
+  /* Parallax sections */
+  .parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  /* Scroll reveal animations */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
   }
 
   /* Sky blue text */

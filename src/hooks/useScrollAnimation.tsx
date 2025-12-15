@@ -15,7 +15,7 @@ export const useScrollAnimation = () => {
       { threshold: 0.1 }
     );
 
-    const elements = document.querySelectorAll('.fade-in-up, .scale-in, .premium-reveal, .text-reveal');
+    const elements = document.querySelectorAll('.fade-in-up, .scale-in, .premium-reveal, .text-reveal, .scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale');
     elements.forEach((el) => observer.observe(el));
 
     return () => {

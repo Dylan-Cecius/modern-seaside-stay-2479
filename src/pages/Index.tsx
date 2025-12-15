@@ -87,22 +87,22 @@ export default function Index() {
         {/* Hero Section */}
         <HeroSection />
 
-        {/* Gallery Section */}
-        <section className="py-0">
+        {/* Gallery Section with parallax effect */}
+        <section className="py-0 scroll-reveal">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-1">
-            <div className="aspect-square overflow-hidden">
+            <div className="aspect-square overflow-hidden scroll-reveal-scale" style={{ transitionDelay: '0ms' }}>
               <img src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png" alt="Coupe dégradée classique" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
             </div>
-            <div className="aspect-square overflow-hidden">
+            <div className="aspect-square overflow-hidden scroll-reveal-scale" style={{ transitionDelay: '100ms' }}>
               <img src="/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png" alt="Coupe moderne avec dégradé" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
             </div>
-            <div className="aspect-square overflow-hidden">
+            <div className="aspect-square overflow-hidden scroll-reveal-scale" style={{ transitionDelay: '200ms' }}>
               <img src="/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png" alt="Coupe avec barbe taillée" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
             </div>
-            <div className="aspect-square overflow-hidden">
+            <div className="aspect-square overflow-hidden scroll-reveal-scale" style={{ transitionDelay: '300ms' }}>
               <img src="/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png" alt="Dégradé progressif avec barbe" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
             </div>
-            <div className="aspect-square overflow-hidden hidden md:block">
+            <div className="aspect-square overflow-hidden hidden md:block scroll-reveal-scale" style={{ transitionDelay: '400ms' }}>
               <img src="/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png" alt="Coupe précise avec finitions" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" loading="lazy" />
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function Index() {
         <section id="services-section" className="section" itemScope itemType="https://schema.org/ItemList">
           <div className="container">
             {/* Header */}
-            <div className="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+            <div className="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
               <span className="text-primary text-sm uppercase tracking-[0.3em] mb-4 block">
                 Nos Prestations
               </span>
@@ -142,7 +142,7 @@ export default function Index() {
         {/* Features Section */}
         <section id="features" className="section bg-card">
           <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+            <div className="text-center max-w-3xl mx-auto mb-16 scroll-reveal">
               <span className="text-primary text-sm uppercase tracking-[0.3em] mb-4 block">
                 {t.home.amenities.subtitle}
               </span>
@@ -153,10 +153,10 @@ export default function Index() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {features.map((feature, index) => <div key={index} className="glass-card p-8 text-center fade-in-up" style={{
-              animationDelay: `${index * 150}ms`
+              {features.map((feature, index) => <div key={index} className="glass-card p-8 text-center scroll-reveal" style={{
+              transitionDelay: `${index * 150}ms`
             }}>
-                  <div className="inline-flex items-center justify-center w-16 h-16 border border-primary/30 text-primary mb-6">
+                  <div className="inline-flex items-center justify-center w-16 h-16 border border-primary/30 text-primary mb-6 transition-all duration-500 group-hover:border-sky group-hover:text-sky">
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-semibold mb-3 text-foreground">{feature.title}</h3>
@@ -166,13 +166,13 @@ export default function Index() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA Section with parallax */}
         <section className="section relative overflow-hidden">
-          <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{
+          <div className="absolute inset-0 bg-cover bg-center opacity-20 parallax-bg" style={{
           backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')"
         }} />
           <div className="container relative z-10">
-            <div className="max-w-3xl mx-auto text-center fade-in-up">
+            <div className="max-w-3xl mx-auto text-center scroll-reveal">
               <span className="text-primary text-sm uppercase tracking-[0.3em] mb-4 block">
                 Sans Rendez-vous
               </span>
@@ -184,11 +184,11 @@ export default function Index() {
               </p>
               <div className="gold-separator mb-8" />
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 scroll-reveal-left" style={{ transitionDelay: '200ms' }}>
                   <Clock className="h-5 w-5 text-primary" />
                   <span>Mardi - Samedi : 10h - 19h</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 scroll-reveal-right" style={{ transitionDelay: '200ms' }}>
                   <MapPin className="h-5 w-5 text-primary" />
                   <span>Jemeppe-sur-Meuse</span>
                 </div>
