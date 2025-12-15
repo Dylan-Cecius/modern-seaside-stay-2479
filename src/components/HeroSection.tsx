@@ -26,7 +26,7 @@ export default function HeroSection() {
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
         {/* Logo */}
         <div className="mb-8 animate-fade-in">
-          <img src={logo} alt="La Barbe à Papa - Coiffeur Barbier" className="h-64 md:h-80 lg:h-96 w-auto invert" />
+          <img src={logo} alt="La Barbe à Papa - Coiffeur Barbier" className="h-[12rem] md:h-[18rem] lg:h-[24rem] w-auto invert" />
         </div>
         
         {/* Decorative line */}
