@@ -16,8 +16,8 @@ interface ServiceCardProps {
 export default function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <div 
-      className="service-card fade-in-up"
-      style={{ animationDelay: `${index * 100}ms` }}
+      className="service-card scroll-reveal cursor-pointer"
+      style={{ transitionDelay: `${index * 100}ms` }}
     >
       {/* Service number */}
       <div className="text-primary/30 text-6xl font-light mb-4">
