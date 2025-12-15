@@ -8,48 +8,59 @@ export default function HeroSection() {
   const {
     t
   } = useLanguage();
-  return <section className="relative h-screen overflow-hidden bg-black">
+  return <section className="relative h-screen overflow-hidden">
       {/* Background image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center opacity-60" 
+        className="absolute inset-0 bg-cover bg-center" 
         style={{
           backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')"
         }} 
       />
       
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
       
       {/* Content */}
-      <div className="relative h-full flex flex-col justify-center items-start px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
-        <div className="max-w-2xl space-y-6">
-          {/* Main title */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none">
-            <div className="mb-3">CRAFT.</div>
-            <div className="mb-3">STYLE.</div>
-            <div>LEGACY.</div>
+      <div 
+        className="relative h-full flex flex-col justify-center items-center text-center px-4" 
+      >
+        
+        {/* Glass morphism container */}
+        <div className="relative max-w-4xl backdrop-blur-xl bg-white/10 rounded-3xl border border-white/20 p-8 md:p-12 shadow-2xl hero-glass">
+          {/* Subtitle */}
+          <div className="mb-6 overflow-hidden">
+            <span className="inline-block text-white/90 text-lg md:text-xl font-medium tracking-wider">
+              {t.hero.subtitle}
+            </span>
+          </div>
+          
+          {/* Main title with gradient and glow */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 hero-title">
+            <span className="hero-text-gradient drop-shadow-2xl">
+              {t.hero.title}
+            </span>
           </h1>
           
-          {/* Subtitle */}
-          <p className="text-base md:text-lg text-white/90 font-normal tracking-wide max-w-lg">
-            VOTRE BARBIER PROFESSIONNEL À LIÈGE ET JEMEPPE SUR MEUSE.
+          {/* Description */}
+          <p className="text-lg md:text-xl text-white/95 mb-10 max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
+            {t.hero.description}
           </p>
           
-          {/* CTA Button */}
-          <div className="pt-4">
-            <Button 
-              onClick={() => {
-                const servicesSection = document.getElementById('services-section');
-                if (servicesSection) {
-                  servicesSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }} 
-              className="bg-primary text-black hover:bg-primary/90 rounded-none px-8 py-6 text-sm md:text-base uppercase font-bold tracking-wider"
-            >
-              RÉSERVER VOTRE TRANSFORMATION
+          {/* CTA Button with special effects */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button onClick={() => {
+            const servicesSection = document.getElementById('services-section');
+            if (servicesSection) {
+              servicesSection.scrollIntoView({
+                behavior: 'smooth'
+              });
+            }
+          }} variant="hero" size="lg" className="hero-cta-button">
+              <span className="relative z-10">{t.hero.exploreApartments}</span>
             </Button>
           </div>
         </div>
       </div>
+      
     </section>;
 }

@@ -129,147 +129,213 @@ export default function Index() {
       <main className="flex-1 relative z-10">
         {/* Hero Section */}
         <HeroSection />
-        
-        {/* Featured Services */}
-        <section id="services-section" className="section bg-black relative" itemScope itemType="https://schema.org/ItemList">
+
+        {/* Modern Google reviews banner */}
+        <section className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6">
           <div className="container">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Left column - Services */}
-              <div>
-                <div className="mb-12">
-                  <h2 className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                    NOS SERVICES
-                  </h2>
-                  <div className="h-1 w-24 bg-primary"></div>
-                </div>
-                
-                <div className="space-y-8">
-                  {featuredServices.map((service, index) => (
-                    <div 
-                      key={service.id} 
-                      className="group relative border-l-4 border-primary pl-6 py-2"
-                      style={{ animationDelay: `${(index + 1) * 100}ms` }}
-                    >
-                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                        {service.name}
-                      </h3>
-                      <p className="text-white/60 text-sm mb-3 leading-relaxed">
-                        {service.description}
-                      </p>
-                      <div className="text-2xl md:text-3xl font-bold text-white mb-3">
-                        {service.price}.00K
-                      </div>
-                      <Button 
-                        className="bg-primary text-black hover:bg-primary/90 rounded-none px-6 py-2 text-xs uppercase font-bold tracking-wider"
-                        onClick={() => {
-                          const contactSection = document.getElementById('contact-section');
-                          if (contactSection) {
-                            contactSection.scrollIntoView({ behavior: 'smooth' });
-                          }
-                        }}
-                      >
-                        VOIR DÉTAILS
-                      </Button>
-                    </div>
-                  ))}
-                </div>
+            <div className="text-center">
+              <span className="text-lg font-bold">⭐⭐⭐⭐⭐ 5 étoiles sur 5 sur Google</span>
+            </div>
+          </div>
+        </section>
+        
+        {/* Welcome Section */}
+        <section id="welcome" className="section relative overflow-hidden bg-gradient-to-br from-background via-background/80 to-primary/5" itemScope itemType="https://schema.org/AboutPage">
+          <div className="container relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="fade-in-up premium-reveal relative z-10">
+                <span className="text-sm text-primary font-medium uppercase tracking-wider">
+                  {t.home.welcome.subtitle}
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6 text-reveal">
+                  <span style={{
+                  "--delay": 1
+                } as React.CSSProperties}>{t.home.welcome.title.split(' ')[0]}</span>{' '}
+                  <span style={{
+                  "--delay": 2
+                } as React.CSSProperties}>{t.home.welcome.title.split(' ').slice(1).join(' ')}</span>
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  {t.home.welcome.description1}
+                </p>
+                <p className="text-muted-foreground mb-8">
+                  {t.home.welcome.description2}
+                </p>
+                <Button asChild className="btn-primary elegant-hover">
+                  <Link to="/about">
+                    {t.home.welcome.learnMore} <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
               </div>
               
-              {/* Right column - Testimonial and Gallery */}
-              <div className="space-y-12">
-                {/* Testimonial Card */}
-                <div className="bg-card border border-border/20 p-8 rounded-lg">
-                  <h3 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-                    TÉMOIGNAGE
-                  </h3>
-                  <p className="text-white/80 italic mb-6 leading-relaxed">
-                    "Meilleur coiffeur de tout Liège ! Gravé propre et surtout jamais déçu de service."
-                  </p>
-                  <div className="flex gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-primary text-xl">★</span>
-                    ))}
-                  </div>
-                  <p className="text-white/60 text-sm">
-                    Alexandre • 5 étoiles sur 5 ⭐⭐
-                  </p>
-                </div>
-                
-                {/* Gallery Section */}
-                <div id="gallery-section">
-                  <div className="mb-6">
-                    <h3 className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                      GALLERIE
-                    </h3>
-                    <div className="h-1 w-24 bg-primary"></div>
-                  </div>
-                  
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      '/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png',
-                      '/lovable-uploads/2944f95e-7a9d-4daf-8ab2-89fdbef4b61e.png',
-                      '/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png',
-                      '/lovable-uploads/54c3307a-f578-4052-8a65-69803bdabda2.png',
-                      '/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png',
-                      '/lovable-uploads/bcc49489-878e-418e-815a-517d163c1a9b.png'
-                    ].map((image, index) => (
-                      <div 
-                        key={index} 
-                        className="aspect-square overflow-hidden group cursor-pointer rounded-lg"
-                      >
-                        <img 
-                          src={image} 
-                          alt={`Galerie ${index + 1}`}
-                          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-110"
-                        />
-                      </div>
-                    ))}
+              <div className="relative scale-in premium-reveal group">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-2xl shadow-primary/20 group-hover:shadow-3xl group-hover:shadow-primary/30 transition-all duration-500 transform group-hover:scale-[1.02] elegant-hover">
+                  {/* Carousel with real salon photos */}
+                  <div className="relative w-full h-full group">
+                     <div className="flex transition-transform duration-500 ease-in-out h-full" style={{
+                     transform: `translateX(-${currentSlide * 100}%)`
+                   }}>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png" alt="Coupe dégradée classique" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png" alt="Coupe moderne avec dégradé" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png" alt="Coupe avec barbe taillée" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png" alt="Dégradé progressif avec barbe" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                       <div className="min-w-full h-full">
+                         <img src="/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png" alt="Coupe précise avec finitions" className="w-full h-full object-cover" loading="lazy" />
+                       </div>
+                     </div>
+                    
+                    {/* Navigation arrows */}
+                    <button onClick={prevSlide} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/70">
+                      ‹
+                    </button>
+                    <button onClick={nextSlide} className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/70">
+                      ›
+                    </button>
+                    
+                    {/* Carousel dots */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                      {Array.from({
+                      length: totalSlides
+                    }).map((_, index) => <div key={index} onClick={() => goToSlide(index)} className={`w-2 h-2 rounded-full cursor-pointer transition-colors ${currentSlide === index ? 'bg-white/80' : 'bg-white/50'}`} />)}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          
         </section>
+        
+        {/* Booking Form Section - TEMPORAIREMENT MASQUÉE */}
+        {/* 
+         <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
+          <div className="container relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="animate-fade-in">
+                <span className="text-sm text-primary font-medium uppercase tracking-wider">
+                  {t.home.booking.subtitle}
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
+                  {t.home.booking.title}
+                </h2>
+                <p className="text-muted-foreground mb-6">
+                  {t.home.booking.description}
+                </p>
+                <ul className="space-y-3 mb-8">
+                  {t.home.booking.benefits.map((item, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="h-5 w-5 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
+                        <ArrowRight className="h-3 w-3" />
+                      </div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <BookingForm />
+            </div>
+          </div>
+          
+          <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
+            <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
+            <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
+          </div>
+         </section>
+         */}
+        
+        {/* Featured Services */}
+        <section id="services-section" className="section" itemScope itemType="https://schema.org/ItemList">
+          <div className="container">
+            <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up premium-reveal">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text text-reveal">
+                <span style={{
+                "--delay": 1
+              } as React.CSSProperties}>{t.home.featuredApartments.title.split(' ')[0]}</span>{' '}
+                <span style={{
+                "--delay": 2
+              } as React.CSSProperties}>{t.home.featuredApartments.title.split(' ').slice(1).join(' ')}</span>
+              </h2>
+              <p className="text-muted-foreground">
+                {t.home.featuredApartments.description}
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredServices.map((service, index) => <div key={service.id} className="fade-in-up premium-reveal elegant-hover" style={{
+              animationDelay: `${(index + 1) * 100}ms`
+            }}>
+                  <ApartmentCard apartment={service} />
+                </div>)}
+            </div>
+            
+            <div className="text-center mt-12">
+              <Button asChild className="btn-primary elegant-hover">
+                
+              </Button>
+            </div>
+          </div>
+        </section>
+        
+        {/* Testimonials Section */}
+        <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
+          <TestimonialsSection />
+        </Suspense>
         
         {/* Features Section */}
         <section className="section bg-card">
           <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {features.map((feature, index) => (
-                <div 
-                  key={index} 
-                  className="flex flex-col items-center text-center p-6"
-                  style={{ animationDelay: `${(index + 1) * 100}ms` }}
-                >
+            <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up">
+              <span className="text-sm text-primary font-medium uppercase tracking-wider">
+                {t.home.amenities.subtitle}
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
+                {t.home.amenities.title}
+              </h2>
+              <p className="text-muted-foreground">
+                Découvrez nos atouts qui font la différence.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {features.map((feature, index) => <div key={index} className="glass-card p-6 rounded-xl scale-in flex flex-col items-center text-center" style={{
+              animationDelay: `${(index + 1) * 100}ms`
+            }}>
                   <div className="mb-4 p-3 rounded-full bg-primary/10">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-foreground">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
         
         {/* CTA Section */}
-        <section id="contact-section" className="relative py-24 bg-black/95">
+        <section className="relative py-24 bg-primary/5">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
+            <div className="max-w-3xl mx-auto text-center scale-in">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {t.home.cta.title}
               </h2>
-              <p className="text-white/70 mb-8">
+              <p className="text-muted-foreground mb-8">
                 {t.home.cta.description}
               </p>
-              <Button 
-                className="bg-primary text-black hover:bg-primary/90 rounded-none px-8 py-4 text-base uppercase font-bold tracking-wider"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              >
-                PRENDRE RENDEZ-VOUS
-              </Button>
+              {/* RÉSERVATION TEMPORAIREMENT DÉSACTIVÉE */}
+              {/* <Button asChild size="lg" className="btn-primary">
+                <Link to="/booking">{t.home.cta.bookNow}</Link>
+               </Button> */}
             </div>
           </div>
+          
         </section>
       </main>
       
