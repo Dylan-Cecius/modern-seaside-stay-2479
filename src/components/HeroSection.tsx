@@ -14,7 +14,7 @@ export default function HeroSection() {
     }
   };
 
-  // Generate random particles - mix of white and sky blue
+  // Generate random particles - more subtle and varied
   const particles = Array.from({ length: 60 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
@@ -22,8 +22,7 @@ export default function HeroSection() {
     size: Math.random() * 3 + 1,
     duration: Math.random() * 15 + 10,
     delay: Math.random() * 10,
-    opacity: Math.random() * 0.5 + 0.2,
-    isBlue: Math.random() > 0.5, // 50% blue, 50% white
+    opacity: Math.random() * 0.4 + 0.1,
   }));
 
   return (
@@ -42,7 +41,7 @@ export default function HeroSection() {
         {particles.map((particle) => (
           <div
             key={particle.id}
-            className={`absolute rounded-full animate-float-particle ${particle.isBlue ? 'bg-sky' : 'bg-foreground'}`}
+            className="absolute rounded-full bg-primary animate-float-particle"
             style={{
               left: `${particle.left}%`,
               top: `${particle.top}%`,
@@ -58,12 +57,12 @@ export default function HeroSection() {
       
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
-        {/* Logo with entrance animation and hover glow effect */}
-        <div className="-mb-16 md:-mb-24 lg:-mb-32 group">
+        {/* Logo with hover glow effect */}
+        <div className="-mb-16 md:-mb-24 lg:-mb-32 animate-fade-in group">
           <img 
             src={logo} 
             alt="La Barbe à Papa - Coiffeur Barbier" 
-            className="h-[24rem] md:h-[36rem] lg:h-[48rem] w-auto invert drop-shadow-[0_0_20px_hsl(var(--primary)/0.3)] group-hover:drop-shadow-[0_0_80px_hsl(var(--primary))] group-hover:scale-[1.02] transition-all duration-700 ease-out cursor-pointer animate-logo-entrance" 
+            className="h-[24rem] md:h-[36rem] lg:h-[48rem] w-auto invert drop-shadow-[0_0_20px_hsl(var(--primary)/0.3)] group-hover:drop-shadow-[0_0_80px_hsl(var(--primary))] group-hover:scale-[1.02] transition-all duration-700 ease-out cursor-pointer" 
           />
         </div>
         
