@@ -58,7 +58,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
         {/* Logo with hover glow effect */}
-        <div className="mb-2 animate-fade-in group">
+        <div className="mb-0 animate-fade-in group">
           <img 
             src={logo} 
             alt="La Barbe à Papa - Coiffeur Barbier" 
@@ -67,20 +67,20 @@ export default function HeroSection() {
         </div>
         
         {/* Decorative line */}
-        <div className="gold-separator mb-1" />
+        <div className="gold-separator mb-0" />
         
         {/* Subtitle */}
-        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-2 text-center -mt-1">
+        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-1 text-center -mt-2">
           {t.hero.subtitle}
         </p>
         
         {/* Main title */}
-        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-2 gradient-text">
+        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-1 gradient-text -mt-1">
           Votre Style, Notre Passion
         </h1>
         
         {/* Description */}
-        <p className="text-muted-foreground text-center max-w-2xl mb-6 leading-relaxed px-4">
+        <p className="text-muted-foreground text-center max-w-2xl mb-6 leading-relaxed px-4 -mt-1">
           {t.hero.description}
         </p>
         
