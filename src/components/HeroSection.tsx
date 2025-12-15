@@ -67,15 +67,15 @@ export default function HeroSection() {
         </div>
         
         {/* Decorative line */}
-        <div className="gold-separator mb-0" />
+        <div className="gold-separator -mt-8 mb-2" />
         
         {/* Subtitle */}
-        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-1 text-center -mt-2">
+        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-2 text-center">
           {t.hero.subtitle}
         </p>
         
         {/* Main title */}
-        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-1 -mt-1">
+        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-2">
           <span className="text-foreground">Votre </span>
           <span className="text-sky">Style</span>
           <span className="text-foreground">, Notre </span>
@@ -83,7 +83,7 @@ export default function HeroSection() {
         </h1>
         
         {/* Description */}
-        <p className="text-muted-foreground text-center max-w-2xl mb-6 leading-relaxed px-4 -mt-1">
+        <p className="text-muted-foreground text-center max-w-2xl mb-6 leading-relaxed px-4">
           {t.hero.description}
         </p>
         
