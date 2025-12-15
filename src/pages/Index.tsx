@@ -1,352 +1,260 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
-import ApartmentCard, { ApartmentProps } from "@/components/ApartmentCard";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { ArrowRight, Wifi, Utensils, Waves, LifeBuoy, MapPin, Coffee, Scissors, Zap, Sparkles } from "lucide-react";
+import ServiceCard, { ServiceProps } from "@/components/ServiceCard";
+import { Scissors, Coffee, MapPin, Clock, Star } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-// Lazy load non-critical components
+// Lazy load components
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
 const ChatBox = lazy(() => import("@/components/ChatBox").then(module => ({ default: module.ChatBox })));
 const ScrollToTop = lazy(() => import("@/components/ScrollToTop"));
 
-// Sample services data - adapted for barbershop
-const featuredServices: ApartmentProps[] = [{
-  id: "1",
-  name: "Coupe Homme",
-  description: "Coupe classique masculine adaptée à votre style et morphologie.",
-  price: 18,
-  capacity: 1,
-  size: 30,
-  image: "",
-  location: "30 min",
-  features: ["Coupe", "Lavage", "Séchage", "Produits inclus", "Conseil style"]
-}, {
-  id: "2",
-  name: "Coupe + Barbe",
-  description: "Service complet associant coupe moderne et taille de barbe professionnelle.",
-  price: 23,
-  capacity: 1,
-  size: 45,
-  image: "",
-  location: "45 min",
-  features: ["Coupe", "Taille barbe", "Produits premium", "Conseil style", "Finition"]
-}, {
-  id: "3",
-  name: "Taille de barbe classique",
-  description: "Service spécialisé de taille et mise en forme de la barbe.",
-  price: 10,
-  capacity: 1,
-  size: 15,
-  image: "",
-  location: "15 min",
-  features: ["Taille", "Mise en forme", "Produits premium", "Conseil entretien"]
-}, {
-  id: "4",
-  name: "Double ancienne",
-  description: "Formule premium avec techniques traditionnelles et soins complets.",
-  price: 32,
-  capacity: 1,
-  size: 50,
-  image: "",
-  location: "50 min",
-  features: ["Double prestation", "Techniques ancestrales", "Produits premium", "Service VIP"]
-}, {
-  id: "5",
-  name: "Coupe enfant",
-  description: "Coupe spécialement adaptée aux enfants dans une ambiance détendue.",
-  price: 16,
-  capacity: 1,
-  size: 30,
-  image: "",
-  location: "30 min",
-  features: ["Coupe adaptée", "Patience", "Ambiance ludique", "Produits doux"]
-}, {
-  id: "6",
-  name: "Taille de barbe à l'ancienne",
-  description: "Service traditionnel de rasage à l'ancienne avec techniques authentiques.",
-  price: 15,
-  capacity: 1,
-  size: 25,
-  image: "",
-  location: "25 min",
-  features: ["Rasage traditionnel", "Techniques ancestrales", "Produits naturels", "Finition soignée"]
-}
-// Service "soin visage" retiré car non proposé actuellement
+// Services data
+const services: ServiceProps[] = [
+  {
+    id: "1",
+    name: "Coupe Homme",
+    description: "Coupe classique masculine adaptée à votre style et morphologie.",
+    price: 18,
+    duration: "30 min"
+  },
+  {
+    id: "2",
+    name: "Coupe + Barbe",
+    description: "Service complet associant coupe moderne et taille de barbe professionnelle.",
+    price: 23,
+    duration: "45 min"
+  },
+  {
+    id: "3",
+    name: "Taille de barbe classique",
+    description: "Service spécialisé de taille et mise en forme de la barbe.",
+    price: 10,
+    duration: "15 min"
+  },
+  {
+    id: "4",
+    name: "Double ancienne",
+    description: "Formule premium avec techniques traditionnelles et soins complets.",
+    price: 32,
+    duration: "50 min"
+  },
+  {
+    id: "5",
+    name: "Coupe enfant",
+    description: "Coupe spécialement adaptée aux enfants dans une ambiance détendue.",
+    price: 16,
+    duration: "30 min"
+  },
+  {
+    id: "6",
+    name: "Taille de barbe à l'ancienne",
+    description: "Service traditionnel de rasage à l'ancienne avec techniques authentiques.",
+    price: 15,
+    duration: "25 min"
+  }
 ];
-export default function Index() {
-  const {
-    t
-  } = useLanguage();
-  useScrollAnimation();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 5;
-  useEffect(() => {
-    // Scroll to top when component mounts
-    window.scrollTo(0, 0);
-    
-    // Update page title and meta description dynamically
-    document.title = "Barbier La Barbe à Papa - Salon de Coiffure Homme & Barber Shop";
-    
-    // Add meta description if not exists
-    let metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Salon de coiffure homme et barbier professionnel. Coupe moderne, taille de barbe, rasage traditionnel. Service de qualité dans une ambiance conviviale. Réservation en ligne.');
-    }
-  }, []);
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
-  };
-  const nextSlide = () => {
-    setCurrentSlide(prev => (prev + 1) % totalSlides);
-  };
-  const prevSlide = () => {
-    setCurrentSlide(prev => (prev - 1 + totalSlides) % totalSlides);
-  };
 
-  // Feature items
-  const features = [{
-    icon: <Scissors className="h-8 w-8 text-primary" />,
+// Features data
+const features = [
+  {
+    icon: <Scissors className="h-8 w-8" />,
     title: "Expertise Reconnue",
-    description: "Des barbiers expérimentés et passionnés."
-  }, {
-    icon: <Coffee className="h-8 w-8 text-primary" />,
+    description: "Des barbiers expérimentés et passionnés par leur métier."
+  },
+  {
+    icon: <Coffee className="h-8 w-8" />,
     title: "Ambiance Conviviale",
     description: "Un accueil chaleureux dans une atmosphère détendue."
-  }, {
-    icon: <MapPin className="h-8 w-8 text-primary" />,
+  },
+  {
+    icon: <MapPin className="h-8 w-8" />,
     title: "Parking Facile",
     description: "Stationnement aisé à proximité du salon."
-  }];
-  return <div className="min-h-screen flex flex-col relative overflow-hidden" itemScope itemType="https://schema.org/HairSalon">
-      
+  }
+];
+
+export default function Index() {
+  const { t } = useLanguage();
+  useScrollAnimation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.title = "La Barbe à Papa - Coiffeur Homme & Barbier à Jemeppe-sur-Meuse";
+
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Salon de coiffure homme et barbier professionnel à Jemeppe-sur-Meuse. Coupe moderne, taille de barbe, rasage traditionnel. Sans rendez-vous.');
+    }
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-background" itemScope itemType="https://schema.org/HairSalon">
       <Navbar />
-      
-      <main className="flex-1 relative z-10">
+
+      <main className="flex-1">
         {/* Hero Section */}
         <HeroSection />
 
-        {/* Modern Google reviews banner */}
-        <section className="bg-gradient-to-r from-primary via-primary to-primary-foreground/90 text-white py-6">
-          <div className="container">
-            <div className="text-center">
-              <span className="text-lg font-bold">⭐⭐⭐⭐⭐ 5 étoiles sur 5 sur Google</span>
+        {/* Gallery Section */}
+        <section className="py-0">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-1">
+            <div className="aspect-square overflow-hidden">
+              <img 
+                src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png" 
+                alt="Coupe dégradée classique" 
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden">
+              <img 
+                src="/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png" 
+                alt="Coupe moderne avec dégradé" 
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden">
+              <img 
+                src="/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png" 
+                alt="Coupe avec barbe taillée" 
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden">
+              <img 
+                src="/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png" 
+                alt="Dégradé progressif avec barbe" 
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div className="aspect-square overflow-hidden hidden md:block">
+              <img 
+                src="/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png" 
+                alt="Coupe précise avec finitions" 
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
             </div>
           </div>
         </section>
-        
-        {/* Welcome Section */}
-        <section id="welcome" className="section relative overflow-hidden bg-gradient-to-br from-background via-background/80 to-primary/5" itemScope itemType="https://schema.org/AboutPage">
-          <div className="container relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="fade-in-up premium-reveal relative z-10">
-                <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                  {t.home.welcome.subtitle}
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6 text-reveal">
-                  <span style={{
-                  "--delay": 1
-                } as React.CSSProperties}>{t.home.welcome.title.split(' ')[0]}</span>{' '}
-                  <span style={{
-                  "--delay": 2
-                } as React.CSSProperties}>{t.home.welcome.title.split(' ').slice(1).join(' ')}</span>
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  {t.home.welcome.description1}
-                </p>
-                <p className="text-muted-foreground mb-8">
-                  {t.home.welcome.description2}
-                </p>
-                <Button asChild className="btn-primary elegant-hover">
-                  <Link to="/about">
-                    {t.home.welcome.learnMore} <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-              
-              <div className="relative scale-in premium-reveal group">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative shadow-2xl shadow-primary/20 group-hover:shadow-3xl group-hover:shadow-primary/30 transition-all duration-500 transform group-hover:scale-[1.02] elegant-hover">
-                  {/* Carousel with real salon photos */}
-                  <div className="relative w-full h-full group">
-                     <div className="flex transition-transform duration-500 ease-in-out h-full" style={{
-                     transform: `translateX(-${currentSlide * 100}%)`
-                   }}>
-                       <div className="min-w-full h-full">
-                         <img src="/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png" alt="Coupe dégradée classique" className="w-full h-full object-cover" loading="lazy" />
-                       </div>
-                       <div className="min-w-full h-full">
-                         <img src="/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png" alt="Coupe moderne avec dégradé" className="w-full h-full object-cover" loading="lazy" />
-                       </div>
-                       <div className="min-w-full h-full">
-                         <img src="/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png" alt="Coupe avec barbe taillée" className="w-full h-full object-cover" loading="lazy" />
-                       </div>
-                       <div className="min-w-full h-full">
-                         <img src="/lovable-uploads/bdb68e6b-1596-4638-8a4e-0fd01454d7f6.png" alt="Dégradé progressif avec barbe" className="w-full h-full object-cover" loading="lazy" />
-                       </div>
-                       <div className="min-w-full h-full">
-                         <img src="/lovable-uploads/51c99a7e-454a-4acb-a0fc-73b5b1f86b08.png" alt="Coupe précise avec finitions" className="w-full h-full object-cover" loading="lazy" />
-                       </div>
-                     </div>
-                    
-                    {/* Navigation arrows */}
-                    <button onClick={prevSlide} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/70">
-                      ‹
-                    </button>
-                    <button onClick={nextSlide} className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-black/70">
-                      ›
-                    </button>
-                    
-                    {/* Carousel dots */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                      {Array.from({
-                      length: totalSlides
-                    }).map((_, index) => <div key={index} onClick={() => goToSlide(index)} className={`w-2 h-2 rounded-full cursor-pointer transition-colors ${currentSlide === index ? 'bg-white/80' : 'bg-white/50'}`} />)}
-                    </div>
+
+        {/* Services Section */}
+        <section id="services-section" className="section" itemScope itemType="https://schema.org/ItemList">
+          <div className="container">
+            {/* Header */}
+            <div className="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+              <span className="text-primary text-sm uppercase tracking-[0.3em] mb-4 block">
+                Nos Prestations
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl mb-4 gradient-text">
+                {t.home.featuredApartments.title}
+              </h2>
+              <p className="text-muted-foreground mt-6">
+                {t.home.featuredApartments.description}
+              </p>
+              <div className="gold-separator mt-8" />
+            </div>
+
+            {/* Services Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {services.map((service, index) => (
+                <ServiceCard key={service.id} service={service} index={index} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <Suspense fallback={
+          <div className="h-96 flex items-center justify-center">
+            <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          </div>
+        }>
+          <TestimonialsSection />
+        </Suspense>
+
+        {/* Features Section */}
+        <section id="features" className="section bg-card">
+          <div className="container">
+            <div className="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+              <span className="text-primary text-sm uppercase tracking-[0.3em] mb-4 block">
+                {t.home.amenities.subtitle}
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl mb-4 gradient-text">
+                {t.home.amenities.title}
+              </h2>
+              <div className="gold-separator mt-6" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {features.map((feature, index) => (
+                <div 
+                  key={index} 
+                  className="glass-card p-8 text-center fade-in-up"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
+                  <div className="inline-flex items-center justify-center w-16 h-16 border border-primary/30 text-primary mb-6">
+                    {feature.icon}
                   </div>
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">{feature.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="section relative overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{
+              backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')"
+            }}
+          />
+          <div className="container relative z-10">
+            <div className="max-w-3xl mx-auto text-center fade-in-up">
+              <span className="text-primary text-sm uppercase tracking-[0.3em] mb-4 block">
+                Sans Rendez-vous
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl mb-6 gradient-text">
+                {t.home.cta.title}
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+                {t.home.cta.description}
+              </p>
+              <div className="gold-separator mb-8" />
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Clock className="h-5 w-5 text-primary" />
+                  <span>Mardi - Samedi : 10h - 19h</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-5 w-5 text-primary" />
+                  <span>Jemeppe-sur-Meuse</span>
                 </div>
               </div>
             </div>
           </div>
-          
-        </section>
-        
-        {/* Booking Form Section - TEMPORAIREMENT MASQUÉE */}
-        {/* 
-         <section className="relative py-20 bg-gradient-to-r from-sea-light to-white dark:from-sea-dark dark:to-background overflow-hidden">
-          <div className="container relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-fade-in">
-                <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                  {t.home.booking.subtitle}
-                </span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
-                  {t.home.booking.title}
-                </h2>
-                <p className="text-muted-foreground mb-6">
-                  {t.home.booking.description}
-                </p>
-                <ul className="space-y-3 mb-8">
-                  {t.home.booking.benefits.map((item, index) => (
-                    <li key={index} className="flex items-center">
-                      <div className="h-5 w-5 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
-                        <ArrowRight className="h-3 w-3" />
-                      </div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <BookingForm />
-            </div>
-          </div>
-          
-          <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
-            <div className="absolute top-10 right-10 w-64 h-64 rounded-full bg-primary/50 blur-3xl" />
-            <div className="absolute bottom-10 right-40 w-48 h-48 rounded-full bg-sea-light blur-3xl" />
-          </div>
-         </section>
-         */}
-        
-        {/* Featured Services */}
-        <section id="services-section" className="section" itemScope itemType="https://schema.org/ItemList">
-          <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up premium-reveal">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text text-reveal">
-                <span style={{
-                "--delay": 1
-              } as React.CSSProperties}>{t.home.featuredApartments.title.split(' ')[0]}</span>{' '}
-                <span style={{
-                "--delay": 2
-              } as React.CSSProperties}>{t.home.featuredApartments.title.split(' ').slice(1).join(' ')}</span>
-              </h2>
-              <p className="text-muted-foreground">
-                {t.home.featuredApartments.description}
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredServices.map((service, index) => <div key={service.id} className="fade-in-up premium-reveal elegant-hover" style={{
-              animationDelay: `${(index + 1) * 100}ms`
-            }}>
-                  <ApartmentCard apartment={service} />
-                </div>)}
-            </div>
-            
-            <div className="text-center mt-12">
-              <Button asChild className="btn-primary elegant-hover">
-                
-              </Button>
-            </div>
-          </div>
-        </section>
-        
-        {/* Testimonials Section */}
-        <Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
-          <TestimonialsSection />
-        </Suspense>
-        
-        {/* Features Section */}
-        <section className="section bg-card">
-          <div className="container">
-            <div className="text-center max-w-3xl mx-auto mb-12 fade-in-up">
-              <span className="text-sm text-primary font-medium uppercase tracking-wider">
-                {t.home.amenities.subtitle}
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
-                {t.home.amenities.title}
-              </h2>
-              <p className="text-muted-foreground">
-                Découvrez nos atouts qui font la différence.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {features.map((feature, index) => <div key={index} className="glass-card p-6 rounded-xl scale-in flex flex-col items-center text-center" style={{
-              animationDelay: `${(index + 1) * 100}ms`
-            }}>
-                  <div className="mb-4 p-3 rounded-full bg-primary/10">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>)}
-            </div>
-          </div>
-        </section>
-        
-        {/* CTA Section */}
-        <section className="relative py-24 bg-primary/5">
-          <div className="container">
-            <div className="max-w-3xl mx-auto text-center scale-in">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                {t.home.cta.title}
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                {t.home.cta.description}
-              </p>
-              {/* RÉSERVATION TEMPORAIREMENT DÉSACTIVÉE */}
-              {/* <Button asChild size="lg" className="btn-primary">
-                <Link to="/booking">{t.home.cta.bookNow}</Link>
-               </Button> */}
-            </div>
-          </div>
-          
         </section>
       </main>
-      
+
       <Footer />
-      
-      {/* Chat and scroll components - lazy loaded */}
+
+      {/* Lazy loaded components */}
       <Suspense fallback={null}>
         <ScrollToTop />
       </Suspense>
       <Suspense fallback={null}>
         <ChatBox />
       </Suspense>
-    </div>;
+    </div>
+  );
 }

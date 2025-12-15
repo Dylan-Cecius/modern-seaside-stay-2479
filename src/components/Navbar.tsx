@@ -1,31 +1,18 @@
-
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Scissors, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "./ThemeToggle";
 import LanguageSelector from "./LanguageSelector";
 import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
+import logo from "@/assets/logo.png";
 
 export default function Navbar() {
-  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  
-  // Navigation links - tous masqués pour le moment
-  const navLinks: any[] = [
-    // Navigation temporairement masquée - À réactiver quand les pages seront prêtes
-    // { name: t.nav.home, path: "/" },
-    // { name: t.nav.apartments, path: "/apartments" },
-    // { name: t.nav.amenities, path: "/amenities" },
-    // { name: t.nav.gallery, path: "/gallery" },
-    // { name: t.nav.contact, path: "/contact" },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
+      const isScrolled = window.scrollY > 50;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
@@ -33,67 +20,143 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrolled]);
-  
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-300", scrolled ? "bg-white/80 dark:bg-card/80 backdrop-blur-lg py-3 shadow-md" : "bg-transparent py-5")}>
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        scrolled 
+          ? "bg-background/95 backdrop-blur-md py-3 border-b border-border/30" 
+          : "bg-transparent py-6"
+      )}
+    >
       <nav className="container flex justify-between items-center">
-        <div className="flex items-center space-x-2">
+        {/* Left side - Language & Navigation */}
+        <div className="flex items-center space-x-8">
           <LanguageSelector />
+          <div className="hidden md:flex items-center space-x-8">
+            <button 
+              onClick={() => scrollToSection('services-section')}
+              className="nav-link flex items-center gap-2"
+            >
+              <Scissors className="h-4 w-4" />
+              Services
+            </button>
+            <button 
+              onClick={() => scrollToSection('testimonials')}
+              className="nav-link"
+            >
+              Avis
+            </button>
+          </div>
         </div>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-8">
-          {navLinks.map(link => <li key={link.name} className="relative">
-              <Link to={link.path} className="font-medium transition-colors hover:text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full">
-                {link.name}
-              </Link>
-            </li>)}
-        </ul>
-
-        <div className="hidden md:flex items-center space-x-2">
-          <ThemeToggle />
-          {/* Bouton réserver temporairement masqué */}
-          {/* <Button asChild className="btn-primary">
-            <Link to="/booking">{t.nav.bookNow}</Link>
-          </Button> */}
+        {/* Center - Logo */}
+        <div className="absolute left-1/2 -translate-x-1/2">
+          <img 
+            src={logo} 
+            alt="La Barbe à Papa" 
+            className={cn(
+              "transition-all duration-500 invert",
+              scrolled ? "h-10" : "h-12 md:h-14"
+            )}
+          />
         </div>
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden flex items-center space-x-2">
+        {/* Right side - Navigation & Theme */}
+        <div className="flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
+            <button 
+              onClick={() => scrollToSection('features')}
+              className="nav-link"
+            >
+              Atouts
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="nav-link flex items-center gap-2"
+            >
+              <Phone className="h-4 w-4" />
+              Contact
+            </button>
+          </div>
           <ThemeToggle />
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="rounded-full">
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          
+          {/* Mobile menu button */}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+            className="md:hidden"
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
       </nav>
 
       {/* Mobile Menu */}
-      <div className={cn("fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden transition-opacity duration-300", mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none")}>
-        <div className={cn("fixed inset-y-0 right-0 w-3/4 max-w-sm bg-card shadow-xl p-6 transition-transform duration-300 ease-in-out", mobileMenuOpen ? "translate-x-0" : "translate-x-full")}>
-          <div className="flex flex-col h-full justify-between">
-            <div>
-              <div className="flex justify-between mb-8">
-                <LanguageSelector />
-                <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(false)} className="rounded-full">
-                  <X className="h-6 w-6" />
-                </Button>
-              </div>
-              <ul className="space-y-6">
-                {navLinks.map(link => <li key={link.name}>
-                    <Link to={link.path} className="text-lg font-medium transition-colors hover:text-primary" onClick={() => setMobileMenuOpen(false)}>
-                      {link.name}
-                    </Link>
-                  </li>)}
-              </ul>
-            </div>
-            
-            {/* Bouton réserver mobile temporairement masqué */}
-            {/* <Button asChild className="w-full btn-primary mt-6">
-              <Link to="/booking" onClick={() => setMobileMenuOpen(false)}>
-                {t.nav.bookNow}
-              </Link>
-            </Button> */}
+      <div 
+        className={cn(
+          "fixed inset-0 z-40 bg-background/98 backdrop-blur-lg md:hidden transition-all duration-500",
+          mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        )}
+      >
+        <div className="flex flex-col items-center justify-center h-full space-y-8 pt-20">
+          <img src={logo} alt="La Barbe à Papa" className="h-20 invert mb-8" />
+          
+          <button 
+            onClick={() => scrollToSection('services-section')}
+            className="text-2xl font-light uppercase tracking-widest text-foreground hover:text-primary transition-colors"
+          >
+            Services
+          </button>
+          <button 
+            onClick={() => scrollToSection('testimonials')}
+            className="text-2xl font-light uppercase tracking-widest text-foreground hover:text-primary transition-colors"
+          >
+            Avis Clients
+          </button>
+          <button 
+            onClick={() => scrollToSection('features')}
+            className="text-2xl font-light uppercase tracking-widest text-foreground hover:text-primary transition-colors"
+          >
+            Nos Atouts
+          </button>
+          <button 
+            onClick={() => scrollToSection('contact')}
+            className="text-2xl font-light uppercase tracking-widest text-foreground hover:text-primary transition-colors"
+          >
+            Contact
+          </button>
+          
+          <div className="flex space-x-6 mt-8">
+            <a 
+              href="https://www.facebook.com/profile.php?id=100082968710739&locale=fr_FR" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-link uppercase text-xs tracking-widest"
+            >
+              Facebook
+            </a>
+            <a 
+              href="https://www.instagram.com/salon_labarbeapapa/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-link uppercase text-xs tracking-widest"
+            >
+              Instagram
+            </a>
           </div>
         </div>
       </div>
-    </header>;
+    </header>
+  );
 }

@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap&font-display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,65 +7,65 @@
 
 @layer base {
   :root {
-    --background: 210 50% 98%;
-    --foreground: 210 40% 10%;
+    --background: 0 0% 8%;
+    --foreground: 45 10% 90%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 210 40% 10%;
+    --card: 0 0% 12%;
+    --card-foreground: 45 10% 90%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 40% 10%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 45 10% 90%;
 
-    --primary: 210 100% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 45 80% 55%;
+    --primary-foreground: 0 0% 8%;
 
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 210 40% 10%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 45 10% 90%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 210 30% 40%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 45 5% 60%;
 
-    --accent: 210 40% 96%;
-    --accent-foreground: 210 40% 10%;
+    --accent: 45 80% 55%;
+    --accent-foreground: 0 0% 8%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
-    --ring: 210 100% 40%;
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 45 80% 55%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 210 30% 12%;
-    --foreground: 210 20% 98%;
+    --background: 0 0% 6%;
+    --foreground: 45 10% 92%;
 
-    --card: 210 30% 15%;
-    --card-foreground: 210 20% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 45 10% 92%;
 
-    --popover: 210 30% 15%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 45 10% 92%;
 
-    --primary: 210 100% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 45 85% 58%;
+    --primary-foreground: 0 0% 6%;
 
-    --secondary: 210 30% 20%;
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 45 10% 92%;
 
-    --muted: 210 30% 20%;
-    --muted-foreground: 210 20% 60%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 45 5% 55%;
 
-    --accent: 210 30% 20%;
-    --accent-foreground: 210 20% 98%;
+    --accent: 45 85% 58%;
+    --accent-foreground: 0 0% 6%;
 
     --destructive: 0 70% 50%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: 45 10% 92%;
 
-    --border: 210 30% 25%;
-    --input: 210 30% 25%;
-    --ring: 210 100% 60%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 45 85% 60%;
   }
 }
 
@@ -76,12 +76,13 @@
   
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
   }
 }
 
@@ -91,23 +92,22 @@
   }
   
   .btn-primary {
-    @apply bg-primary text-primary-foreground rounded-full px-6 py-2.5 font-medium transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 active:scale-[0.98] hover:scale-105;
+    @apply bg-transparent text-primary border-2 border-primary rounded-none px-8 py-3 font-medium uppercase tracking-widest text-sm transition-all duration-300 hover:bg-primary hover:text-background;
   }
   
   .section {
-    @apply py-12 md:py-16 lg:py-24;
+    @apply py-16 md:py-24 lg:py-32;
   }
   
   .glass-card {
-    @apply bg-white/70 dark:bg-black/30 backdrop-blur-lg border border-white/20 dark:border-white/10 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:translate-y-[-4px];
+    @apply bg-card/50 backdrop-blur-lg border border-border/30 rounded-sm shadow-lg hover:shadow-2xl transition-all duration-300 hover:border-primary/30;
   }
-  
   
   /* Scroll animations */
   .fade-in-up {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.6s ease-out;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .fade-in-up.visible {
@@ -117,8 +117,8 @@
 
   .scale-in {
     opacity: 0;
-    transform: scale(0.9);
-    transition: all 0.5s ease-out;
+    transform: scale(0.95);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .scale-in.visible {
@@ -126,108 +126,46 @@
     transform: scale(1);
   }
 
-  /* Service cards with hover effects */
+  /* Service cards - dark elegant style */
   .service-card {
-    @apply bg-card rounded-lg p-6 border border-border/20 transition-all duration-300 hover:shadow-xl hover:border-primary/30 hover:bg-card/80 cursor-pointer group;
-    transform: translateY(0);
+    @apply bg-card border border-border/30 p-8 transition-all duration-500 hover:border-primary/50;
   }
 
   .service-card:hover {
-    transform: translateY(-8px);
+    box-shadow: 0 0 30px hsla(45, 80%, 55%, 0.1);
   }
 
-  .service-card .service-icon {
-    @apply transition-all duration-300 group-hover:scale-110 group-hover:text-primary;
-  }
-
-  /* Gradient text effect */
+  /* Gold text gradient */
   .gradient-text {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(45, 60%, 70%));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease-in-out infinite;
   }
 
-  @keyframes gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  /* Modern scrolling banner with Google reviews styling - Fixed */
-  .scrolling-text {
-    display: flex;
-    white-space: nowrap;
-    animation: scroll-horizontal-smooth 20s linear infinite;
-    will-change: transform;
-    gap: 2rem;
-  }
-
-  .scrolling-text span {
-    padding: 1rem 2rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
-    border-radius: 2rem;
-    border: 1px solid rgba(255,255,255,0.25);
-    backdrop-filter: blur(10px);
-    font-size: 0.875rem;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    flex-shrink: 0;
-  }
-
-  .scrolling-text span:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.12));
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  }
-
-  @keyframes scroll-horizontal-smooth {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* Premium animations inspired by Bayer & Bayer */
+  /* Premium reveal animation */
   .premium-reveal {
     opacity: 0;
-    transform: translateY(50px) scale(0.95);
+    transform: translateY(40px);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: 0.2s;
   }
 
   .premium-reveal.visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 
-  /* Elegant hover effects */
+  /* Elegant hover effect */
   .elegant-hover {
     position: relative;
-    overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .elegant-hover::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    transition: left 0.6s ease;
+  .elegant-hover:hover {
+    transform: translateY(-4px);
   }
 
-  .elegant-hover:hover::before {
-    left: 100%;
-  }
-
-  /* Sophisticated text effects */
+  /* Text reveal animation */
   .text-reveal {
     overflow: hidden;
     position: relative;
@@ -244,7 +182,50 @@
     transform: translateY(0);
   }
 
-  
+  /* Hero styles */
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    animation: scroll-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-bounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(10px); opacity: 0.5; }
+  }
+
+  /* Decorative line */
+  .decorative-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  }
+
+  /* Social links */
+  .social-link {
+    @apply text-muted-foreground hover:text-primary transition-colors duration-300;
+  }
+
+  /* Navigation link */
+  .nav-link {
+    @apply relative text-sm uppercase tracking-widest font-medium text-foreground/80 hover:text-primary transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Page transitions */
   .page-transition-enter {
     opacity: 0;
     transform: translateY(10px);
@@ -265,89 +246,20 @@
     transition: opacity 300ms;
   }
 
-  /* Hero Section Premium Effects */
-  .hero-glass {
-    animation: hero-float 6s ease-in-out infinite;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 
-      0 25px 50px -12px rgba(0, 0, 0, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  @keyframes hero-float {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-10px) scale(1.02); }
-  }
-
-  .hero-text-gradient {
-    background: linear-gradient(135deg, 
-      #ffffff 0%, 
-      #f8fafc 25%, 
-      #e2e8f0 50%, 
-      #ffffff 75%, 
-      #f1f5f9 100%);
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: hero-gradient-shift 4s ease-in-out infinite;
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
-  }
-
-  @keyframes hero-gradient-shift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-
-  .hero-subtitle {
-    animation: hero-slide-up 1s ease-out 0.5s both;
-  }
-
-  @keyframes hero-slide-up {
-    from { 
-      opacity: 0; 
-      transform: translateY(30px); 
-    }
-    to { 
-      opacity: 1; 
-      transform: translateY(0); 
-    }
-  }
-
-  .hero-description {
-    animation: hero-fade-in 1s ease-out 1s both;
-  }
-
-  @keyframes hero-fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
+  /* CTA Button */
   .hero-cta-button {
-    @apply min-w-[250px] rounded-full px-8 py-4 text-lg font-semibold;
-    @apply bg-gradient-to-r from-primary via-primary/90 to-primary;
-    @apply text-white border-2 border-white/30;
+    @apply bg-transparent text-primary border-2 border-primary px-10 py-4 text-sm font-semibold uppercase tracking-[0.2em];
     @apply transition-all duration-300 ease-out;
-    @apply hover:from-white hover:via-white/95 hover:to-white/90;
-    @apply hover:text-primary hover:border-primary/30;
-    @apply hover:shadow-xl hover:shadow-white/20;
-    @apply hover:scale-105 active:scale-95;
-    @apply relative overflow-hidden;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    @apply hover:bg-primary hover:text-background;
   }
 
-  .hero-cta-button::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent;
-    @apply translate-x-[-100%] skew-x-12;
-    @apply transition-transform duration-700;
+  /* Separator */
+  .gold-separator {
+    @apply w-16 h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto;
   }
 
-  .hero-cta-button:hover::before {
-    @apply translate-x-[100%];
+  /* Image overlay */
+  .image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent;
   }
-
-
 }

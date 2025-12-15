@@ -1,66 +1,108 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logo from "@/assets/logo.png";
+
 export default function HeroSection() {
-  const {
-    t
-  } = useLanguage();
-  return <section className="relative h-screen overflow-hidden">
-      {/* Background image */}
+  const { t } = useLanguage();
+
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById('services-section');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <section className="relative min-h-screen flex flex-col">
+      {/* Background image with overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center" 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')"
-        }} 
+        }}
       />
       
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-background/85" />
       
       {/* Content */}
-      <div 
-        className="relative h-full flex flex-col justify-center items-center text-center px-4" 
-      >
+      <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
+        {/* Logo */}
+        <div className="mb-8 animate-fade-in">
+          <img 
+            src={logo} 
+            alt="La Barbe à Papa - Coiffeur Barbier" 
+            className="h-32 md:h-40 lg:h-48 w-auto invert"
+          />
+        </div>
         
-        {/* Glass morphism container */}
-        <div className="relative max-w-4xl backdrop-blur-xl bg-white/10 rounded-3xl border border-white/20 p-8 md:p-12 shadow-2xl hero-glass">
-          {/* Subtitle */}
-          <div className="mb-6 overflow-hidden">
-            <span className="inline-block text-white/90 text-lg md:text-xl font-medium tracking-wider">
-              {t.hero.subtitle}
-            </span>
+        {/* Decorative line */}
+        <div className="gold-separator mb-8" />
+        
+        {/* Subtitle */}
+        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-6 text-center">
+          {t.hero.subtitle}
+        </p>
+        
+        {/* Main title */}
+        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-6 gradient-text">
+          Votre Style, Notre Passion
+        </h1>
+        
+        {/* Description */}
+        <p className="text-muted-foreground text-center max-w-2xl mb-12 leading-relaxed px-4">
+          {t.hero.description}
+        </p>
+        
+        {/* CTA Button */}
+        <button 
+          onClick={scrollToServices}
+          className="hero-cta-button"
+        >
+          Découvrir nos Services
+        </button>
+        
+        {/* Contact info sidebar */}
+        <div className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 flex-col items-end space-y-6 text-right">
+          <div className="text-sm">
+            <p className="text-muted-foreground mb-1">Adresse</p>
+            <p className="text-foreground">Rue de Jace 189</p>
+            <p className="text-foreground">4101 Jemeppe-sur-Meuse</p>
           </div>
-          
-          {/* Main title with gradient and glow */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 hero-title">
-            <span className="hero-text-gradient drop-shadow-2xl">
-              {t.hero.title}
-            </span>
-          </h1>
-          
-          {/* Description */}
-          <p className="text-lg md:text-xl text-white/95 mb-10 max-w-2xl mx-auto leading-relaxed font-light tracking-wide">
-            {t.hero.description}
-          </p>
-          
-          {/* CTA Button with special effects */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button onClick={() => {
-            const servicesSection = document.getElementById('services-section');
-            if (servicesSection) {
-              servicesSection.scrollIntoView({
-                behavior: 'smooth'
-              });
-            }
-          }} variant="hero" size="lg" className="hero-cta-button">
-              <span className="relative z-10">{t.hero.exploreApartments}</span>
-            </Button>
+          <div className="decorative-line" />
+          <div className="flex space-x-4">
+            <a 
+              href="https://www.facebook.com/profile.php?id=100082968710739&locale=fr_FR" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-link text-xs uppercase tracking-widest"
+            >
+              Facebook
+            </a>
+            <a 
+              href="https://www.instagram.com/salon_labarbeapapa/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-link text-xs uppercase tracking-widest"
+            >
+              Instagram
+            </a>
           </div>
         </div>
       </div>
       
-    </section>;
+      {/* Scroll indicator */}
+      <div className="relative z-10 pb-8 flex justify-center">
+        <button 
+          onClick={scrollToServices}
+          className="scroll-indicator text-primary hover:text-primary/80 transition-colors"
+          aria-label="Scroll to services"
+        >
+          <ChevronDown className="h-6 w-6" />
+          <ChevronDown className="h-6 w-6 -mt-3" />
+          <ChevronDown className="h-6 w-6 -mt-3" />
+        </button>
+      </div>
+    </section>
+  );
 }
