@@ -25,19 +25,19 @@
     --muted: 0 0% 20%;
     --muted-foreground: 0 0% 60%;
 
-    --accent: 199 89% 70%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 207 100% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 199 89% 70%;
+    --ring: 207 100% 50%;
 
     --radius: 0rem;
     
-    --sky: 199 89% 70%;
+    --sky: 207 100% 50%;
   }
 
   .dark {
@@ -59,17 +59,17 @@
     --muted: 0 0% 20%;
     --muted-foreground: 0 0% 60%;
 
-    --accent: 199 89% 70%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 207 100% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 199 89% 70%;
+    --ring: 207 100% 50%;
     
-    --sky: 199 89% 70%;
+    --sky: 207 100% 50%;
   }
 }
 
@@ -139,12 +139,9 @@
     box-shadow: 0 0 30px hsla(0, 0%, 100%, 0.1);
   }
 
-  /* Sky blue text gradient */
+  /* Sky blue text */
   .gradient-text {
-    background: linear-gradient(135deg, hsl(var(--sky)), hsl(var(--primary)));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: hsl(var(--sky));
   }
 
   /* Premium reveal animation */
