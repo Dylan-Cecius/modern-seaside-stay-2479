@@ -25,7 +25,7 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
       </div>
       
       {/* Service name */}
-      <h3 className="text-2xl md:text-3xl font-light mb-3 text-foreground group-hover:text-primary transition-colors">
+      <h3 className="text-2xl md:text-3xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
         {service.name}
       </h3>
       
@@ -38,9 +38,9 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
       <div className="flex items-center justify-between pt-4 border-t border-sky/30">
         <div className="flex items-center gap-2 text-sky text-sm">
           <Clock className="h-4 w-4" />
-          <span>{service.duration}</span>
+          <span className="font-bold">{service.duration}</span>
         </div>
-        <div className="text-sky text-2xl font-light">
+        <div className="text-sky text-2xl font-bold">
           {service.price}€
         </div>
       </div>
