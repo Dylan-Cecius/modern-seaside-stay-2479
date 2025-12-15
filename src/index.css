@@ -140,15 +140,15 @@
   }
 
   .service-card .text-foreground {
-    color: hsl(210 25% 20%);
+    color: hsl(0 0% 100%);
   }
 
   .service-card .text-muted-foreground {
-    color: hsl(210 15% 40%);
+    color: hsl(210 20% 80%);
   }
 
   .service-card .text-primary\/30 {
-    color: hsl(210 20% 80%);
+    color: hsl(210 30% 50%);
   }
 
   /* Glass card with glow hover */
