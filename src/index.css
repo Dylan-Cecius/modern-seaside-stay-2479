@@ -130,13 +130,13 @@
     transform: scale(1);
   }
 
-  /* Service cards - dark elegant style */
+  /* Service cards - blue style */
   .service-card {
-    @apply bg-card border border-border/30 p-8 transition-all duration-500 hover:border-primary/50;
+    @apply bg-sky/10 border border-sky/30 p-8 transition-all duration-500 hover:border-sky/50;
   }
 
   .service-card:hover {
-    box-shadow: 0 0 30px hsla(0, 0%, 100%, 0.1);
+    box-shadow: 0 0 30px hsla(207, 100%, 50%, 0.2);
   }
 
   /* Sky blue text */
