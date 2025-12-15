@@ -19,7 +19,7 @@ export default function HeroSection() {
     id: i,
     left: Math.random() * 100,
     top: Math.random() * 120,
-    size: Math.random() * 3 + 1,
+    size: Math.random() * 5 + 2,
     duration: Math.random() * 15 + 10,
     delay: Math.random() * 10,
     opacity: Math.random() * 0.3 + 0.1,
