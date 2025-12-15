@@ -14,14 +14,15 @@ export default function HeroSection() {
     }
   };
 
-  // Generate random particles
-  const particles = Array.from({ length: 100 }, (_, i) => ({
+  // Generate random particles - more subtle and varied
+  const particles = Array.from({ length: 60 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
-    top: Math.random() * 100,
-    size: Math.random() * 6 + 2,
-    duration: Math.random() * 8 + 4,
-    delay: Math.random() * 5,
+    top: Math.random() * 120,
+    size: Math.random() * 3 + 1,
+    duration: Math.random() * 15 + 10,
+    delay: Math.random() * 10,
+    opacity: Math.random() * 0.4 + 0.1,
   }));
 
   return (
@@ -40,7 +41,7 @@ export default function HeroSection() {
         {particles.map((particle) => (
           <div
             key={particle.id}
-            className="absolute rounded-full bg-primary/50 animate-float-particle"
+            className="absolute rounded-full bg-primary animate-float-particle"
             style={{
               left: `${particle.left}%`,
               top: `${particle.top}%`,
@@ -48,7 +49,7 @@ export default function HeroSection() {
               height: `${particle.size}px`,
               animationDuration: `${particle.duration}s`,
               animationDelay: `${particle.delay}s`,
-              boxShadow: `0 0 ${particle.size * 2}px hsl(var(--primary) / 0.6)`,
+              opacity: particle.opacity,
             }}
           />
         ))}
@@ -56,12 +57,12 @@ export default function HeroSection() {
       
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
-        {/* Logo with intense glow effect */}
-        <div className="mb-2 animate-fade-in">
+        {/* Logo with hover glow effect */}
+        <div className="mb-2 animate-fade-in group">
           <img 
             src={logo} 
             alt="La Barbe à Papa - Coiffeur Barbier" 
-            className="h-[24rem] md:h-[36rem] lg:h-[48rem] w-auto invert drop-shadow-[0_0_60px_hsl(var(--primary)/0.8)] hover:drop-shadow-[0_0_100px_hsl(var(--primary))] transition-all duration-500" 
+            className="h-[24rem] md:h-[36rem] lg:h-[48rem] w-auto invert drop-shadow-[0_0_20px_hsl(var(--primary)/0.3)] group-hover:drop-shadow-[0_0_80px_hsl(var(--primary))] group-hover:scale-[1.02] transition-all duration-700 ease-out cursor-pointer" 
           />
         </div>
         
