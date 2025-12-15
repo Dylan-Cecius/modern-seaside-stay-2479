@@ -15,12 +15,12 @@ export default function HeroSection() {
   };
 
   // Generate random particles
-  const particles = Array.from({ length: 50 }, (_, i) => ({
+  const particles = Array.from({ length: 100 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
     top: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 10 + 5,
+    size: Math.random() * 6 + 2,
+    duration: Math.random() * 8 + 4,
     delay: Math.random() * 5,
   }));
 
@@ -40,7 +40,7 @@ export default function HeroSection() {
         {particles.map((particle) => (
           <div
             key={particle.id}
-            className="absolute rounded-full bg-primary/30 animate-float-particle"
+            className="absolute rounded-full bg-primary/50 animate-float-particle"
             style={{
               left: `${particle.left}%`,
               top: `${particle.top}%`,
@@ -48,6 +48,7 @@ export default function HeroSection() {
               height: `${particle.size}px`,
               animationDuration: `${particle.duration}s`,
               animationDelay: `${particle.delay}s`,
+              boxShadow: `0 0 ${particle.size * 2}px hsl(var(--primary) / 0.6)`,
             }}
           />
         ))}
@@ -55,30 +56,30 @@ export default function HeroSection() {
       
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
-        {/* Logo with glow effect */}
-        <div className="mb-4 animate-fade-in">
+        {/* Logo with intense glow effect */}
+        <div className="mb-2 animate-fade-in">
           <img 
             src={logo} 
             alt="La Barbe à Papa - Coiffeur Barbier" 
-            className="h-[24rem] md:h-[36rem] lg:h-[48rem] w-auto invert drop-shadow-[0_0_30px_hsl(var(--primary)/0.6)] hover:drop-shadow-[0_0_50px_hsl(var(--primary)/0.8)] transition-all duration-500" 
+            className="h-[24rem] md:h-[36rem] lg:h-[48rem] w-auto invert drop-shadow-[0_0_60px_hsl(var(--primary)/0.8)] hover:drop-shadow-[0_0_100px_hsl(var(--primary))] transition-all duration-500" 
           />
         </div>
         
         {/* Decorative line */}
-        <div className="gold-separator mb-4" />
+        <div className="gold-separator mb-2" />
         
         {/* Subtitle */}
-        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-3 text-center">
+        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-2 text-center">
           {t.hero.subtitle}
         </p>
         
         {/* Main title */}
-        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-4 gradient-text">
+        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-2 gradient-text">
           Votre Style, Notre Passion
         </h1>
         
         {/* Description */}
-        <p className="text-muted-foreground text-center max-w-2xl mb-8 leading-relaxed px-4">
+        <p className="text-muted-foreground text-center max-w-2xl mb-6 leading-relaxed px-4">
           {t.hero.description}
         </p>
         
