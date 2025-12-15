@@ -75,8 +75,11 @@ export default function HeroSection() {
         </p>
         
         {/* Main title */}
-        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-1 gradient-text -mt-1">
-          Votre Style, Notre Passion
+        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-1 -mt-1">
+          <span className="text-foreground">Votre </span>
+          <span className="text-sky">Style</span>
+          <span className="text-foreground">, Notre </span>
+          <span className="text-sky">Passion</span>
         </h1>
         
         {/* Description */}
