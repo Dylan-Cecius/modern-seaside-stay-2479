@@ -27,7 +27,7 @@ export default function Navbar() {
     }
     setMobileMenuOpen(false);
   };
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500", scrolled ? "bg-background/95 backdrop-blur-md py-4 border-b border-border/50" : "bg-black/80 backdrop-blur-sm py-6")}>
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500", scrolled ? "bg-background/95 backdrop-blur-md py-2 border-b border-border/50" : "bg-black py-2")}>
       <nav className="container flex justify-between items-center">
         {/* Left side - Navigation */}
         <div className="hidden md:flex items-center space-x-10">
@@ -41,7 +41,7 @@ export default function Navbar() {
 
         {/* Center - Logo */}
         <div className="flex items-center justify-center">
-          <img src={logo} alt="La Barbe à Papa" className="h-32 md:h-40 invert" />
+          <img src={logo} alt="La Barbe à Papa" className="h-20 md:h-24 invert" />
         </div>
 
         {/* Right side - Navigation & Controls */}
