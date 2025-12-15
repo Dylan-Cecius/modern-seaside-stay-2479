@@ -117,7 +117,7 @@ export default function TestimonialsSection() {
                   <Quote className="h-12 w-12 text-primary/30 mx-auto mb-6" />
 
                   {/* Content */}
-                  <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8 italic">
+                  <p className="text-lg md:text-xl text-sky leading-relaxed mb-8 italic">
                     "{testimonial.content}"
                   </p>
 
