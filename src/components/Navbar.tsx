@@ -27,43 +27,38 @@ export default function Navbar() {
     }
     setMobileMenuOpen(false);
   };
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500", scrolled ? "bg-background/95 backdrop-blur-md py-3 border-b border-border/30" : "bg-transparent py-6")}>
+  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500", scrolled ? "bg-background/95 backdrop-blur-md py-4 border-b border-border/50" : "bg-black/80 backdrop-blur-sm py-6")}>
       <nav className="container flex justify-between items-center">
-        {/* Left side - Language & Navigation */}
-        <div className="flex items-center space-x-8">
-          <LanguageSelector />
-          <div className="hidden md:flex items-center space-x-8">
-            <button onClick={() => scrollToSection('services-section')} className="nav-link flex items-center gap-2">
-              <Scissors className="h-4 w-4" />
-              Services
-            </button>
-            <button onClick={() => scrollToSection('testimonials')} className="nav-link">
-              Avis
-            </button>
-          </div>
+        {/* Left side - Navigation */}
+        <div className="hidden md:flex items-center space-x-10">
+          <button onClick={() => scrollToSection('services-section')} className="text-sm font-medium uppercase tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors">
+            Services
+          </button>
+          <button onClick={() => scrollToSection('testimonials')} className="text-sm font-medium uppercase tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors">
+            Avis
+          </button>
         </div>
 
         {/* Center - Logo */}
-        <div className="absolute left-1/2 -translate-x-1/2">
-          
+        <div className="flex items-center justify-center">
+          <img src={logo} alt="La Barbe à Papa" className="h-32 md:h-40 invert" />
         </div>
 
-        {/* Right side - Navigation & Theme */}
-        <div className="flex items-center space-x-8">
-          <div className="hidden md:flex items-center space-x-8">
-            <button onClick={() => scrollToSection('features')} className="nav-link">
-              Atouts
-            </button>
-            <button onClick={() => scrollToSection('contact')} className="nav-link flex items-center gap-2">
-              <Phone className="h-4 w-4" />
-              Contact
-            </button>
-          </div>
-          <ThemeToggle />
-          
-          {/* Mobile menu button */}
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden">
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        {/* Right side - Navigation & Controls */}
+        <div className="hidden md:flex items-center space-x-10">
+          <button onClick={() => scrollToSection('features')} className="text-sm font-medium uppercase tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors">
+            Atouts
+          </button>
+          <button onClick={() => scrollToSection('contact')} className="text-sm font-medium uppercase tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors">
+            Contact
+          </button>
+        </div>
+        
+        {/* Mobile controls */}
+        <div className="flex items-center space-x-4 md:hidden">
+          <LanguageSelector />
+          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
         </div>
       </nav>
