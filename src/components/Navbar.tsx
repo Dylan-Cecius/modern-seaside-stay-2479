@@ -28,40 +28,7 @@ export default function Navbar() {
     setMobileMenuOpen(false);
   };
   return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500", scrolled ? "bg-background/95 backdrop-blur-md py-2 border-b border-border/50" : "bg-transparent py-4")}>
-      <nav className="container flex justify-between items-center">
-        {/* Left side - Navigation */}
-        <div className="hidden md:flex items-center space-x-10">
-          <button onClick={() => scrollToSection('services-section')} className="text-sm font-medium uppercase tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors">
-            Services
-          </button>
-          <button onClick={() => scrollToSection('testimonials')} className="text-sm font-medium uppercase tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors">
-            Avis
-          </button>
-        </div>
-
-        {/* Center - Logo */}
-        <div className="flex items-center justify-center">
-          <img src={logo} alt="La Barbe à Papa" className="h-20 md:h-24 invert" />
-        </div>
-
-        {/* Right side - Navigation & Controls */}
-        <div className="hidden md:flex items-center space-x-10">
-          <button onClick={() => scrollToSection('features')} className="text-sm font-medium uppercase tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors">
-            Atouts
-          </button>
-          <button onClick={() => scrollToSection('contact')} className="text-sm font-medium uppercase tracking-[0.2em] text-foreground hover:text-muted-foreground transition-colors">
-            Contact
-          </button>
-        </div>
-        
-        {/* Mobile controls */}
-        <div className="flex items-center space-x-4 md:hidden">
-          <LanguageSelector />
-          <Button variant="ghost" size="icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
-        </div>
-      </nav>
+      
 
       {/* Mobile Menu */}
       <div className={cn("fixed inset-0 z-40 bg-background/98 backdrop-blur-lg md:hidden transition-all duration-500", mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible")}>
