@@ -14,7 +14,7 @@ export default function HeroSection() {
     }
   };
 
-  // Generate random particles - more subtle and varied
+  // Generate random particles - white and blue with transparency
   const particles = Array.from({ length: 60 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
@@ -22,7 +22,8 @@ export default function HeroSection() {
     size: Math.random() * 3 + 1,
     duration: Math.random() * 15 + 10,
     delay: Math.random() * 10,
-    opacity: Math.random() * 0.4 + 0.1,
+    opacity: Math.random() * 0.3 + 0.1,
+    isBlue: Math.random() > 0.5,
   }));
 
   return (
@@ -41,7 +42,7 @@ export default function HeroSection() {
         {particles.map((particle) => (
           <div
             key={particle.id}
-            className="absolute rounded-full bg-primary animate-float-particle"
+            className="absolute rounded-full animate-float-particle"
             style={{
               left: `${particle.left}%`,
               top: `${particle.top}%`,
@@ -50,13 +51,14 @@ export default function HeroSection() {
               animationDuration: `${particle.duration}s`,
               animationDelay: `${particle.delay}s`,
               opacity: particle.opacity,
+              backgroundColor: particle.isBlue ? 'hsl(var(--sky))' : 'hsl(0 0% 100%)',
             }}
           />
         ))}
       </div>
       
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
+      <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-8">
         {/* Logo with hover glow effect */}
         <div className="-mb-16 md:-mb-24 lg:-mb-32 animate-fade-in group">
           <img 
