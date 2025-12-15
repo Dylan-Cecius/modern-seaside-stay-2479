@@ -249,9 +249,9 @@
 
   /* CTA Button */
   .hero-cta-button {
-    @apply bg-transparent text-sky border-2 border-sky px-10 py-4 text-sm font-semibold uppercase tracking-[0.2em];
+    @apply bg-sky text-background px-10 py-4 text-sm font-semibold uppercase tracking-[0.2em];
     @apply transition-all duration-300 ease-out;
-    @apply hover:bg-sky hover:text-background;
+    @apply hover:bg-sky/80 hover:scale-105 hover:shadow-lg;
   }
 
   /* Separator */
