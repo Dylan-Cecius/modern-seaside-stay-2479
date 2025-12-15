@@ -35,12 +35,12 @@ export default function ServiceCard({ service, index }: ServiceCardProps) {
       </p>
       
       {/* Duration and Price */}
-      <div className="flex items-center justify-between pt-4 border-t border-border/30">
-        <div className="flex items-center gap-2 text-muted-foreground text-sm">
+      <div className="flex items-center justify-between pt-4 border-t border-sky/30">
+        <div className="flex items-center gap-2 text-sky text-sm">
           <Clock className="h-4 w-4" />
           <span>{service.duration}</span>
         </div>
-        <div className="text-primary text-2xl font-light">
+        <div className="text-sky text-2xl font-light">
           {service.price}€
         </div>
       </div>
