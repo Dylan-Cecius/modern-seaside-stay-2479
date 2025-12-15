@@ -67,10 +67,10 @@ export default function HeroSection() {
         </div>
         
         {/* Decorative line */}
-        <div className="gold-separator mb-2" />
+        <div className="gold-separator mb-1" />
         
         {/* Subtitle */}
-        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-2 text-center">
+        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-2 text-center -mt-1">
           {t.hero.subtitle}
         </p>
         
