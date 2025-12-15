@@ -16,7 +16,7 @@ interface ServiceCardProps {
 export default function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <div 
-      className="service-card scroll-reveal cursor-pointer"
+      className="service-card scroll-reveal cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(56,189,248,0.3)]"
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       {/* Service number */}
