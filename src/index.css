@@ -128,15 +128,27 @@
     transform: scale(1);
   }
 
-  /* Service cards - blue style with glow */
+  /* Service cards - light style with glow */
   .service-card {
-    @apply bg-sky/10 border border-sky/30 p-8 transition-all duration-500 hover:border-sky/50;
+    @apply bg-[hsl(210_20%_95%)] border border-sky/20 p-8 transition-all duration-500 hover:border-sky/50;
     transform: scale(1);
   }
 
   .service-card:hover {
     transform: scale(1.05);
     box-shadow: 0 0 40px hsla(207, 100%, 50%, 0.4), 0 0 80px hsla(207, 100%, 50%, 0.2);
+  }
+
+  .service-card .text-foreground {
+    color: hsl(210 25% 20%);
+  }
+
+  .service-card .text-muted-foreground {
+    color: hsl(210 15% 40%);
+  }
+
+  .service-card .text-primary\/30 {
+    color: hsl(210 20% 80%);
   }
 
   /* Glass card with glow hover */
