@@ -1,26 +1,23 @@
 import { ChevronDown } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import logo from "@/assets/logo.png";
-
 export default function HeroSection() {
-  const { t } = useLanguage();
-
+  const {
+    t
+  } = useLanguage();
   const scrollToServices = () => {
     const servicesSection = document.getElementById('services-section');
     if (servicesSection) {
-      servicesSection.scrollIntoView({ behavior: 'smooth' });
+      servicesSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section className="relative min-h-screen flex flex-col">
+  return <section className="relative min-h-screen flex flex-col">
       {/* Background image with overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')"
-        }}
-      />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')"
+    }} />
       
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-background/85" />
@@ -29,11 +26,7 @@ export default function HeroSection() {
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
         {/* Logo */}
         <div className="mb-8 animate-fade-in">
-          <img 
-            src={logo} 
-            alt="La Barbe à Papa - Coiffeur Barbier" 
-            className="h-32 md:h-40 lg:h-48 w-auto invert"
-          />
+          <img src={logo} alt="La Barbe à Papa - Coiffeur Barbier" className="h-32 md:h-40 lg:h-48 w-auto invert" />
         </div>
         
         {/* Decorative line */}
@@ -55,54 +48,32 @@ export default function HeroSection() {
         </p>
         
         {/* CTA Button */}
-        <button 
-          onClick={scrollToServices}
-          className="hero-cta-button"
-        >
+        <button onClick={scrollToServices} className="hero-cta-button">
           Découvrir nos Services
         </button>
         
         {/* Contact info sidebar */}
         <div className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 flex-col items-end space-y-6 text-right">
           <div className="text-sm">
-            <p className="text-muted-foreground mb-1">Adresse</p>
-            <p className="text-foreground">Rue de Jace 189</p>
-            <p className="text-foreground">4101 Jemeppe-sur-Meuse</p>
+            
+            
+            
           </div>
           <div className="decorative-line" />
           <div className="flex space-x-4">
-            <a 
-              href="https://www.facebook.com/profile.php?id=100082968710739&locale=fr_FR" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-link text-xs uppercase tracking-widest"
-            >
-              Facebook
-            </a>
-            <a 
-              href="https://www.instagram.com/salon_labarbeapapa/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-link text-xs uppercase tracking-widest"
-            >
-              Instagram
-            </a>
+            
+            
           </div>
         </div>
       </div>
       
       {/* Scroll indicator */}
       <div className="relative z-10 pb-8 flex justify-center">
-        <button 
-          onClick={scrollToServices}
-          className="scroll-indicator text-primary hover:text-primary/80 transition-colors"
-          aria-label="Scroll to services"
-        >
+        <button onClick={scrollToServices} className="scroll-indicator text-primary hover:text-primary/80 transition-colors" aria-label="Scroll to services">
           <ChevronDown className="h-6 w-6" />
           <ChevronDown className="h-6 w-6 -mt-3" />
           <ChevronDown className="h-6 w-6 -mt-3" />
         </button>
       </div>
-    </section>
-  );
+    </section>;
 }
