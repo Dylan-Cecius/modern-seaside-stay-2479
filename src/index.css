@@ -128,9 +128,9 @@
     transform: scale(1);
   }
 
-  /* Service cards - bright blue style with glow */
+  /* Service cards - dark blue style with glow */
   .service-card {
-    @apply bg-[hsl(200_100%_50%)] border border-sky/30 p-8 transition-all duration-500 hover:border-white/50;
+    @apply bg-[hsl(215_30%_18%)] border border-sky/20 p-8 transition-all duration-500 hover:border-sky/40;
     transform: scale(1);
   }
 
