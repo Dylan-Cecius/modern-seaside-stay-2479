@@ -58,7 +58,7 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-20">
         {/* Logo with hover glow effect */}
-        <div className="mb-0 animate-fade-in group">
+        <div className="-mb-16 md:-mb-24 lg:-mb-32 animate-fade-in group">
           <img 
             src={logo} 
             alt="La Barbe à Papa - Coiffeur Barbier" 
