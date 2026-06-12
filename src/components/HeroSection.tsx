@@ -18,11 +18,6 @@ export default function HeroSection() {
       }}
     >
       <div className="container w-full text-center pt-20">
-        <img
-          src={logo}
-          alt="La Barbe à Papa - Coiffeur Barbier"
-          className="h-40 md:h-44 w-auto mx-auto mb-10 invert drop-shadow-[0_6px_30px_rgba(0,0,0,0.6)]"
-        />
 
         <span className="eyebrow mb-6">Coiffeur Homme · Barbier à Liège</span>
 
