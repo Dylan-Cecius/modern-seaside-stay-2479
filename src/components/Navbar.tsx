@@ -37,8 +37,8 @@ export default function Navbar() {
       style={{ borderColor: "hsl(var(--primary) / 0.25)" }}
     >
       <div className="container flex items-center justify-between h-[72px]">
-        <button onClick={() => scrollTo("hero-top")} aria-label="Accueil">
-          <img src={logo} alt="La Barbe à Papa" className="h-12 w-auto invert" />
+        <button onClick={() => scrollTo("hero-top")} aria-label="Accueil" className="text-foreground serif text-lg tracking-wide">
+          La Barbe à Papa
         </button>
 
         <nav className="hidden md:flex items-center gap-9">
