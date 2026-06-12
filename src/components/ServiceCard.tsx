@@ -1,5 +1,3 @@
-import { Clock } from "lucide-react";
-
 export interface ServiceProps {
   id: string;
   name: string;
@@ -15,35 +13,44 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service, index }: ServiceCardProps) {
   return (
-    <div 
-      className="service-card scroll-reveal cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(56,189,248,0.3)]"
-      style={{ transitionDelay: `${index * 100}ms` }}
+    <div
+      className="grid items-baseline gap-x-6 gap-y-2 py-7 scroll-reveal"
+      style={{
+        gridTemplateColumns: "auto 1fr auto",
+        borderBottom: "1px dashed hsl(var(--muted-foreground) / 0.25)",
+        transitionDelay: `${index * 80}ms`,
+      }}
     >
-      {/* Service number */}
-      <div className="text-primary/30 text-6xl font-light mb-4">
-        {String(index + 1).padStart(2, '0')}
-      </div>
-      
-      {/* Service name */}
-      <h3 className="text-2xl md:text-3xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
-        {service.name}
-      </h3>
-      
-      {/* Description */}
-      <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
+      <span
+        className="italic text-primary"
+        style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.1rem" }}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <h3 className="text-2xl md:text-[1.45rem] font-medium text-foreground">{service.name}</h3>
+      <span
+        className="whitespace-nowrap"
+        style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontSize: "1.7rem",
+          color: "hsl(var(--accent))",
+        }}
+      >
+        {service.price}€
+      </span>
+
+      <p
+        className="text-muted-foreground text-[0.9rem] max-w-lg"
+        style={{ gridColumn: 2 }}
+      >
         {service.description}
       </p>
-      
-      {/* Duration and Price */}
-      <div className="flex items-center justify-between pt-4 border-t border-sky/30">
-        <div className="flex items-center gap-2 text-sky text-sm">
-          <Clock className="h-4 w-4" />
-          <span className="font-bold">{service.duration}</span>
-        </div>
-        <div className="text-sky text-2xl font-bold">
-          {service.price}€
-        </div>
-      </div>
+      <span
+        className="text-[0.72rem] uppercase text-muted-foreground text-right"
+        style={{ gridColumn: 3, letterSpacing: "0.18em" }}
+      >
+        {service.duration}
+      </span>
     </div>
   );
 }

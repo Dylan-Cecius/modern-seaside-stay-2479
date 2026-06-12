@@ -1,62 +1,91 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Scissors, Phone } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import ThemeToggle from "./ThemeToggle";
-import LanguageSelector from "./LanguageSelector";
-import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 50;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrolled]);
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
     setMobileMenuOpen(false);
   };
-  return <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500", scrolled ? "bg-background/95 backdrop-blur-md py-2 border-b border-border/50" : "bg-transparent py-4")}>
-      
 
-      {/* Mobile Menu */}
-      <div className={cn("fixed inset-0 z-40 bg-background/98 backdrop-blur-lg md:hidden transition-all duration-500", mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible")}>
+  const links = [
+    { id: "services-section", label: "Services" },
+    { id: "galerie", label: "Galerie" },
+    { id: "testimonials", label: "Avis" },
+    { id: "features", label: "Atouts" },
+    { id: "contact", label: "Contact" },
+  ];
+
+  return (
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-lg border-b",
+        scrolled ? "bg-background/80" : "bg-background/60"
+      )}
+      style={{ borderColor: "hsl(var(--primary) / 0.25)" }}
+    >
+      <div className="container flex items-center justify-between h-[72px]">
+        <button onClick={() => scrollTo("hero-top")} aria-label="Accueil">
+          <img src={logo} alt="La Barbe à Papa" className="h-12 w-auto invert" />
+        </button>
+
+        <nav className="hidden md:flex items-center gap-9">
+          {links.map((l) => (
+            <button key={l.id} onClick={() => scrollTo(l.id)} className="nav-link">
+              {l.label}
+            </button>
+          ))}
+        </nav>
+
+        <button
+          onClick={() => scrollTo("contact")}
+          className="hidden md:inline-flex border border-primary text-primary px-5 py-2.5 text-[0.72rem] uppercase transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+          style={{ letterSpacing: "0.22em" }}
+        >
+          Sans rendez-vous
+        </button>
+
+        <button
+          className="md:hidden text-foreground"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Menu"
+        >
+          {mobileMenuOpen ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      {/* Mobile */}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 bg-background/98 backdrop-blur-lg md:hidden transition-all duration-500",
+          mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        )}
+      >
         <div className="flex flex-col items-center justify-center h-full space-y-8 pt-20">
-          <img src={logo} alt="La Barbe à Papa" className="h-20 invert mb-8" />
-          
-          <button onClick={() => scrollToSection('services-section')} className="text-2xl font-light uppercase tracking-widest text-foreground hover:text-primary transition-colors">
-            Services
-          </button>
-          <button onClick={() => scrollToSection('testimonials')} className="text-2xl font-light uppercase tracking-widest text-foreground hover:text-primary transition-colors">
-            Avis Clients
-          </button>
-          <button onClick={() => scrollToSection('features')} className="text-2xl font-light uppercase tracking-widest text-foreground hover:text-primary transition-colors">
-            Nos Atouts
-          </button>
-          <button onClick={() => scrollToSection('contact')} className="text-2xl font-light uppercase tracking-widest text-foreground hover:text-primary transition-colors">
-            Contact
-          </button>
-          
-          <div className="flex space-x-6 mt-8">
-            <a href="https://www.facebook.com/profile.php?id=100082968710739&locale=fr_FR" target="_blank" rel="noopener noreferrer" className="social-link uppercase text-xs tracking-widest">
-              Facebook
-            </a>
-            <a href="https://www.instagram.com/salon_labarbeapapa/" target="_blank" rel="noopener noreferrer" className="social-link uppercase text-xs tracking-widest">
-              Instagram
-            </a>
-          </div>
+          <img src={logo} alt="La Barbe à Papa" className="h-16 invert mb-6" />
+          {links.map((l) => (
+            <button
+              key={l.id}
+              onClick={() => scrollTo(l.id)}
+              className="text-xl uppercase tracking-[0.25em] text-foreground hover:text-primary transition-colors"
+            >
+              {l.label}
+            </button>
+          ))}
         </div>
       </div>
-    </header>;
+    </header>
+  );
 }

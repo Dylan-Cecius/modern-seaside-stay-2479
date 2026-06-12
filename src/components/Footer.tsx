@@ -1,86 +1,79 @@
-import { Facebook, Instagram, MapPin, Clock, Phone } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
+  const year = new Date().getFullYear();
   return (
-    <footer id="contact" className="bg-card border-t border-border/30">
-      {/* Main footer content */}
-      <div className="container py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-          {/* Logo and social */}
-          <div className="flex flex-col items-center text-center">
-            <img src={logo} alt="La Barbe à Papa" className="h-20 invert mb-6" />
-            <p className="text-muted-foreground text-sm mb-6">
+    <footer
+      className="bg-background pt-16 pb-8 border-t"
+      style={{ borderColor: "hsl(var(--primary) / 0.25)" }}
+    >
+      <div className="container">
+        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr] gap-10 text-center md:text-left">
+          <div>
+            <img src={logo} alt="La Barbe à Papa" className="h-16 invert mb-5 mx-auto md:mx-0" />
+            <p className="text-muted-foreground text-[0.88rem]">
               Votre barbier de confiance depuis 2022
             </p>
-            <div className="flex space-x-6">
-              <a 
-                href="https://www.facebook.com/profile.php?id=100082968710739&locale=fr_FR" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="social-link"
+            <div className="flex gap-4 mt-5 justify-center md:justify-start">
+              <a
+                href="https://www.facebook.com/profile.php?id=100082968710739&locale=fr_FR"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border flex items-center justify-center text-foreground/80 hover:text-primary hover:border-primary transition-all"
+                style={{ borderColor: "hsl(var(--primary) / 0.25)" }}
+                aria-label="Facebook"
               >
-                <Facebook size={20} />
-                <span className="sr-only">Facebook</span>
+                <Facebook size={16} />
               </a>
-              <a 
-                href="https://www.instagram.com/salon_labarbeapapa/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="social-link"
+              <a
+                href="https://www.instagram.com/salon_labarbeapapa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border flex items-center justify-center text-foreground/80 hover:text-primary hover:border-primary transition-all"
+                style={{ borderColor: "hsl(var(--primary) / 0.25)" }}
+                aria-label="Instagram"
               >
-                <Instagram size={20} />
-                <span className="sr-only">Instagram</span>
+                <Instagram size={16} />
               </a>
             </div>
           </div>
 
-          {/* Address */}
-          <div className="flex flex-col items-center text-center">
-            <div className="flex items-center gap-2 text-primary mb-4">
-              <MapPin className="h-5 w-5" />
-              <h4 className="text-lg font-semibold uppercase tracking-wider">Adresse</h4>
-            </div>
-            <div className="text-muted-foreground">
-              <p>Rue de Jace 189</p>
-              <p>4101 Jemeppe-sur-Meuse</p>
-              <p className="mt-2">Belgique</p>
-            </div>
+          <div>
+            <h4
+              className="text-primary text-[0.72rem] uppercase mb-4 font-medium"
+              style={{ fontFamily: "Inter, sans-serif", letterSpacing: "0.3em" }}
+            >
+              Adresse
+            </h4>
+            <ul className="text-muted-foreground text-[0.88rem] space-y-1">
+              <li>Rue de Jace 189</li>
+              <li>4101 Jemeppe-sur-Meuse</li>
+              <li>Belgique</li>
+            </ul>
           </div>
 
-          {/* Hours */}
-          <div className="flex flex-col items-center text-center">
-            <div className="flex items-center gap-2 text-primary mb-4">
-              <Clock className="h-5 w-5" />
-              <h4 className="text-lg font-semibold uppercase tracking-wider">Horaires</h4>
-            </div>
-            <div className="text-muted-foreground space-y-1">
-              <p>Mardi - Samedi</p>
-              <p className="text-foreground font-semibold text-lg">10h - 19h</p>
-              <p className="text-sm mt-3">
-                Fermé dimanche & lundi
-              </p>
-              <p className="text-sm">
-                Fermé les jours fériés
-              </p>
-            </div>
+          <div>
+            <h4
+              className="text-primary text-[0.72rem] uppercase mb-4 font-medium"
+              style={{ fontFamily: "Inter, sans-serif", letterSpacing: "0.3em" }}
+            >
+              Horaires
+            </h4>
+            <ul className="text-muted-foreground text-[0.88rem] space-y-1">
+              <li>Mardi – Samedi</li>
+              <li>10h – 19h</li>
+              <li>Fermé dimanche &amp; lundi</li>
+              <li>Fermé les jours fériés</li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      {/* Bottom bar */}
-      <div className="border-t border-border/30">
-        <div className="container py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-muted-foreground text-sm">
-              © {currentYear} La Barbe à Papa. Tous droits réservés.
-            </p>
-            <p className="text-muted-foreground text-sm">
-              Sans rendez-vous • Parking facile
-            </p>
-          </div>
+        <div
+          className="text-center text-muted-foreground text-[0.75rem] mt-14 pt-6 border-t"
+          style={{ borderColor: "hsl(var(--muted-foreground) / 0.12)" }}
+        >
+          © {year} La Barbe à Papa. Tous droits réservés. · Sans rendez-vous • Parking facile
         </div>
       </div>
     </footer>
