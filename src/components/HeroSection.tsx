@@ -1,119 +1,63 @@
-import { ChevronDown } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
 import logo from "@/assets/logo.png";
 
 export default function HeroSection() {
-  const { t } = useLanguage();
-  
-  const scrollToServices = () => {
-    const servicesSection = document.getElementById('services-section');
-    if (servicesSection) {
-      servicesSection.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Generate random particles - white and blue with transparency
-  const particles = Array.from({ length: 60 }, (_, i) => ({
-    id: i,
-    left: Math.random() * 100,
-    top: Math.random() * 120,
-    size: Math.random() * 5 + 2,
-    duration: Math.random() * 15 + 10,
-    delay: Math.random() * 10,
-    opacity: Math.random() * 0.3 + 0.1,
-    isBlue: Math.random() > 0.5,
-  }));
-
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden">
-      {/* Background image with overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-        style={{ backgroundImage: "url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')" }} 
-      />
-      
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-background/85" />
+    <header
+      id="hero-top"
+      className="relative min-h-screen flex items-center"
+      style={{
+        backgroundImage:
+          "linear-gradient(rgba(14,13,11,.55), rgba(14,13,11,.78) 70%, hsl(var(--background))), url('/lovable-uploads/74522104-fe6f-4229-8965-fa14fc763836.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="container w-full text-center pt-20">
+        <img
+          src={logo}
+          alt="La Barbe à Papa - Coiffeur Barbier"
+          className="h-40 md:h-44 w-auto mx-auto mb-10 invert drop-shadow-[0_6px_30px_rgba(0,0,0,0.6)]"
+        />
 
-      {/* Particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {particles.map((particle) => (
-          <div
-            key={particle.id}
-            className="absolute rounded-full animate-float-particle"
-            style={{
-              left: `${particle.left}%`,
-              top: `${particle.top}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              animationDuration: `${particle.duration}s`,
-              animationDelay: `${particle.delay}s`,
-              opacity: particle.opacity,
-              backgroundColor: particle.isBlue ? 'hsl(var(--sky))' : 'hsl(0 0% 100%)',
-            }}
-          />
-        ))}
-      </div>
-      
-      {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center items-center px-4 pt-8">
-        {/* Logo with hover glow effect */}
-        <div className="-mb-16 md:-mb-24 lg:-mb-32 animate-fade-in group">
-          <img 
-            src={logo} 
-            alt="La Barbe à Papa - Coiffeur Barbier" 
-            className="h-[24rem] md:h-[36rem] lg:h-[48rem] w-auto invert drop-shadow-[0_0_20px_hsl(var(--primary)/0.3)] group-hover:drop-shadow-[0_0_80px_hsl(var(--primary))] group-hover:scale-[1.02] transition-all duration-700 ease-out cursor-pointer" 
-          />
-        </div>
-        
-        {/* Decorative line */}
-        <div className="gold-separator -mt-8 mb-2" />
-        
-        {/* Subtitle */}
-        <p className="text-muted-foreground text-sm md:text-base uppercase tracking-[0.3em] mb-2 text-center">
-          {t.hero.subtitle}
-        </p>
-        
-        {/* Main title */}
-        <h1 className="hero-title text-4xl md:text-5xl lg:text-6xl text-center mb-2">
-          <span className="text-foreground">Votre </span>
-          <span className="text-sky">Style</span>
-          <span className="text-foreground">, Notre </span>
-          <span className="text-sky">Passion</span>
-        </h1>
-        
-        {/* Description */}
-        <p className="text-muted-foreground text-center max-w-2xl mb-6 leading-relaxed px-4">
-          {t.hero.description}
-        </p>
-        
-        {/* CTA Button */}
-        <button onClick={scrollToServices} className="hero-cta-button">
-          Découvrir nos Services
-        </button>
-        
-        {/* Contact info sidebar */}
-        <div className="hidden lg:flex fixed right-8 top-1/2 -translate-y-1/2 flex-col items-end space-y-6 text-right">
-          <div className="text-sm"></div>
-          <div className="decorative-line" />
-          <div className="flex space-x-4"></div>
-        </div>
-      </div>
-      
-      {/* Scroll indicator */}
-      <div className="relative z-10 pb-8 flex justify-center">
-        <button 
-          onClick={scrollToServices} 
-          className="scroll-indicator text-primary hover:text-primary/80 transition-colors" 
-          aria-label="Scroll to services"
+        <span className="eyebrow mb-6">Coiffeur Homme · Barbier à Liège</span>
+
+        <h1
+          className="hero-title mt-6"
+          style={{ fontSize: "clamp(2.6rem, 6vw, 4.6rem)" }}
         >
-          <ChevronDown className="h-6 w-6" />
-          <ChevronDown className="h-6 w-6 -mt-3" />
-          <ChevronDown className="h-6 w-6 -mt-3" />
-        </button>
+          Votre Style,
+          <br />
+          <em className="italic font-medium" style={{ color: "hsl(var(--accent))" }}>
+            Notre Passion
+          </em>
+        </h1>
+
+        <p className="max-w-xl mx-auto mt-7 text-[1.02rem]" style={{ color: "hsl(var(--ivoire2))" }}>
+          Votre coiffeur homme et barbier à Jemeppe-sur-Meuse. Barber shop moderne et chaleureux où
+          tradition et modernité se rencontrent pour sublimer votre style.
+        </p>
+
+        <div className="mt-11 flex flex-wrap items-center justify-center gap-4">
+          <button onClick={() => scrollTo("services-section")} className="btn-or">
+            Découvrir nos services
+          </button>
+          <button onClick={() => scrollTo("contact")} className="btn-ghost">
+            Nous trouver
+          </button>
+        </div>
       </div>
-    </section>
+
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[0.7rem] uppercase text-muted-foreground"
+        style={{ letterSpacing: "0.3em" }}
+      >
+        Mardi – Samedi · 10h – 19h
+      </div>
+    </header>
   );
 }
