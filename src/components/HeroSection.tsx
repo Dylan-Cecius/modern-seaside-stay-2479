@@ -17,7 +17,7 @@ export default function HeroSection() {
         backgroundPosition: "center",
       }}
     >
-      <div className="container w-full text-center pt-28">
+      <div className="container w-full text-center">
 
 
         <span className="eyebrow mb-6">Coiffeur Homme · Barbier à Liège</span>
