@@ -94,22 +94,8 @@ export default function Index() {
               <h2>Galerie</h2>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-              {gallery.map((g, i) => (
-                <figure
-                  key={i}
-                  className="overflow-hidden scroll-reveal-scale"
-                  style={{ aspectRatio: "3/4", transitionDelay: `${i * 80}ms` }}
-                >
-                  <img
-                    src={g.src}
-                    alt={g.alt}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-all duration-700 hover:scale-105"
-                    style={{ filter: "grayscale(35%) contrast(1.05)" }}
-                  />
-                </figure>
-              ))}
+            <div className="scroll-reveal">
+              <GalleryCarousel images={gallery} />
             </div>
           </div>
         </section>
