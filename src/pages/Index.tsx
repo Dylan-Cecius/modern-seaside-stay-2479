@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import ServiceCard, { ServiceProps } from "@/components/ServiceCard";
+import GalleryCarousel from "@/components/GalleryCarousel";
 import { Scissors, Coffee, ParkingCircle } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
@@ -28,6 +29,10 @@ const features = [
 ];
 
 const gallery = [
+  { src: "/gallery/coupe-recent-1.jpg", alt: "Coupe brushed up dégradé fade, profil", placeholder: true },
+  { src: "/gallery/coupe-recent-2.jpg", alt: "Fade serré avec design ligne rasée, arrière", placeholder: true },
+  { src: "/gallery/coupe-recent-3.jpg", alt: "Blond cendré décoloration, mi-long sur le dessus, fade sec", placeholder: true },
+  { src: "/gallery/coupe-recent-4.jpg", alt: "Coupe française châtain claire, mid-fade", placeholder: true },
   { src: "/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png", alt: "Coupe dégradée classique" },
   { src: "/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png", alt: "Coupe moderne avec dégradé" },
   { src: "/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png", alt: "Coupe avec barbe taillée" },
@@ -89,22 +94,8 @@ export default function Index() {
               <h2>Galerie</h2>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-              {gallery.map((g, i) => (
-                <figure
-                  key={i}
-                  className="overflow-hidden scroll-reveal-scale"
-                  style={{ aspectRatio: "3/4", transitionDelay: `${i * 80}ms` }}
-                >
-                  <img
-                    src={g.src}
-                    alt={g.alt}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-all duration-700 hover:scale-105"
-                    style={{ filter: "grayscale(35%) contrast(1.05)" }}
-                  />
-                </figure>
-              ))}
+            <div className="scroll-reveal">
+              <GalleryCarousel images={gallery} />
             </div>
           </div>
         </section>
