@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -46,6 +46,27 @@ const existingGallery = [
 
 export default function Index() {
   useScrollAnimation();
+  const [availableRecent, setAvailableRecent] = useState<typeof recentPhotos>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all(
+      recentPhotos.map((p) =>
+        fetch(p.src, { method: "HEAD" })
+          .then((r) => (r.ok ? p : null))
+          .catch(() => null)
+      )
+    ).then((results) => {
+      if (!cancelled) {
+        setAvailableRecent(results.filter(Boolean) as typeof recentPhotos);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const gallery = [...availableRecent, ...existingGallery];
 
   useEffect(() => {
     window.scrollTo(0, 0);
