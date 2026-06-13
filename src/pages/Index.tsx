@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import ServiceCard, { ServiceProps } from "@/components/ServiceCard";
+import GalleryCarousel from "@/components/GalleryCarousel";
 import { Scissors, Coffee, ParkingCircle } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
