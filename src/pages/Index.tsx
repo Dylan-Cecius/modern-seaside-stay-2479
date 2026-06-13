@@ -29,6 +29,10 @@ const features = [
 ];
 
 const gallery = [
+  { src: "/gallery/coupe-recent-1.jpg", alt: "Coupe brushed up dégradé fade, profil", placeholder: true },
+  { src: "/gallery/coupe-recent-2.jpg", alt: "Fade serré avec design ligne rasée, arrière", placeholder: true },
+  { src: "/gallery/coupe-recent-3.jpg", alt: "Blond cendré décoloration, mi-long sur le dessus, fade sec", placeholder: true },
+  { src: "/gallery/coupe-recent-4.jpg", alt: "Coupe française châtain claire, mid-fade", placeholder: true },
   { src: "/lovable-uploads/ed8f100e-1c03-44d7-b811-f0fce045d875.png", alt: "Coupe dégradée classique" },
   { src: "/lovable-uploads/1a99e796-3589-4843-a0bd-9fb830318a14.png", alt: "Coupe moderne avec dégradé" },
   { src: "/lovable-uploads/8ca30b87-12b4-487c-8020-a9a2ba8489bb.png", alt: "Coupe avec barbe taillée" },
