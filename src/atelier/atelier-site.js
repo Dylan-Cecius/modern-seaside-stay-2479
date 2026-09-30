@@ -9,6 +9,7 @@
   try { const value=localStorage.getItem(preferenceKey);if(value==='on'||value==='off')saved=value; } catch { /* Storage can be restricted on file:// or in private browsing. */ }
   let motion=saved?saved==='on':!reduced.matches;
   let scene=null;
+  if(window.atelierScene)window.atelierScene.destroy();
   function applyMotion() {
     root.dataset.motion=motion?'on':'off';motionButton.setAttribute('aria-pressed',String(motion));
     motionButton.setAttribute('aria-label',motion?'Désactiver les animations':'Activer les animations');
