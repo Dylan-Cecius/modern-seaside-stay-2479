@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import atelierBody from "@/atelier/atelier-body.html?raw";
 import atelierScene from "@/atelier/atelier-scene.js?raw";
 import atelierSite from "@/atelier/atelier-site.js?raw";
-import "@/atelier/atelier-reference.css";
 
 declare global {
   interface Window {
