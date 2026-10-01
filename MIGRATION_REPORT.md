@@ -82,3 +82,8 @@
 - La galerie compte donc huit réalisations, renumérotées de 01 à 08. Le `aria-label` de la piste annonce « Galerie de huit réalisations » et le compteur du visionneuse « 01 / 08 ».
 - Contrôles exécutés (Chromium, préférence d’animation `off` préchargée) : huit cartes avec `data-image` de 0 à 7, huit photos réellement chargées (`naturalWidth` > 0; la dernière se charge dès qu’elle est visible, en raison du chargement différé), note « Certaines photos ne peuvent pas être affichées » masquée, visionneuse ouverte sur `08 / 08` puis bouclée sur `01 / 08` avec la flèche droite, fermeture par Échap, aucun débordement horizontal à 1280 et 390 px, aucune erreur de page ni requête d’image en échec.
 - Build et vérification TypeScript réussis après le changement. Aucune publication, aucun DNS, domaine ou dépendance touchés.
+
+## Bouton « Animations » retiré (01/10/2026)
+- Demande du propriétaire : suppression du bouton de gestion des animations en bas de page.
+- Retiré de `src/atelier/atelier-body.html` (bouton et mentions dans la fenêtre d'informations) et de `src/atelier/atelier-site.js` (préférence localStorage, clic, gestion `inert`). La prise en charge de « mouvement réduit » du système est conservée : `data-motion="off"` est appliqué automatiquement.
+- Tests exécutés : build OK, typecheck OK, Playwright (1280×1800 et 390×844) — bouton absent, scène 3D prête, menu mobile ouvert/fermé, fenêtre d'informations sans mention « Animation », `data-motion="on"` / `"off"` selon préférence système.

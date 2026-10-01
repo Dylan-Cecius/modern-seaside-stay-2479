@@ -7,21 +7,13 @@
   const listen=(target,type,handler,options)=>{target.addEventListener(type,handler,options);cleanups.push(()=>target.removeEventListener(type,handler,options));};
   const observe=(observer,target)=>{observer.observe(target);cleanups.push(()=>observer.disconnect());};
   let destroyed=false,scene=null,sceneFrame=0,anchorFocusFrame=0;
-  const motionButton=document.getElementById('motion-control');
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-  const preferenceKey='lbap-atelier-chrome-motion';
-  let saved=null;
-  try { const value=localStorage.getItem(preferenceKey);if(value==='on'||value==='off')saved=value; } catch { /* Storage can be restricted. */ }
-  let motion=saved?saved==='on':!reduced.matches;
+  let motion=!reduced.matches;
   function applyMotion() {
-    root.dataset.motion=motion?'on':'off';motionButton.setAttribute('aria-pressed',String(motion));
-    motionButton.setAttribute('aria-label',motion?'Désactiver les animations':'Activer les animations');
-    motionButton.querySelector('.motion-symbol').textContent=motion?'Ⅱ':'▷';scene?.setMotion(motion);
+    root.dataset.motion=motion?'on':'off';scene?.setMotion(motion);
   }
   applyMotion();
-  const onMotionClick=()=>{motion=!motion;saved=motion?'on':'off';try{localStorage.setItem(preferenceKey,saved);}catch{}applyMotion();};
-  const onReducedChange=()=>{if(!saved){motion=!reduced.matches;applyMotion();}};
-  listen(motionButton,'click',onMotionClick);listen(reduced,'change',onReducedChange);
+  listen(reduced,'change',()=>{motion=!reduced.matches;applyMotion();});
   const visibilityObserver=new IntersectionObserver(entries=>entries.forEach(e=>e.target.dataset.inview=String(e.isIntersecting)),{threshold:0.01});
   document.querySelectorAll('.hero,.marquee,.contact').forEach(el=>visibilityObserver.observe(el));cleanups.push(()=>visibilityObserver.disconnect());
   const onVisibility=()=>root.classList.toggle('page-paused',document.hidden);listen(document,'visibilitychange',onVisibility);
@@ -32,7 +24,7 @@
   const focusable='a[href],button:not([disabled]),[tabindex="0"]';let menuOpen=false;
   function setMenu(open,{restore=true}={}) {
     menuOpen=open;menu.hidden=!open;menu.inert=!open;menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
-    document.body.classList.toggle('locked',open);document.getElementById('main').inert=open;document.querySelector('.site-footer').inert=open;motionButton.inert=open;document.querySelector('.mobile-visit').inert=open;
+    document.body.classList.toggle('locked',open);document.getElementById('main').inert=open;document.querySelector('.site-footer').inert=open;document.querySelector('.mobile-visit').inert=open;
     if(open)menu.querySelector('a').focus();else if(restore)menuButton.focus();
   }
   listen(menuButton,'click',()=>setMenu(!menuOpen));
