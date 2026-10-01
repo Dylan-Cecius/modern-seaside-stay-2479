@@ -42,7 +42,9 @@ export default function Index() {
     siteScript.textContent = atelierSite;
     document.body.appendChild(siteScript);
 
-    const anchorFrame = window.requestAnimationFrame(() => {
+    let anchorFrame = 0;
+    const anchorOuterFrame = window.requestAnimationFrame(() => {
+      anchorFrame = window.requestAnimationFrame(() => {
       const hash = window.location.hash;
       if (!hash) {
         window.scrollTo(0, 0);
@@ -53,9 +55,11 @@ export default function Index() {
       } catch {
         // Ignore malformed URL fragments.
       }
+      });
     });
 
     return () => {
+      window.cancelAnimationFrame(anchorOuterFrame);
       window.cancelAnimationFrame(anchorFrame);
       window.atelierSiteDestroy?.();
       window.atelierSiteDestroy = undefined;
