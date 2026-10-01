@@ -74,3 +74,11 @@
 - La pause lors d’un véritable changement d’onglet système reste conservée dans le code, mais n’a pas été marquée comme testée : Chromium automatisé ne reproduit pas fidèlement ce changement de visibilité système.
 - Aucun test n’a été réalisé sur la version publiée, conformément à l’interdiction de publier à cette étape.
 - Aucun DNS, domaine, dépendance ou autre projet n’a été modifié.
+
+## Galerie : contenu mis à jour (01/10/2026)
+
+- La troisième réalisation (`8ca30b87-12b4-487c-8020-a9a2ba8489bb.png`, libellée « LA FINITION ») a été retirée de la galerie. Le fichier reste dans `public/lovable-uploads/`, simplement plus affiché.
+- Quatre photos fournies par le propriétaire ont été ajoutées en fin de carrousel : `coupe-degrade.jpg`, `coupe-texturisee.jpg`, `coupe-decoloree.jpg`, `coupe-lignes.jpg` (copiées dans `public/lovable-uploads/`, comme les photos existantes). Les libellés « LE PROFIL », « LA NUQUE », « LES POINTES », « LES LIGNES » et les textes alternatifs « Réalisation du salon — coupe N » suivent le modèle déjà en place; aucune prestation ni prix n’a été inventé.
+- La galerie compte donc huit réalisations, renumérotées de 01 à 08. Le `aria-label` de la piste annonce « Galerie de huit réalisations » et le compteur du visionneuse « 01 / 08 ».
+- Contrôles exécutés (Chromium, préférence d’animation `off` préchargée) : huit cartes avec `data-image` de 0 à 7, huit photos réellement chargées (`naturalWidth` > 0; la dernière se charge dès qu’elle est visible, en raison du chargement différé), note « Certaines photos ne peuvent pas être affichées » masquée, visionneuse ouverte sur `08 / 08` puis bouclée sur `01 / 08` avec la flèche droite, fermeture par Échap, aucun débordement horizontal à 1280 et 390 px, aucune erreur de page ni requête d’image en échec.
+- Build et vérification TypeScript réussis après le changement. Aucune publication, aucun DNS, domaine ou dépendance touchés.
