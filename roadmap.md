@@ -4,5 +4,5 @@
 - [x] Restaurer favicon SVG bleu, viewport et theme-color de la référence.
 - [x] Nettoyer listeners, observers, RAF, scène, canvas et drapeaux au démontage.
 - [x] Préserver les ancres directes.
-- [ ] Finaliser build, typecheck, comparaisons desktop/mobile et parcours interactifs.
-- [ ] Mettre à jour MIGRATION_REPORT.md avec résultats exécutés et limites.
+- [x] Finaliser build, typecheck, comparaisons desktop/mobile et parcours interactifs.
+- [x] Mettre à jour MIGRATION_REPORT.md avec résultats exécutés et limites.
