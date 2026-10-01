@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import atelierBody from "@/atelier/atelier-body.html?raw";
+import atelierCss from "@/atelier/atelier-reference.css?raw";
 import atelierScene from "@/atelier/atelier-scene.js?raw";
 import atelierSite from "@/atelier/atelier-site.js?raw";
 
@@ -14,6 +15,7 @@ declare global {
       setMotion: (enabled: boolean) => void;
       debug?: { renderer?: string; triangles?: number; draws?: number };
     };
+    atelierSiteDestroy?: () => void;
   }
 }
 
@@ -24,7 +26,11 @@ export default function Index() {
     const root = rootRef.current;
     if (!root || root.dataset.initialized === "true") return;
     root.dataset.initialized = "true";
-    window.scrollTo(0, 0);
+
+    const referenceStyle = document.createElement("style");
+    referenceStyle.dataset.atelierStyle = "reference";
+    referenceStyle.textContent = atelierCss;
+    document.head.appendChild(referenceStyle);
 
     const sceneScript = document.createElement("script");
     sceneScript.dataset.atelierScript = "scene";
@@ -36,13 +42,37 @@ export default function Index() {
     siteScript.textContent = atelierSite;
     document.body.appendChild(siteScript);
 
+    let anchorFrame = 0;
+    const anchorOuterFrame = window.requestAnimationFrame(() => {
+      anchorFrame = window.requestAnimationFrame(() => {
+      const hash = window.location.hash;
+      if (!hash) {
+        window.scrollTo(0, 0);
+        return;
+      }
+      try {
+        document.querySelector(hash)?.scrollIntoView();
+      } catch {
+        // Ignore malformed URL fragments.
+      }
+      });
+    });
+
     return () => {
+      window.cancelAnimationFrame(anchorOuterFrame);
+      window.cancelAnimationFrame(anchorFrame);
+      window.atelierSiteDestroy?.();
+      window.atelierSiteDestroy = undefined;
       window.atelierScene?.destroy();
       window.atelierScene = undefined;
+      window.AtelierScene = undefined;
       sceneScript.remove();
       siteScript.remove();
+      referenceStyle.remove();
       document.body.classList.remove("locked");
       document.documentElement.classList.remove("page-paused");
+      delete document.documentElement.dataset.motion;
+      delete root.dataset.initialized;
     };
   }, []);
 
