@@ -87,3 +87,12 @@
 - Demande du propriétaire : suppression du bouton de gestion des animations en bas de page.
 - Retiré de `src/atelier/atelier-body.html` (bouton et mentions dans la fenêtre d'informations) et de `src/atelier/atelier-site.js` (préférence localStorage, clic, gestion `inert`). La prise en charge de « mouvement réduit » du système est conservée : `data-motion="off"` est appliqué automatiquement.
 - Tests exécutés : build OK, typecheck OK, Playwright (1280×1800 et 390×844) — bouton absent, scène 3D prête, menu mobile ouvert/fermé, fenêtre d'informations sans mention « Animation », `data-motion="on"` / `"off"` selon préférence système.
+
+## Section « Avis Google » ajoutée (01/10/2026)
+
+- Demande du propriétaire : nouvelle section entre « Les coupes » et « Contact », reprenant exactement les quatre avis Google réels du salon et la mention « 5/5 sur Google ».
+- `src/atelier/atelier-body.html` : section `#avis` insérée (kicker « AVIS GOOGLE » numéroté 04, titre « ILS EN PARLENT. », 5 étoiles bleues + mention « 5/5 sur Google », quatre `blockquote`/`cite` avec mention « AVIS GOOGLE », lien discret « Voir les avis sur Google » ouvrant une recherche Google Maps vers « La Barbe à Papa, Rue de Jace 189, 4101 Jemeppe-sur-Meuse, Belgique » dans un nouvel onglet). La numérotation de la section contact passe de 04 à 05.
+- `src/atelier/atelier-reference.css` : styles de la section ajoutés en fin de fichier (grille 2 colonnes avec décalage éditorial en desktop, une colonne en mobile, textes en serif italique, séparateurs fins). La référence validée reste inchangée ; adaptation uniquement côté production.
+- Avis repris mot pour mot ; aucune date, badge Local Guide, avatar ni note individuelle inventés. Avis statiques dans le code, aucune API ni dépendance ajoutée. Aucun prix, contenu existant, 3D ou galerie modifiés.
+- Contrôles exécutés : build OK (2026-10-01T10:57:39Z) ; Playwright Chromium, préférence d'animation `off` préchargée, 1280×1800 et 390×844 — section présente, titre « ILS EN PARLENT. », 4 avis avec les bons noms, lien Google Maps correct, zéro débordement horizontal, galerie inchangée (8 cartes, compteur 01/08), zéro erreur de page, captures de la section desktop et mobile.
+- Rien n'a été publié ; aucun DNS, domaine ou dépendance touchés.
