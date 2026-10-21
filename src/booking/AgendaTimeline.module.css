@@ -43,6 +43,7 @@
   border-bottom: 1px solid var(--agenda-border);
 }
 .dayHeader {
+  background: #f6f8fb;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,11 +64,6 @@
   color: #42617c;
   font: 12px/1.2 Arial, sans-serif;
 }
-.dayBlue { background: #e4f0ff; }
-.dayLilac { background: #eee8ff; }
-.dayMint { background: #e4f8f2; }
-.dayPeach { background: #fff0e6; }
-.dayPink { background: #ffedf1; }
 .outsidePeriod { opacity: .55; filter: grayscale(.35); }
 .timeRail {
   position: relative;
@@ -107,15 +103,28 @@
     repeating-linear-gradient(135deg, transparent, transparent 12px, rgba(119,136,154,.035) 12px, rgba(119,136,154,.035) 24px),
     repeating-linear-gradient(to bottom, #e4e9ed 0, #e4e9ed 1px, transparent 1px, transparent 36px);
 }
-.emptyLabel {
+.emptySlot {
   position: absolute;
-  top: 24px;
-  left: 8px;
-  right: 8px;
-  text-align: center;
-  color: #a1b0bc;
-  font: 12px/1.6 Arial, sans-serif;
-  pointer-events: none;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 0;
+}
+.emptySlot:hover {
+  background: rgba(22, 75, 200, .07);
+  box-shadow: inset 0 0 0 1px rgba(22, 75, 200, .18);
+}
+.emptySlot:focus-visible {
+  z-index: 3;
+  outline: 2px solid #164bc8;
+  outline-offset: -2px;
+  background: rgba(22, 75, 200, .1);
 }
 .event {
   position: absolute;
