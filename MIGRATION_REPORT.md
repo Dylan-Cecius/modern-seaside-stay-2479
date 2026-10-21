@@ -207,3 +207,10 @@ Non testé : collision réelle avec un rendez-vous existant en base (aucune écr
 - Test `tests/booking-daily-purge.sql` (bloc annulé) : non validé → 0 coordonnée effacée, empreinte ancienne effacée ; validé à 90 j → seule la fiche de 200 j effacée, journal système 1. Après test : 0 rendez-vous, 0 coordonnée, 0 empreinte, 0 journal ; réglages inchangés (tout désactivé).
 - Case du formulaire : « Je confirme avoir pris connaissance des informations de confidentialité. » (obligatoire), pour ne pas suggérer le consentement comme base légale.
 - Limite : la première exécution réelle aura lieu cette nuit ; non observée.
+
+## 2026-10-21 — Agenda admin en temps réel
+
+- booking_events ajouté à la publication temps réel (migration idempotente) ; booking_customers non publié. Les messages ne servent que de signal : l'agenda est relu par une requête soumise à la règle « admin seulement ».
+- Abonnement monté uniquement après vérification du rôle admin, retiré à la déconnexion. Statut affiché : « Synchronisé en temps réel » seulement si le canal est réellement actif, sinon « Actualisation différée (toutes les 20 s) » avec relecture onglet visible ; relecture au retour sur l'onglet ; requêtes périmées ignorées ; détails ouverts conservés et mis à jour.
+- Durées validées par le propriétaire (durations_validated=true conservé) ; confidentialité non validée, réservations fermées, contact vide.
+- Limite : aucune session admin (0 rôle) → réception temps réel non observée en vrai.
