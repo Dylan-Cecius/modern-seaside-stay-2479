@@ -27,6 +27,7 @@ export function bookingError(error: { message?: string; code?: string } | null) 
   if (message.includes('ADMIN_REQUIRED')) return 'Accès réservé à l’administrateur.';
   if (message.includes('DECEMBER_ONLY')) return 'Les rendez-vous sont limités à décembre 2026.';
   if (message.includes('BOOKING_DISABLED')) return 'Les réservations ne sont pas encore ouvertes.';
+  if (message.includes('RATE_LIMITED')) return 'Trop de demandes rapprochées. Réessayez dans un moment ou passez directement au salon.';
   if (message.includes('CLOSED')) return 'Le salon est fermé à cette heure.';
   return 'L’opération n’a pas abouti. Vérifiez les informations et réessayez.';
 }

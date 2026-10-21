@@ -17,11 +17,11 @@ def request(path,body=None):
  try:
   with urllib.request.urlopen(req) as r:return r.status,json.load(r)
  except urllib.error.HTTPError as e:return e.code,json.load(e)
-for table in ['booking_events','booking_customers','user_roles']:
+for table in ['booking_events','booking_customers','user_roles','booking_rate_log','booking_purge_log']:
  status,data=request(table+'?select=*')
  assert status in (401,403) or (status==200 and data==[]),f'Public data must be denied: {table}, status {status}'
  print('PASS anonymous reads denied:',table)
-for fn,args in [('admin_save_booking_settings',{'p_settings':{},'p_hours':[],'p_services':[]}),('admin_cancel',{'p_id':'00000000-0000-0000-0000-000000000000'}),('admin_block',{'p_start':'2026-12-01T09:00:00Z','p_end':'2026-12-01T10:00:00Z','p_note':''}),('create_booking',{'p_services':[],'p_start':'2026-12-01T09:00:00Z','p_first':'','p_last':'','p_phone':'','p_email':'','p_consent':False,'p_manual':True})]:
+for fn,args in [('admin_save_booking_settings',{'p_settings':{},'p_hours':[],'p_services':[]}),('admin_cancel',{'p_id':'00000000-0000-0000-0000-000000000000'}),('admin_block',{'p_start':'2026-12-01T09:00:00Z','p_end':'2026-12-01T10:00:00Z','p_note':''}),('create_booking',{'p_services':[],'p_start':'2026-12-01T09:00:00Z','p_first':'','p_last':'','p_phone':'','p_email':'','p_consent':False,'p_manual':True}),('admin_count_expired_customers',{}),('admin_purge_expired_customers',{})]:
  status,data=request('rpc/'+fn,args)
  assert status in (401,403,404),f'Anonymous action must be denied: {fn}'
  print('PASS anonymous privileged action denied:',fn)

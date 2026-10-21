@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { isTestDate, localDecemberInstant, brusselsDay, brusselsTime, customerSchema, TIME_ZONE, canSelectBookingDay, publicBookingEnabled, shouldLoadSlots, canConfirmBooking } from '../src/booking/rules';
+import { isTestDate, localDecemberInstant, brusselsDay, brusselsTime, customerSchema, TIME_ZONE, canSelectBookingDay, publicBookingEnabled, shouldLoadSlots, canConfirmBooking, bookingError } from '../src/booking/rules';
 describe('December 2026 booking rules',()=>{
  test('demo allows open December dates after service selection without activation',()=>{expect(publicBookingEnabled({public_enabled:false,durations_validated:false,privacy_validated:false})).toBe(false);expect(canSelectBookingDay('2026-12-01','coupe',true)).toBe(true);expect(canSelectBookingDay('2026-12-01','',true)).toBe(false);});
  test('closed Sunday and Monday cannot be selected',()=>{expect(canSelectBookingDay('2026-12-06','coupe',false)).toBe(false);expect(canSelectBookingDay('2026-12-07','coupe',false)).toBe(false);});
@@ -13,4 +13,5 @@ describe('December 2026 booking rules',()=>{
  test('free slots load after service and December day, even before activation',()=>{expect(shouldLoadSlots('2026-12-02','coupe')).toBe(true);expect(shouldLoadSlots('2026-12-02','')).toBe(false);expect(shouldLoadSlots('2027-01-02','coupe')).toBe(false);});
  test('confirmation stays disabled before activation even with a chosen slot',()=>{const base={enabled:false,busy:false,slot:'2026-12-02T09:00:00Z',slots:['2026-12-02T09:00:00Z'],consent:true,manual:false};expect(canConfirmBooking(base)).toBe(false);expect(canConfirmBooking({...base,enabled:true})).toBe(true);});
  test('stale or missing slot and missing consent block confirmation',()=>{const base={enabled:true,busy:false,slot:'2026-12-02T09:00:00Z',slots:['2026-12-02T09:30:00Z'],consent:true,manual:false};expect(canConfirmBooking(base)).toBe(false);expect(canConfirmBooking({...base,slot:''})).toBe(false);expect(canConfirmBooking({...base,slots:[base.slot],consent:false})).toBe(false);expect(canConfirmBooking({...base,slots:[base.slot],busy:true})).toBe(false);});
+ test('rate limit and server errors map to informative messages',()=>{expect(bookingError({message:'RATE_LIMITED'})).toContain('Trop de demandes');expect(bookingError({code:'23P01'})).toContain('créneau');expect(bookingError({message:'VALIDATION_REQUIRED'})).toContain('n’a pas abouti');expect(bookingError(null)).toBe('');});
 });

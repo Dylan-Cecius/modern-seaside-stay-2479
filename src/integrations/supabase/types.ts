@@ -115,6 +115,48 @@ export type Database = {
         }
         Relationships: []
       }
+      booking_purge_log: {
+        Row: {
+          created_at: string
+          id: string
+          purged_by: string | null
+          purged_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          purged_by?: string | null
+          purged_count: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          purged_by?: string | null
+          purged_count?: number
+        }
+        Relationships: []
+      }
+      booking_rate_log: {
+        Row: {
+          client_key: string
+          created_at: string
+          id: string
+          phone_key: string
+        }
+        Insert: {
+          client_key?: string
+          created_at?: string
+          id?: string
+          phone_key?: string
+        }
+        Update: {
+          client_key?: string
+          created_at?: string
+          id?: string
+          phone_key?: string
+        }
+        Relationships: []
+      }
       booking_services: {
         Row: {
           active: boolean
@@ -203,7 +245,9 @@ export type Database = {
         Returns: string
       }
       admin_cancel: { Args: { p_id: string }; Returns: undefined }
+      admin_count_expired_customers: { Args: never; Returns: number }
       admin_delete_customer: { Args: { p_id: string }; Returns: undefined }
+      admin_purge_expired_customers: { Args: never; Returns: number }
       admin_save_booking_settings: {
         Args: { p_hours: Json; p_services: Json; p_settings: Json }
         Returns: undefined
@@ -228,6 +272,7 @@ export type Database = {
       }
       create_booking: {
         Args: {
+          p_client_key?: string
           p_consent: boolean
           p_email: string
           p_first: string
