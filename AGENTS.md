@@ -12,3 +12,4 @@
 - Expired customer coordinates are purged manually by the admin through `admin_purge_expired_customers`, which journals each run in `booking_purge_log`; no automatic purge exists and the UI must say so.
 - The slot start interval (15 or 30 min) is saved atomically with the other settings through `admin_save_booking_settings`; public opening requires a validated email contact and positive retention, enforced by the `booking_settings_validation` trigger.
 - When a migration recreates a function with a changed signature, drop the old overload and re-apply REVOKE/GRANT in the same or a follow-up migration: the new overload gets default PUBLIC execute and PostgREST cannot choose between overloads (PGRST 300).
+- A daily pg_cron job (booking-daily-purge) calls the locked-down system_purge_expired_booking_data; it purges rate-log >24h always and customer data only when privacy is validated, logging purged_by NULL; why: GDPR retention must not depend on manual action.
