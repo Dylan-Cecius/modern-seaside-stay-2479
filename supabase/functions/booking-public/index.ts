@@ -2,10 +2,16 @@ import { createClient } from 'npm:@supabase/supabase-js@2';
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 import { z } from 'npm:zod@3';
 const schema=z.object({services:z.array(z.string().uuid()).min(1).max(8),start:z.string().datetime({offset:true}),first:z.string().trim().min(1).max(80),last:z.string().trim().min(1).max(80),phone:z.string().trim().regex(/^\+?[0-9 () .-]{7,30}$/),email:z.union([z.literal(''),z.string().trim().email().max(255)]),consent:z.literal(true)}).strict();
+// Network fingerprint is only a SECONDARY anti-abuse layer: headers can be forged by clients.
+// cf-connecting-ip is overwritten by the platform's edge proxy; x-forwarded-for is a fallback only.
+// The primary quota is the server-side HMAC of the normalised phone number in create_booking.
+// The raw IP never leaves this function: only a SHA-256 digest is sent, then re-keyed with a DB-only pepper.
+const IP_PATTERN=/^[0-9a-fA-F:.]{3,45}$/;
 async function clientKey(req:Request):Promise<string>{
- const ip=(req.headers.get('x-forwarded-for')||'').split(',')[0].trim();
+ const candidates=[req.headers.get('cf-connecting-ip'),(req.headers.get('x-forwarded-for')||'').split(',')[0]];
+ const ip=candidates.map(v=>(v||'').trim()).find(v=>IP_PATTERN.test(v));
  if(!ip)return '';
- const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('lbp-booking:'+ip));
+ const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('lbp-booking:'+ip.toLowerCase()));
  return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 Deno.serve(async(req)=>{
