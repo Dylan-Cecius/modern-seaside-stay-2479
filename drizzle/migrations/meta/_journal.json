@@ -43,6 +43,13 @@
       "when": 1792587436465,
       "tag": "0005_public_free_slot_preview",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792587506259,
+      "tag": "0006_read_only_slot_helper_check",
+      "breakpoints": true
     }
   ]
 }
