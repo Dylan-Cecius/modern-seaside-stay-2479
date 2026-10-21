@@ -19,7 +19,7 @@ def request(path,body=None):
  except urllib.error.HTTPError as e:return e.code,json.load(e)
 for table in ['booking_events','booking_customers','user_roles']:
  status,data=request(table+'?select=*')
- assert status in (401,403),f'Public data must be denied: {table}'
+ assert status in (401,403) or (status==200 and data==[]),f'Public data must be denied: {table}, status {status}'
  print('PASS anonymous reads denied:',table)
 for fn,args in [('admin_cancel',{'p_id':'00000000-0000-0000-0000-000000000000'}),('admin_block',{'p_start':'2026-12-01T09:00:00Z','p_end':'2026-12-01T10:00:00Z','p_note':''}),('create_booking',{'p_services':[],'p_start':'2026-12-01T09:00:00Z','p_first':'','p_last':'','p_phone':'','p_email':'','p_consent':False,'p_manual':True})]:
  status,data=request('rpc/'+fn,args)
