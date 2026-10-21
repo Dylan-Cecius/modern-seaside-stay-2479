@@ -1,6 +1,10 @@
 import { describe, expect, test } from 'bun:test';
-import { isTestDate, localDecemberInstant, brusselsDay, brusselsTime, customerSchema, TIME_ZONE } from '../src/booking/rules';
+import { isTestDate, localDecemberInstant, brusselsDay, brusselsTime, customerSchema, TIME_ZONE, canSelectBookingDay, publicBookingEnabled } from '../src/booking/rules';
 describe('December 2026 booking rules',()=>{
+ test('demo allows open December dates after service selection without activation',()=>{expect(publicBookingEnabled({public_enabled:false,durations_validated:false,privacy_validated:false})).toBe(false);expect(canSelectBookingDay('2026-12-01','coupe',true)).toBe(true);expect(canSelectBookingDay('2026-12-01','',true)).toBe(false);});
+ test('closed Sunday and Monday cannot be selected',()=>{expect(canSelectBookingDay('2026-12-06','coupe',false)).toBe(false);expect(canSelectBookingDay('2026-12-07','coupe',false)).toBe(false);});
+ test('selection remains restricted to December 2026',()=>{for(const day of ['2026-11-30','2027-01-01','2025-12-01','2026-12-32'])expect(canSelectBookingDay(day,'coupe',true)).toBe(false);});
+ test('real availability requires activation and both validations',()=>{expect(publicBookingEnabled(null)).toBe(false);for(const public_enabled of [false,true])for(const durations_validated of [false,true])for(const privacy_validated of [false,true])expect(publicBookingEnabled({public_enabled,durations_validated,privacy_validated})).toBe(public_enabled&&durations_validated&&privacy_validated);expect(publicBookingEnabled({public_enabled:true,durations_validated:true,privacy_validated:true})).toBe(true);});
  test('accepts only actual December 2026 days',()=>{expect(isTestDate('2026-12-01')).toBe(true);expect(isTestDate('2026-12-31')).toBe(true);for(const day of ['2026-11-30','2027-01-01','2025-12-01','2026-12-00','2026-12-32'])expect(isTestDate(day)).toBe(false);});
  test('10:00 Brussels is 09:00 UTC in December',()=>{expect(TIME_ZONE).toBe('Europe/Brussels');expect(localDecemberInstant('2026-12-01','10:00')).toBe('2026-12-01T09:00:00.000Z');expect(brusselsTime('2026-12-01T09:00:00Z')).toBe('10:00');});
  test('Belgian day boundary is independent of browser timezone',()=>{expect(brusselsDay('2026-11-30T23:00:00Z')).toBe('2026-12-01');expect(brusselsDay('2026-12-31T23:00:00Z')).toBe('2027-01-01');});

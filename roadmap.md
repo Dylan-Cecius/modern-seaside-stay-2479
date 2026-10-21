@@ -1,5 +1,7 @@
 # Test de réservation décembre 2026
 
+- [x] Corriger la sélection des jours ouverts en démonstration sans créneaux fictifs ni écriture ; tester activation, mobile/desktop et compilation automatique, actualiser le rapport.
+
 - [x] Confirmer besoin de profils et liste de prestations — aucun profil client ; les sept prestations et tarifs actuels de l’accueil font foi.
 - [x] Remplacer les deux actions hero par un seul bouton bleu Réserver un rendez-vous au même emplacement ; routes, clavier, mobile et sécurité vérifiés.
 - [x] Rendre l’enregistrement des réglages atomique côté serveur ; vérifier le refus des appels publics.
