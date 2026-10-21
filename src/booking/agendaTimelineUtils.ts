@@ -58,7 +58,8 @@ export function belgianClock(instant: string): string {
 export function dateLabel(date: string, compact = false): string {
   const dateObject = new Date(date + 'T12:00:00Z');
   return new Intl.DateTimeFormat('fr-BE', {
-    weekday: 'short', day: 'numeric', month: 'short', ...(compact ? {} : { year: 'numeric' })
+    timeZone: TIME_ZONE, weekday: 'short', day: 'numeric', month: 'short',
+    year: compact ? undefined : 'numeric'
   }).format(dateObject);
 }
 
