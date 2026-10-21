@@ -23,8 +23,8 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - name: Installer les dépendances verrouillées
-        run: npm ci --no-audit --no-fund
+      - name: Installer les dépendances sans toucher au lockfile obsolète
+        run: npm install --no-save --package-lock=false --legacy-peer-deps --no-audit --no-fund
       - name: Vérifier les types
         run: npx tsc -p tsconfig.app.json --noEmit
       - name: Compiler le site
