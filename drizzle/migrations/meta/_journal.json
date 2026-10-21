@@ -8,6 +8,13 @@
       "when": 1792585367161,
       "tag": "0000_december_booking_preview",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792585478783,
+      "tag": "0001_harden_booking_validation",
+      "breakpoints": true
     }
   ]
 }

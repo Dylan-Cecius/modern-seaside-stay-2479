@@ -1,0 +1,9 @@
+DROP POLICY public_catalog ON public.booking_services;
+CREATE POLICY public_catalog ON public.booking_services FOR SELECT TO anon,authenticated USING(active);
+CREATE POLICY admin_catalog_read ON public.booking_services FOR SELECT TO authenticated USING(public.has_role(auth.uid(),'admin'));
+CREATE FUNCTION public.booking_settings_validation() RETURNS trigger LANGUAGE plpgsql SET search_path=public AS $$ BEGIN IF NEW.public_enabled AND (NOT NEW.durations_validated OR NOT NEW.privacy_validated OR length(trim(NEW.privacy_contact))<3) THEN RAISE EXCEPTION 'VALIDATION_REQUIRED'; END IF; RETURN NEW; END $$;
+CREATE TRIGGER booking_settings_validate BEFORE INSERT OR UPDATE ON public.booking_settings FOR EACH ROW EXECUTE FUNCTION public.booking_settings_validation();
+CREATE FUNCTION public.booking_customer_validation() RETURNS trigger LANGUAGE plpgsql SET search_path=public AS $$ BEGIN NEW.email:=nullif(trim(NEW.email),''); IF NEW.source='public' AND NEW.consented_at IS NULL THEN RAISE EXCEPTION 'CONSENT_REQUIRED'; END IF; RETURN NEW; END $$;
+CREATE TRIGGER booking_customer_validate BEFORE INSERT OR UPDATE ON public.booking_customers FOR EACH ROW EXECUTE FUNCTION public.booking_customer_validation();
+CREATE FUNCTION public.admin_delete_customer(p_id uuid) RETURNS void LANGUAGE plpgsql SECURITY DEFINER SET search_path=public AS $$ BEGIN IF NOT COALESCE(public.has_role(auth.uid(),'admin'),false) THEN RAISE EXCEPTION 'ADMIN_REQUIRED'; END IF; DELETE FROM public.booking_customers WHERE event_id=p_id; END $$;
+REVOKE ALL ON FUNCTION public.admin_delete_customer(uuid) FROM PUBLIC; GRANT EXECUTE ON FUNCTION public.admin_delete_customer(uuid) TO authenticated;
