@@ -1,0 +1,35 @@
+name: Agenda pastel — compilation et tests
+
+on:
+  pull_request:
+    paths:
+      - 'src/booking/**'
+      - 'tests/agenda-timeline.test.ts'
+      - '.github/workflows/agenda-pastel-checks.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Code source
+        uses: actions/checkout@v4
+      - name: Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Installer les dépendances verrouillées
+        run: npm ci --no-audit --no-fund
+      - name: Vérifier les types
+        run: npx tsc -p tsconfig.app.json --noEmit
+      - name: Compiler le site
+        run: npm run build
+      - name: Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Tester les règles du calendrier
+        run: bun test tests/agenda-timeline.test.ts tests/booking-rules.test.ts
