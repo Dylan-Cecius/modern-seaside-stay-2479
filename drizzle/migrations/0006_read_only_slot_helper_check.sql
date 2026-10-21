@@ -1,0 +1,2 @@
+DO $$ BEGIN IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname='supabase_read_only_user') THEN GRANT EXECUTE ON FUNCTION public.booking_free_starts(date,time,time,integer,integer,tstzrange[],timestamptz) TO supabase_read_only_user; END IF; END $$;
+COMMENT ON FUNCTION public.booking_free_starts(date,time,time,integer,integer,tstzrange[],timestamptz) IS 'Pure slot calculator (no table access). Executable by booking_slots and the read-only test role only.';

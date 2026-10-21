@@ -153,6 +153,7 @@ export type Database = {
           privacy_validated: boolean
           public_enabled: boolean
           retention_days: number
+          slot_interval_minutes: number
         }
         Insert: {
           durations_validated?: boolean
@@ -161,6 +162,7 @@ export type Database = {
           privacy_validated?: boolean
           public_enabled?: boolean
           retention_days?: number
+          slot_interval_minutes?: number
         }
         Update: {
           durations_validated?: boolean
@@ -169,6 +171,7 @@ export type Database = {
           privacy_validated?: boolean
           public_enabled?: boolean
           retention_days?: number
+          slot_interval_minutes?: number
         }
         Relationships: []
       }
@@ -204,6 +207,18 @@ export type Database = {
       admin_save_booking_settings: {
         Args: { p_hours: Json; p_services: Json; p_settings: Json }
         Returns: undefined
+      }
+      booking_free_starts: {
+        Args: {
+          p_busy: unknown[]
+          p_closes: string
+          p_date: string
+          p_duration: number
+          p_now: string
+          p_opens: string
+          p_step: number
+        }
+        Returns: string[]
       }
       booking_slots: {
         Args: { p_date: string; p_services: string[] }

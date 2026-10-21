@@ -158,3 +158,13 @@
 - Activation simulée exclusivement dans la réponse de réglages du navigateur : le parcours reprend une vraie requête serveur `booking_slots`. Le serveur réellement désactivé renvoie toujours zéro créneau ; aucun réglage ni rendez-vous modifié. Une réservation réelle après activation administrative n’a pas été testée et reste soumise aux bloquants précédents.
 - Accueil vérifié aux deux tailles : un seul CTA vers `/reservation`, sept tarifs et huit réalisations conservés. Compilation automatique : **build OK à 12:51:56 UTC**, aucun build/typecheck manuel exécuté.
 - Aperçu : https://id-preview--f33ac174-d6f3-4aab-8e29-b40dd8cce95b.lovable.app/reservation . Aucune publication, aucun déploiement du site ou des fonctions, aucun changement domaine/DNS.
+
+## Créneaux réels en aperçu (21 octobre 2026)
+
+- `booking_slots` (lecture seule) renvoie désormais les heures libres même si les réservations publiques sont désactivées : calcul serveur à partir des horaires, des durées indicatives, des rendez-vous confirmés et des blocages ; uniquement des heures de début, aucune donnée client ni contenu d'événement. Rythme 30 min par défaut (`slot_interval_minutes`, 15 ou 30 ; modifiable en base, pas encore dans l'écran admin).
+- Calcul isolé dans la fonction pure `booking_free_starts` (aucun accès aux tables, non exécutable par les visiteurs).
+- Création inchangée : `create_booking` et la fonction publique refusent toujours toute réservation tant que l'activation et les validations ne sont pas faites.
+- `/reservation` : boutons d'heures accessibles (aria-pressed), libellés « Aperçu des créneaux actuellement libres — réservations non encore ouvertes » et « Durées indicatives à valider », résumé mis à jour, créneau effacé au changement de prestation ou de jour, réponses périmées ignorées, erreurs et journée vide affichées ; bouton « Confirmer le rendez-vous » désactivé avant ouverture.
+
+Tests exécutés : `bun test tests/booking-rules.test.ts` (12/12) ; `python3 tests/booking-security.py` (tous PASS : 2 déc. Coupe homme 10:00, 10:30, 11:00, 11:30 … 18:30 = 18 créneaux ; 45 et 60 min dernier départ 18:00 ; dimanche 6 et lundi 7 vides ; réponse limitée à `starts_at` ; création publique refusée sans écriture) ; `tests/booking-slots.sql` en lecture seule (rendez-vous 10:30–11:30 masqué, blocage 12–14 respecté, heures passées exclues, rythme 15 min, 10:00 Bruxelles = 09:00 UTC) ; base : 0 rendez-vous, 0 client après tests ; Playwright 1280 et 390 px : choix jour + heure au clavier, résumé, changement de prestation, rechargement, aucun débordement, aucune erreur, aucune requête d'écriture.
+Non testé : collision réelle avec un rendez-vous existant en base (aucune écriture autorisée en production) — couvert par le test de la fonction pure.

@@ -5,6 +5,8 @@ export const TIME_ZONE = 'Europe/Brussels';
 export const isTestDate = (day: string) => /^2026-12-(0[1-9]|[12][0-9]|3[01])$/.test(day);
 export const canSelectBookingDay = (day: string, service: string, open: boolean) => isTestDate(day) && Boolean(service) && open;
 export const publicBookingEnabled = (settings: { public_enabled: boolean; durations_validated: boolean; privacy_validated: boolean } | null) => Boolean(settings?.public_enabled && settings.durations_validated && settings.privacy_validated);
+export const shouldLoadSlots = (day: string, service: string) => isTestDate(day) && Boolean(service);
+export const canConfirmBooking = (s: { enabled: boolean; busy: boolean; slot: string; slots: string[]; consent: boolean; manual: boolean }) => s.enabled && !s.busy && Boolean(s.slot) && s.slots.includes(s.slot) && (s.manual || s.consent);
 export const brusselsDay = (instant: string) => new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(instant));
 export const brusselsTime = (instant: string) => new Intl.DateTimeFormat('fr-BE', { timeZone: TIME_ZONE, hour: '2-digit', minute: '2-digit' }).format(new Date(instant));
 export const localDecemberInstant = (day: string, time: string) => {
