@@ -201,6 +201,10 @@ export type Database = {
       }
       admin_cancel: { Args: { p_id: string }; Returns: undefined }
       admin_delete_customer: { Args: { p_id: string }; Returns: undefined }
+      admin_save_booking_settings: {
+        Args: { p_hours: Json; p_services: Json; p_settings: Json }
+        Returns: undefined
+      }
       booking_slots: {
         Args: { p_date: string; p_services: string[] }
         Returns: {
