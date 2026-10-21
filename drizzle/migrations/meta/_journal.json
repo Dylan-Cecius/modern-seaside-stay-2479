@@ -15,6 +15,13 @@
       "when": 1792585478783,
       "tag": "0001_harden_booking_validation",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792585564713,
+      "tag": "0002_restrict_booking_function_grants",
+      "breakpoints": true
     }
   ]
 }
