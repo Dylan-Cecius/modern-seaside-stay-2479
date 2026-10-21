@@ -1,0 +1,10 @@
+REVOKE ALL ON TABLE public.booking_events,public.booking_customers,public.user_roles FROM anon;
+REVOKE INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER ON TABLE public.booking_events,public.booking_customers,public.user_roles FROM authenticated;
+REVOKE INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER ON TABLE public.booking_settings,public.booking_hours,public.booking_services FROM anon;
+REVOKE INSERT,DELETE,TRUNCATE,REFERENCES,TRIGGER ON TABLE public.booking_settings,public.booking_hours,public.booking_services FROM authenticated;
+REVOKE ALL ON FUNCTION public.has_role(uuid,public.app_role),public.admin_block(timestamptz,timestamptz,text),public.admin_cancel(uuid),public.admin_delete_customer(uuid),public.create_booking(uuid[],timestamptz,text,text,text,text,boolean,boolean) FROM PUBLIC,anon;
+GRANT SELECT ON TABLE public.booking_events,public.booking_customers,public.user_roles TO authenticated;
+GRANT SELECT,UPDATE ON TABLE public.booking_settings,public.booking_hours,public.booking_services TO authenticated;
+GRANT SELECT ON TABLE public.booking_settings,public.booking_hours,public.booking_services TO anon;
+GRANT EXECUTE ON FUNCTION public.has_role(uuid,public.app_role),public.admin_block(timestamptz,timestamptz,text),public.admin_cancel(uuid),public.admin_delete_customer(uuid),public.create_booking(uuid[],timestamptz,text,text,text,text,boolean,boolean) TO authenticated;
+GRANT EXECUTE ON FUNCTION public.create_booking(uuid[],timestamptz,text,text,text,text,boolean,boolean),public.has_role(uuid,public.app_role) TO service_role;
