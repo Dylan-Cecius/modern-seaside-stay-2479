@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import { Baby, Ban, CalendarDays, ChevronLeft, ChevronRight, Scissors, Sparkles, UsersRound } from 'lucide-react';
 import type { Hours } from './useCatalog';
 import {
-  HOUR_HEIGHT, START_DATE, activeDayEvents, belgianClock, belgianDay, dateLabel, eventPosition,
+  HOUR_HEIGHT, START_DATE, activeDayEvents, availableGridStarts, belgianClock, belgianDay, dateLabel, eventPosition, minuteClock,
   eventTone, inTestPeriod, minuteRange, moveAgendaDate, visibleAgendaDays
 } from './agendaTimelineUtils';
 import type { AgendaEvent, AgendaView, PastelTone } from './agendaTimelineUtils';
@@ -15,13 +15,14 @@ type TimelineProps = {
   hours: Hours[];
   onSelect: (event: AgendaEvent) => void;
   onDateChange: (date: string) => void;
+  onCreateAtSlot: (day: string, minutes: number) => void;
+  slotIntervalMinutes: number;
 };
 
 const tonalClasses: Record<PastelTone, string> = {
   blue: styles.blue, lilac: styles.lilac, pink: styles.pink,
   mint: styles.mint, peach: styles.peach, neutral: styles.neutral
 };
-const headerClasses = [styles.dayBlue, styles.dayLilac, styles.dayMint, styles.dayPeach, styles.dayPink];
 
 function EventBadge({ tone }: { tone: PastelTone }) {
   const Icon = tone === 'blue' ? Scissors : tone === 'lilac' ? Sparkles :
@@ -52,7 +53,7 @@ export function AgendaPeriodNavigation({
 }
 
 export default function AgendaTimeline({
-  date, view, events, hours, onSelect
+  date, view, events, hours, onSelect, onCreateAtSlot, slotIntervalMinutes
 }: Omit<TimelineProps, 'onDateChange'>) {
   const days = visibleAgendaDays(date, view);
   const dayHours = days.map((day) => {
@@ -78,8 +79,7 @@ export default function AgendaTimeline({
           const daily = activeDayEvents(events, day);
           const bookingCount = daily.filter((event) => event.kind === 'appointment').length;
           return <div key={'head-' + day}
-            className={styles.dayHeader + ' ' + headerClasses[index % headerClasses.length] +
-              (!inTestPeriod(day) ? ' ' + styles.outsidePeriod : '')}
+            className={styles.dayHeader + (!inTestPeriod(day) ? ' ' + styles.outsidePeriod : '')}
             style={{ gridRow: 1, gridColumn: index + 2 }}>
             <strong>{dateLabel(day, true)}</strong>
             <span>{!inTestPeriod(day) ? 'Hors période test' :
@@ -98,9 +98,18 @@ export default function AgendaTimeline({
           return <div key={'lane-' + day}
             className={styles.dayLane + (!open ? ' ' + styles.closedLane : '')}
             style={{ gridRow: 2, gridColumn: index + 2, height: gridHeight }}>
-            {!open && daily.length === 0 && <span className={styles.emptyLabel}>Fermé</span>}
-            {open && daily.length === 0 &&
-              <span className={styles.emptyLabel}>Aucun rendez-vous<br />Créneaux libres</span>}
+            {open && availableGridStarts(day, dayHours[index], events, slotIntervalMinutes).map((minute) =>
+              <button key={'slot-' + minute} type="button"
+                className={styles.emptySlot}
+                style={{
+                  top: (minute - range.from) * HOUR_HEIGHT / 60,
+                  height: slotIntervalMinutes * HOUR_HEIGHT / 60
+                }}
+                aria-label={'Ajouter un rendez-vous le ' + dateLabel(day) + ' à ' + minuteClock(minute)}
+                title={'Ajouter à ' + minuteClock(minute)}
+                onClick={() => onCreateAtSlot(day, minute)}
+              />
+            )}
             {inTestPeriod(day) && daily.map((event) => {
               const position = eventPosition(event.starts_at, event.ends_at, range.from, range.to);
               if (!position) return null;
