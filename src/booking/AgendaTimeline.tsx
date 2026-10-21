@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import { Baby, Ban, CalendarDays, ChevronLeft, ChevronRight, Scissors, Sparkles, UsersRound } from 'lucide-react';
 import type { Hours } from './useCatalog';
 import {
-  HOUR_HEIGHT, START_DATE, activeDayEvents, belgianClock, dateLabel, eventPosition,
+  HOUR_HEIGHT, START_DATE, activeDayEvents, belgianClock, belgianDay, dateLabel, eventPosition,
   eventTone, inTestPeriod, minuteRange, moveAgendaDate, visibleAgendaDays
 } from './agendaTimelineUtils';
 import type { AgendaEvent, AgendaView, PastelTone } from './agendaTimelineUtils';
@@ -35,9 +35,7 @@ export function AgendaPeriodNavigation({
   const days = visibleAgendaDays(date, view);
   const previous = moveAgendaDate(date, view, -1);
   const next = moveAgendaDate(date, view, 1);
-  const today = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Europe/Brussels', year: 'numeric', month: '2-digit', day: '2-digit'
-  }).format(new Date());
+  const today = belgianDay(new Date().toISOString());
   const jumpTo = inTestPeriod(today) ? today : START_DATE;
   const period = view === 'day' ? dateLabel(date) :
     dateLabel(days[0], true) + ' — ' + dateLabel(days[days.length - 1]);
