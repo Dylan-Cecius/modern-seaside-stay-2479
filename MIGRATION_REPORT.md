@@ -168,3 +168,23 @@
 
 Tests exécutés : `bun test tests/booking-rules.test.ts` (12/12) ; `python3 tests/booking-security.py` (tous PASS : 2 déc. Coupe homme 10:00, 10:30, 11:00, 11:30 … 18:30 = 18 créneaux ; 45 et 60 min dernier départ 18:00 ; dimanche 6 et lundi 7 vides ; réponse limitée à `starts_at` ; création publique refusée sans écriture) ; `tests/booking-slots.sql` en lecture seule (rendez-vous 10:30–11:30 masqué, blocage 12–14 respecté, heures passées exclues, rythme 15 min, 10:00 Bruxelles = 09:00 UTC) ; base : 0 rendez-vous, 0 client après tests ; Playwright 1280 et 390 px : choix jour + heure au clavier, résumé, changement de prestation, rechargement, aucun débordement, aucune erreur, aucune requête d'écriture.
 Non testé : collision réelle avec un rendez-vous existant en base (aucune écriture autorisée en production) — couvert par le test de la fonction pure.
+
+## 2026-10-21 — Anti-abus, purge RGPD et réglage 15/30 min
+
+### Réalisé et vérifié
+- Réglage « Départ des créneaux » 15/30 min dans /admin, enregistré atomiquement avec horaires, durées et confidentialité via admin_save_booking_settings ; le serveur refuse toute autre valeur (INVALID_INTERVAL) et toute sauvegarde partielle.
+- Anti-abus persistant des réservations publiques : journal booking_rate_log (empreintes SHA-256/md5, aucune donnée brute), limite de 3 créations par heure par empreinte d'IP ou de téléphone normalisé, appliquée dans create_booking ; les ajouts manuels admin ne sont pas limités. La fonction publique booking-public transmet l'empreinte et répond 429 avec un message clair.
+- Purge manuelle et journalisée : admin_count_expired_customers / admin_purge_expired_customers (rôle admin exigé), bouton « Purger les coordonnées expirées » avec confirmation, compteur et journal booking_purge_log ; l'interface indique explicitement qu'aucun effacement automatique n'est actif.
+- Ouverture publique conditionnée (déclencheur booking_settings_validation) à : durées validées + confidentialité validée + contact au format courriel + conservation positive. Aucune case n'a été cochée à la place du propriétaire.
+- Notice de confidentialité précisée : mesures précontractuelles comme base légale, responsable à confirmer, droits, hébergeur, absence d'effacement automatique ; la case d'accord n'est pas présentée comme base légale.
+- Correction de sécurité : la recréation de create_booking avec un paramètre supplémentaire avait produit une surcharge ambiguë (PGRST 300) et des permissions par défaut ; ancienne surcharge supprimée, EXECUTE retiré à PUBLIC/anon et limité à authenticated/service_role pour les quatre fonctions concernées.
+
+### Tests exécutés
+- bun test tests/booking-rules.test.ts : 13 tests, 50 assertions (dont mapping RATE_LIMITED).
+- python3 tests/booking-security.py : tous PASS — lectures anonymes refusées sur 5 tables (dont booking_rate_log, booking_purge_log), 6 actions privilégiées refusées aux anonymes (dont les deux fonctions de purge), 7 tarifs inchangés, horaires mardi–samedi 10h–19h, refus hors décembre, 18 créneaux réels le 2 décembre (10:00–18:30), jours fermés vides, deux prestations principales rejetées, création publique refusée tant que désactivée sans écriture.
+- Build : OK (2026-10-21T13:20Z). Playwright 1280×1800 et 390×844 : /reservation affiche les vrais créneaux (18 boutons, 10:00–18:30) et la nouvelle notice ; /admin affiche le formulaire de connexion.
+
+### Limites connues (inchangées)
+- Aucun compte administrateur : le parcours authentifié (agenda, réglages, purge) n'a pas pu être exercé de bout en bout. Procédure : créer le compte dans Cloud → Users → Add user (ou connexion Google/Lovable), puis attribution du rôle admin par intervention privilégiée après vérification d'identité — aucune promotion automatique ni détournement.
+- Collisions simultanées : vérifiées par le calculateur pur (booking_free_starts) et la contrainte d'exclusion ; non exercées avec écritures réelles (instance partagée, aucun faux rendez-vous en production).
+- Purge automatique : non programmée ; le bouton manuel journalisé est la seule voie, et l'interface le dit.
