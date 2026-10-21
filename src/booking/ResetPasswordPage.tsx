@@ -1,0 +1,11 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { supabase } from '@/integrations/supabase/client';
+import BookingLayout from './BookingLayout';
+import s from './Booking.module.css';
+export default function ResetPasswordPage(){const [recovery,setRecovery]=useState(window.location.hash.includes('type=recovery'));const [password,setPassword]=useState('');const [confirm,setConfirm]=useState('');const [message,setMessage]=useState('');const [busy,setBusy]=useState(false);const [done,setDone]=useState(false);
+useEffect(()=>{const {data:{subscription}}=supabase.auth.onAuthStateChange(event=>{if(event==='PASSWORD_RECOVERY')setRecovery(true);});return()=>subscription.unsubscribe();},[]);
+async function submit(e:React.FormEvent){e.preventDefault();if(password.length<12||password!==confirm){setMessage('Choisissez au moins 12 caractères et deux mots de passe identiques.');return;}setBusy(true);const {data,error:userError}=await supabase.auth.getUser();if(userError||!data.user){setMessage('Le lien a expiré. Demandez un nouveau lien.');setBusy(false);return;}const {error}=await supabase.auth.updateUser({password});setBusy(false);if(error)setMessage('Le mot de passe n’a pas été modifié. Vérifiez le lien ou choisissez un mot de passe plus sûr.');else{setDone(true);setMessage('Mot de passe modifié.');}}
+return <BookingLayout admin><section className={s.auth}><h1>Nouveau mot de passe</h1>{!recovery?<p>Ouvrez le lien de récupération reçu dans votre messagerie.</p>:done?<p role='status'>{message}</p>:<form onSubmit={submit}><label className={s.field}>Nouveau mot de passe<input type='password' required minLength={12} maxLength={128} autoComplete='new-password' value={password} onChange={e=>setPassword(e.target.value)}/></label><label className={s.field}>Confirmer<input type='password' required minLength={12} maxLength={128} autoComplete='new-password' value={confirm} onChange={e=>setConfirm(e.target.value)}/></label>{message&&<p role='alert' className={s.error}>{message}</p>}<Button className={s.control} type='submit' disabled={busy}>Enregistrer</Button></form>}<p><Link to='/admin'>Retour à l’administration</Link></p></section></BookingLayout>;
+}
