@@ -306,6 +306,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      system_purge_expired_booking_data: { Args: never; Returns: number }
     }
     Enums: {
       app_role: "admin"
