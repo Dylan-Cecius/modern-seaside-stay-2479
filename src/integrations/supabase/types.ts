@@ -157,6 +157,21 @@ export type Database = {
         }
         Relationships: []
       }
+      booking_rate_secret: {
+        Row: {
+          id: boolean
+          pepper: string
+        }
+        Insert: {
+          id?: boolean
+          pepper?: string
+        }
+        Update: {
+          id?: boolean
+          pepper?: string
+        }
+        Relationships: []
+      }
       booking_services: {
         Row: {
           active: boolean
