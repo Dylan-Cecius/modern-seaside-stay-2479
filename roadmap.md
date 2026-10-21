@@ -10,4 +10,8 @@
 - [x] Ajouter connexion sécurisée et /admin avec agenda et réglages.
 - [ ] Configurer le premier administrateur — attend création et identification du compte propriétaire, aucun compte présent.
 - [x] Exécuter tests de règles et accès public, contrôles ordinateur/mobile et documenter les limites ; aucune publication.
+- [x] Ajouter le réglage admin 15/30 min des départs de créneaux, enregistré atomiquement et validé côté serveur.
+- [x] Ajouter l’anti-abus serveur des réservations publiques (3 créations/heure par empreinte d’IP ou de téléphone, contournement impossible côté client, admin non bloqué) et verrouiller les permissions des fonctions recréées.
+- [x] Ajouter la purge manuelle journalisée des coordonnées expirées et la notice de confidentialité précise (base légale, droits, absence d’effacement automatique).
+- [ ] Valider durées, confidentialité, contact RGPD et conservation par le propriétaire — aucune case cochée à sa place.
 - [ ] Vérifier écritures/admin et collisions de bout en bout — attend compte admin et environnement de test isolé, instance Cloud actuellement partagée ; aucun faux rendez-vous en production.
