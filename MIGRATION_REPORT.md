@@ -188,3 +188,14 @@ Non testé : collision réelle avec un rendez-vous existant en base (aucune écr
 - Aucun compte administrateur : le parcours authentifié (agenda, réglages, purge) n'a pas pu être exercé de bout en bout. Procédure : créer le compte dans Cloud → Users → Add user (ou connexion Google/Lovable), puis attribution du rôle admin par intervention privilégiée après vérification d'identité — aucune promotion automatique ni détournement.
 - Collisions simultanées : vérifiées par le calculateur pur (booking_free_starts) et la contrainte d'exclusion ; non exercées avec écritures réelles (instance partagée, aucun faux rendez-vous en production).
 - Purge automatique : non programmée ; le bouton manuel journalisé est la seule voie, et l'interface le dit.
+
+
+## Correctif anti-abus (21/10/2026, audit propriétaire)
+
+- Défaut confirmé : dans `create_booking`, `phone_key=phone_key` mélangeait colonne et variable PL/pgSQL ; toute réservation publique aurait échoué (référence ambiguë). Corrigé par la migration 0010 : variables préfixées `v_`, alias `rate.phone_key = v_phone_hash`.
+- Empreintes : HMAC-SHA256 avec un sel secret stocké uniquement en base (`booking_rate_secret`, aucun accès anon/authenticated/service_role). Aucun téléphone ni IP brut enregistré. Téléphone normalisé (chiffres, `00`→international, `0` national→`32`), donc « +32 470… » et « 0470… » comptent ensemble.
+- Concurrence : verrous `pg_advisory_xact_lock` triés (téléphone + connexion) pris avant le comptage et conservés jusqu'à la fin de la transaction ; une 4e demande simultanée attend la fin des précédentes puis voit leurs inscriptions.
+- IP : `cf-connecting-ip` (écrit par le proxy de la plateforme) puis `x-forwarded-for` en repli ; traitée comme couche secondaire seulement, la limite par téléphone fonctionne seule.
+- Rétention : entrées de plus de 24 h supprimées à chaque tentative publique ; notice de confidentialité mise à jour. Coordonnées des rendez-vous non touchées.
+- Tests réellement exécutés : `tests/booking-rate-limit.sql` (bloc unique terminé par une exception, donc annulation totale) — 3 réservations même numéro OK, 4e (autre format, autre connexion) RATE_LIMITED, autre numéro OK, même connexion avec 4e numéro RATE_LIMITED, ancienne empreinte purgée, aucune donnée brute, 4 verrous consultatifs tenus. Après test : 0 rendez-vous, 0 coordonnée, 0 empreinte, réservations toujours désactivées. Fonction `booking-public` redéployée ; appel réel refusé (400, réservations fermées), rien écrit. bun test 13/13, booking-security.py PASS, typecheck OK, référence SHA-256 inchangée.
+- Non testé : 4 requêtes réellement simultanées (impossible sans écrire des réservations persistantes) ; la sérialisation est garantie par le verrou mais non observée en parallèle. Une personne changeant de numéro ET de connexion n'est pas bloquée.

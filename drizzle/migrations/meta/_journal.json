@@ -71,6 +71,13 @@
       "when": 1792588810553,
       "tag": "0009_drop_old_create_booking_overload",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1792589249423,
+      "tag": "0010_fix_booking_rate_limit",
+      "breakpoints": true
     }
   ]
 }
