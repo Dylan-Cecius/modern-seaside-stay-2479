@@ -45,3 +45,12 @@ La maquette approuvée montre cinq colonnes mardi–samedi, la plage 10 h–19 h
 
 ## Publication et validation
 Cette intégration ne modifie ni les tarifs, ni les durées, ni les paramètres d'ouverture des réservations publiques. Une fusion GitHub ne correspond pas à une demande explicite de publication du site live ; la publication finale est une étape distincte dans Lovable. La maquette générée contient des noms d'exemple qui **ne sont pas** des rendez-vous dans l'agenda réel.
+
+## Évolution : ajout rapide au clic (21/10/2026)
+- Cases sans rendez-vous totalement vides ; en-têtes des cinq jours uniformes gris bleuté clair.
+- Clic sur une cellule libre de 15 ou 30 min : formulaire prérempli (jour et heure) ; champs prestation, prénom, nom, téléphone, email facultatif et note interne.
+- Calcul côté navigateur de la durée, de l’heure de fin et du tarif depuis le catalogue du salon ; filtre des cellules occupées/bloquées et vérification après sélection du service.
+- Enregistrement atomique via la RPC admin_create_booking : contrôle serveur de l’identité administrateur, horaires et exclusion des conflits. L’ajout de la note fait partie de la même transaction que le rendez-vous.
+- Succès : fermeture de la modale, actualisation immédiate de l’agenda et mise à jour Realtime.
+- Les couleurs pastel restent seulement sur les cartes de rendez-vous. Aucune donnée de démonstration n’est ajoutée.
+- La migration 0013_admin_quick_booking.sql a été appliquée à la base Lovable Cloud (grants anon refusés, authenticated avec contrôle admin). Le site public n’est pas republié.
