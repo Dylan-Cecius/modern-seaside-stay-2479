@@ -1,0 +1,11 @@
+REVOKE ALL ON FUNCTION public.has_role(uuid,public.app_role) FROM anon;
+REVOKE ALL ON FUNCTION public.create_booking(uuid[],timestamptz,text,text,text,text,boolean,boolean) FROM anon;
+REVOKE ALL ON FUNCTION public.admin_block(timestamptz,timestamptz,text) FROM anon,service_role;
+REVOKE ALL ON FUNCTION public.admin_cancel(uuid) FROM anon,service_role;
+REVOKE ALL ON FUNCTION public.admin_delete_customer(uuid) FROM anon,service_role;
+REVOKE ALL ON FUNCTION public.booking_event_window() FROM PUBLIC,anon,authenticated;
+REVOKE ALL ON FUNCTION public.booking_settings_validation() FROM PUBLIC,anon,authenticated;
+REVOKE ALL ON FUNCTION public.booking_customer_validation() FROM PUBLIC,anon,authenticated;
+CREATE FUNCTION public.booking_require_origin() RETURNS trigger LANGUAGE plpgsql SET search_path=public AS $$ BEGIN IF auth.role() IS DISTINCT FROM 'service_role' AND NOT COALESCE(public.has_role(auth.uid(),'admin'),false) THEN RAISE EXCEPTION 'ADMIN_OR_SERVER_REQUIRED'; END IF; RETURN NEW; END $$;
+REVOKE ALL ON FUNCTION public.booking_require_origin() FROM PUBLIC,anon,authenticated;
+CREATE TRIGGER booking_origin BEFORE INSERT ON public.booking_events FOR EACH ROW EXECUTE FUNCTION public.booking_require_origin();

@@ -96,3 +96,43 @@
 - Avis repris mot pour mot ; aucune date, badge Local Guide, avatar ni note individuelle inventés. Avis statiques dans le code, aucune API ni dépendance ajoutée. Aucun prix, contenu existant, 3D ou galerie modifiés.
 - Contrôles exécutés : build OK (2026-10-01T10:57:39Z) ; Playwright Chromium, préférence d'animation `off` préchargée, 1280×1800 et 390×844 — section présente, titre « ILS EN PARLENT. », 4 avis avec les bons noms, lien Google Maps correct, zéro débordement horizontal, galerie inchangée (8 cartes, compteur 01/08), zéro erreur de page, captures de la section desktop et mobile.
 - Rien n'a été publié ; aucun DNS, domaine ou dépendance touchés.
+
+## Test de réservation décembre 2026 — première étape (21/10/2026)
+
+### Ajouts opérationnels et limites
+- Ajout uniquement d’un CTA « Réserver un rendez-vous » sur le premier écran, vers `/reservation`, via une adaptation du rendu React et une feuille additive dédiée. Le HTML de production existant, la feuille de référence, les scripts WebGL/site, médias et sept tarifs de l’accueil n’ont pas été modifiés.
+- Routes autonomes `/reservation`, `/admin`, `/reset-password`, chargées à la demande et stylées avec un module CSS indépendant.
+- Lovable Cloud activé dans ce projet. Il s’agit actuellement d’une instance partagée aperçu/publication, pas d’un environnement de données de test distinct. Le site n’a pas été publié. Les fonctions Cloud et migrations ont été appliquées pour permettre les contrôles ; cela n’est pas une publication du site.
+- Catalogue, horaires, réglages et coordonnées persistants ; tables privées sous RLS et permissions explicites. Les coordonnées sont séparées de l’agenda et du catalogue public. Disponibilité publique limitée aux heures libres.
+- Validation serveur, fuseau Europe/Brussels, refus des dates hors décembre 2026 ; plage d’agenda protégée par exclusion GiST, commune aux rendez-vous et blocages confirmés. Prix et fin du rendez-vous recalculés côté serveur.
+- Interface client : prestation, calendrier, heures libres, coordonnées, confidentialité et confirmation après insertion réelle. Les réservations sont désactivées jusqu’à validation par un administrateur des durées et de la confidentialité.
+- Interface admin implémentée : authentification email/mot de passe, Google et Lovable, rôle vérifié via fonction serveur ; agenda jour/semaine, liste/détails, ajout manuel, blocages, annulation/libération, durées, horaires et activation. Récupération de mot de passe avec page dédiée ; aucune inscription email publique ni auto-attribution de rôle.
+- Valeurs initiales indicatives : 30 / 45 / 15 / 30 / 60 / 60 / 30 minutes selon l’ordre actuel des sept prestations. Ne sont pas considérées comme validées.
+- Aucun SMS ni email de rendez-vous configuré ; aucun envoi de confirmation prétendu. Les emails d’authentification sont des fonctions Cloud distinctes et leur livraison n’a pas été testée.
+- Confidentialité : contact et conservation doivent être validés par le propriétaire. La valeur initiale de conservation proposée (90 jours) est un paramètre non validé, pas une politique confirmée. Suppression des coordonnées disponible à l’administrateur ; pas d’effacement automatique. L’avis RGPD complet/base juridique demeure à valider avant ouverture.
+- Une seule capacité simultanée ; aucun collaborateur inventé. Pas de protection anti-abus/rate limiting dédiée à ce stade ; les contraintes empêchent le chevauchement, pas le spam de créneaux distincts. À traiter avant une ouverture publique.
+- Le catalogue est provisoirement celui de l’accueil : la nouvelle liste demandée (rasage crâne + barbe à l’ancienne à 30 €, shampoing à 2 €, omission des offres à 28 € et 32 €) nécessite confirmation. Aucun tarif de l’accueil n’a été remplacé.
+
+### Vérifications réellement exécutées
+- `bun test tests/booking-rules.test.ts` : 5 tests réussis, 18 assertions (décembre uniquement, conversion 10 h Bruxelles → 09 h UTC, frontière de date belge, dates manuelles hors période, champs obligatoires et courriel facultatif).
+- `python3 tests/booking-security.py` : contrôles hébergés en lecture seule réussis ; aucun rendez-vous/compte créé. Accès public sans données aux tables privées, actions privilégiées refusées, sept prix exacts, horaires mardi–samedi 10 h–19 h, refus serveur novembre/janvier, aucun créneau public quand désactivé.
+- Fonction Cloud `booking-public` appelée avec entrées invalides : refus HTTP 400 observé.
+- Contrainte d’exclusion vérifiée dans le catalogue PostgreSQL. Son comportement simultané réel n’a pas été exercé avec des insertions.
+- Chromium 1280×1800 et 390×844 : CTA présent et cliquable, navigation réelle vers `/reservation`, sept prestations chargées depuis Cloud, choix d’une prestation, dates correctement désactivées à l’état initial, connexion admin affichée, aucun débordement horizontal sur réservation/admin, aucune erreur de page.
+- Captures ordinateur/mobile enregistrées sous `/tmp/browser/booking/` et visualisées (accueil mobile, réservation mobile, connexion desktop).
+- Accueil : huit cartes de galerie et instance WebGL constatées ; préférence système reduced-motion utilisée. La scène et ses fichiers ne sont pas modifiés.
+- Compilation automatique après correction de l’emplacement des tests : `build OK` à 12:26:43 UTC. Aucun build/typecheck manuel lancé.
+- Référence SHA-256 revérifiée : `38298705467a6ba69365211a3293327149529ec3a0e58852d11766c59285324b`.
+
+### Bloquants et contrôles non exécutés
+- Aucun utilisateur d’authentification n’existe encore. Aucun premier admin n’a été inventé ni auto-attribué. Connexion authentifiée, écriture/lecture via agenda, blocage, annulation et réglages n’ont donc pas été vérifiés de bout en bout.
+- Aucune fausse réservation de test créée sur l’instance partagée. Confirmation UI après écriture et collision simultanée restent non vérifiées tant qu’un environnement de test isolé ou une procédure approuvée n’est pas disponible.
+- La liste de prestations de réservation et l’éventuel besoin de profils restent à confirmer ; aucun profil client ajouté, clients sans compte.
+- Le linter a signalé les fonctions SECURITY DEFINER ; les droits anonymes des fonctions privées ont été explicitement retirés et leur refus testé. La disponibilité publique est intentionnellement SECURITY DEFINER et ne retourne que des heures libres. Les fonctions admin vérifient le rôle et la création publique exige un appel serveur.
+
+### Mise en service en aperçu (sans publication)
+1. Ouvrir `/admin` dans l’aperçu. Créer le compte propriétaire dans **Cloud → Users → Add user**, ou se connecter avec Google/Lovable pour créer son compte sans lui donner de droits.
+2. Identifier le compte propriétaire et demander l’attribution du rôle admin par opération privilégiée. Ne jamais écrire ce rôle dans un profil, des métadonnées modifiables ou le navigateur.
+3. Confirmer le catalogue de réservation, régler/valider les durées, horaires, contact RGPD et conservation ; activer les réservations uniquement après ces validations.
+4. Tester les écritures dans un environnement isolé ; la présente instance est partagée. Ni domaine ni DNS ne doivent être modifiés pour ce test.
+5. Entrées : aperçu du projet + `/reservation`, `/admin`, `/reset-password`. Aucune publication nécessaire pour consulter ces pages.

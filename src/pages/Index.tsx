@@ -3,6 +3,7 @@ import atelierBody from "@/atelier/atelier-body.html?raw";
 import atelierCss from "@/atelier/atelier-reference.css?raw";
 import atelierScene from "@/atelier/atelier-scene.js?raw";
 import atelierSite from "@/atelier/atelier-site.js?raw";
+import bookingCtaCss from "@/atelier/booking-cta.css?raw";
 
 declare global {
   interface Window {
@@ -29,7 +30,7 @@ export default function Index() {
 
     const referenceStyle = document.createElement("style");
     referenceStyle.dataset.atelierStyle = "reference";
-    referenceStyle.textContent = atelierCss;
+    referenceStyle.textContent = atelierCss + '\n' + bookingCtaCss;
     document.head.appendChild(referenceStyle);
 
     const sceneScript = document.createElement("script");
@@ -76,5 +77,6 @@ export default function Index() {
     };
   }, []);
 
-  return <div ref={rootRef} dangerouslySetInnerHTML={{ __html: atelierBody }} />;
+  const body = atelierBody.replace('</div>\n    </div>\n    <div class="hero-scene"', '</div><a class="booking-preview-cta" href="/reservation">Réserver un rendez-vous <svg aria-hidden="true"><use href="#arrow-ne"/></svg></a>\n    </div>\n    <div class="hero-scene"');
+  return <div ref={rootRef} dangerouslySetInnerHTML={{ __html: body }} />;
 }

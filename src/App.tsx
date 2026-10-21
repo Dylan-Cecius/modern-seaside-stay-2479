@@ -6,6 +6,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { lazy, Suspense } from "react";
+const ReservationPage = lazy(() => import("./booking/ReservationPage"));
+const AdminPage = lazy(() => import("./booking/AdminPage"));
+const ResetPasswordPage = lazy(() => import("./booking/ResetPasswordPage"));
 // Pages temporairement supprimées mais conservées dans les imports pour réactivation future
 // import Apartments from "./pages/Apartments";
 // import Amenities from "./pages/Amenities"; 
@@ -26,6 +30,9 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/reservation" element={<Suspense fallback={<p role="status">Chargement…</p>}><ReservationPage /></Suspense>} />
+            <Route path="/admin" element={<Suspense fallback={<p role="status">Chargement…</p>}><AdminPage /></Suspense>} />
+            <Route path="/reset-password" element={<Suspense fallback={<p role="status">Chargement…</p>}><ResetPasswordPage /></Suspense>} />
             {/* Routes temporairement désactivées - À réactiver quand les pages seront prêtes */}
             {/* <Route path="/apartments" element={<Apartments />} />
             <Route path="/amenities" element={<Amenities />} />
