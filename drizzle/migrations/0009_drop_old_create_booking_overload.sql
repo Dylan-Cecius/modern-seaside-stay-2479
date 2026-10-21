@@ -1,0 +1,2 @@
+-- The 8-parameter overload is fully replaced by the 9-parameter one (p_client_key has a default); keeping both makes PostgREST calls ambiguous (PGRST 300).
+DROP FUNCTION public.create_booking(uuid[], timestamptz, text, text, text, text, boolean, boolean);

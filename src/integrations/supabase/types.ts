@@ -270,34 +270,20 @@ export type Database = {
           starts_at: string
         }[]
       }
-      create_booking:
-        | {
-            Args: {
-              p_consent: boolean
-              p_email: string
-              p_first: string
-              p_last: string
-              p_manual?: boolean
-              p_phone: string
-              p_services: string[]
-              p_start: string
-            }
-            Returns: string
-          }
-        | {
-            Args: {
-              p_client_key?: string
-              p_consent: boolean
-              p_email: string
-              p_first: string
-              p_last: string
-              p_manual?: boolean
-              p_phone: string
-              p_services: string[]
-              p_start: string
-            }
-            Returns: string
-          }
+      create_booking: {
+        Args: {
+          p_client_key?: string
+          p_consent: boolean
+          p_email: string
+          p_first: string
+          p_last: string
+          p_manual?: boolean
+          p_phone: string
+          p_services: string[]
+          p_start: string
+        }
+        Returns: string
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
