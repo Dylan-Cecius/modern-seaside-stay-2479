@@ -102,5 +102,5 @@ export function eventPosition(
   if (clampedEnd <= clampedStart) return null;
   const top = (clampedStart - fromMinutes) * HOUR_HEIGHT / 60;
   const height = Math.max(1, (clampedEnd - clampedStart) * HOUR_HEIGHT / 60 - 3);
-  return { top, height, compact: height < 52 };
+  return { top, height, compact: height < 48 };
 }
