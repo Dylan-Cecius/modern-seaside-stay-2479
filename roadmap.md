@@ -14,4 +14,6 @@
 - [x] Ajouter l’anti-abus serveur des réservations publiques (3 créations/heure par empreinte d’IP ou de téléphone, contournement impossible côté client, admin non bloqué) et verrouiller les permissions des fonctions recréées.
 - [x] Ajouter la purge manuelle journalisée des coordonnées expirées et la notice de confidentialité précise (base légale, droits, absence d’effacement automatique).
 - [ ] Valider durées, confidentialité, contact RGPD et conservation par le propriétaire — aucune case cochée à sa place.
-- [ ] Vérifier écritures/admin et collisions de bout en bout — attend compte admin et environnement de test isolé, instance Cloud actuellement partagée ; aucun faux rendez-vous en production.
+- [ ] Vérifier écritures/admin et collisions de bout en bout — attend compte admin et environnement de test isolé, instance Cloud actuellement partagée ; aucun faux rendez-vous en production.- [x] Agenda admin synchronisé automatiquement (temps réel + relecture de secours)
+- [ ] Rôle admin : en attente de la confirmation du propriétaire sur le compte à autoriser (2 comptes présents)
+- [ ] Confidentialité (contact, conservation) à valider par le propriétaire ; ouverture publique ensuite
