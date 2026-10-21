@@ -260,6 +260,18 @@ export type Database = {
         Returns: string
       }
       admin_cancel: { Args: { p_id: string }; Returns: undefined }
+      admin_create_booking: {
+        Args: {
+          p_services: string[]
+          p_start: string
+          p_first: string
+          p_last: string
+          p_phone: string
+          p_email: string
+          p_note: string
+        }
+        Returns: string
+      }
       admin_count_expired_customers: { Args: never; Returns: number }
       admin_delete_customer: { Args: { p_id: string }; Returns: undefined }
       admin_purge_expired_customers: { Args: never; Returns: number }

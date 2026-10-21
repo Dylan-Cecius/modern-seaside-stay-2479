@@ -2,7 +2,8 @@ import { describe, expect, test } from 'bun:test';
 import {
   START_DATE, END_DATE, HOUR_HEIGHT, activeDayEvents, belgianClock, belgianDay,
   dateLabel, eventPosition, eventTone, inTestPeriod, minuteRange, moveAgendaDate,
-  offsetDate, visibleAgendaDays
+  offsetDate, visibleAgendaDays, availableGridStarts, appointmentFits,
+  brusselsInstant, minuteClock, bookingOverlaps
 } from '../src/booking/agendaTimelineUtils';
 import type { AgendaEvent } from '../src/booking/agendaTimelineUtils';
 
@@ -70,4 +71,37 @@ describe('agenda de décembre — calendrier pastel', () => {
     expect(minuteRange([{enabled:true,opens:'10:00:00',closes:'19:00:00'}]))
       .toEqual({from:600,to:1140});
   });
+  test('les grilles vides proposent des départs 10 h – 19 h, sans texte de rendez-vous fictifs', () => {
+    const hours = { enabled: true, opens: '10:00:00', closes: '19:00:00' };
+    const now = Date.parse('2026-10-21T12:00:00Z');
+    const starts = availableGridStarts('2026-12-02', hours, [], 30, now);
+    expect(starts).toHaveLength(18);
+    expect(starts.slice(0, 4).map(minuteClock)).toEqual(['10:00','10:30','11:00','11:30']);
+    expect(starts[starts.length - 1]).toBe(1110);
+    expect(availableGridStarts('2026-12-02', hours, [], 15, now)).toHaveLength(36);
+    expect(availableGridStarts('2026-12-06', { ...hours, enabled: false }, [], 30, now)).toHaveLength(0);
+    expect(availableGridStarts('2026-12-02', hours, [], 30, Date.parse('2027-01-01T00:00:00Z'))).toHaveLength(0);
+  });
+  test('les créneaux bloqués et les rendez-vous pris ne sont pas cliquables', () => {
+    const hours = { enabled: true, opens: '10:00:00', closes: '19:00:00' };
+    const event = sample('booked', '2026-12-02T10:30:00Z', '2026-12-02T11:15:00Z', 'Coupe homme');
+    const booked = availableGridStarts('2026-12-02', hours, [event], 30, Date.parse('2026-10-21T12:00:00Z'));
+    expect(booked).toContain(600); // 10:00 Brussels
+    expect(booked).not.toContain(690); // 11:30 Brussels
+    expect(booked).not.toContain(720); // 12:00 overlaps until 12:15
+    expect(booked).toContain(750); // 12:30
+    expect(bookingOverlaps(Date.parse('2026-12-02T10:30:00Z'),Date.parse('2026-12-02T11:00:00Z'),[event])).toBe(true);
+  });
+  test('la durée choisie est vérifiée avant d’enregistrer et le serveur revérifie', () => {
+    const h={ enabled: true, opens: '10:00:00', closes: '19:00:00' };
+    const now=Date.parse('2026-10-21T00:00:00Z');
+    expect(appointmentFits('2026-12-02',600,45,h,[],now)).toBe(true);
+    expect(appointmentFits('2026-12-02',1110,45,h,[],now)).toBe(false); // ends 19:15
+    expect(appointmentFits('2026-12-02',1080,60,h,[],now)).toBe(true);
+    expect(appointmentFits('2026-12-02',630,30,h,
+      [sample('b','2026-12-02T09:30:00Z','2026-12-02T10:30:00Z','Coupe homme')],now)).toBe(false);
+    expect(minuteClock(600)).toBe('10:00');
+    expect(new Date(brusselsInstant('2026-12-02',600)).toISOString()).toBe('2026-12-02T09:00:00.000Z');
+  });
+
 });

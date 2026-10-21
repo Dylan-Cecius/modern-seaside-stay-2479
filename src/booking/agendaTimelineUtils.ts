@@ -104,3 +104,71 @@ export function eventPosition(
   const height = Math.max(1, (clampedEnd - clampedStart) * HOUR_HEIGHT / 60 - 3);
   return { top, height, compact: height < 48 };
 }
+
+
+/** Uniform 15/30-minute grid, computed from the configured opening hours. */
+export function clockMinutes(clock: string): number {
+  const match = /^([01]\d|2[0-3]):([0-5]\d)/.exec(clock);
+  return match ? Number(match[1]) * 60 + Number(match[2]) : NaN;
+}
+export function minuteClock(minutes: number): string {
+  return String(Math.floor(minutes / 60)).padStart(2, '0') +
+    ':' + String(minutes % 60).padStart(2, '0');
+}
+
+/** December 2026 in Brussels uses CET (UTC+01:00). */
+export function brusselsInstant(day: string, minutes: number): number {
+  return Date.parse(day + 'T' + minuteClock(minutes) + ':00+01:00');
+}
+
+type HoursWindow = { enabled: boolean; opens: string; closes: string };
+type BusyWindow = Pick<AgendaEvent, 'starts_at' | 'ends_at' | 'status'>;
+
+export function bookingOverlaps(
+  startsAt: number, endsAt: number, events: readonly BusyWindow[]
+): boolean {
+  return events.some((event) =>
+    event.status === 'confirmed' &&
+    Date.parse(event.starts_at) < endsAt &&
+    Date.parse(event.ends_at) > startsAt
+  );
+}
+
+/** Display only empty half-hour/quarter-hour start cells. A longer service
+ * is rechecked after it is chosen and again by the PostgreSQL exclusion constraint.
+ */
+export function availableGridStarts(
+  day: string, hours: HoursWindow | undefined,
+  events: readonly BusyWindow[], interval: number, nowMs = Date.now()
+): number[] {
+  if (!inTestPeriod(day) || !hours?.enabled || ![15, 30].includes(interval)) return [];
+  const opens = clockMinutes(hours.opens);
+  const closes = clockMinutes(hours.closes);
+  if (!Number.isFinite(opens) || !Number.isFinite(closes) || closes <= opens) return [];
+  const starts: number[] = [];
+  for (let minute = Math.ceil(opens / interval) * interval; minute + interval <= closes; minute += interval) {
+    const start = brusselsInstant(day, minute);
+    const end = brusselsInstant(day, minute + interval);
+    if (start > nowMs && !bookingOverlaps(start, end, events)) starts.push(minute);
+  }
+  return starts;
+}
+
+/** Validate the selected service against closing time and all confirmed bookings.
+ * This is an early user-facing check; create_booking remains the authoritative guard.
+ */
+export function appointmentFits(
+  day: string, minutes: number, duration: number,
+  hours: HoursWindow | undefined, events: readonly BusyWindow[],
+  nowMs = Date.now()
+): boolean {
+  if (!inTestPeriod(day) || !hours?.enabled || duration <= 0 ||
+      !Number.isFinite(duration) || !Number.isInteger(minutes)) return false;
+  const opens = clockMinutes(hours.opens);
+  const closes = clockMinutes(hours.closes);
+  if (!Number.isFinite(opens) || !Number.isFinite(closes) ||
+      minutes < opens || minutes + duration > closes || minutes % 15 !== 0) return false;
+  const start = brusselsInstant(day, minutes);
+  const end = start + duration * 60_000;
+  return start > nowMs && !bookingOverlaps(start, end, events);
+}
