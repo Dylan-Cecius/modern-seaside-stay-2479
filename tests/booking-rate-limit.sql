@@ -12,7 +12,7 @@ DECLARE svc uuid[] := ARRAY['5e84ecb6-b222-45e9-86da-7ad402e9958d'::uuid];
   ['phone_a_1','10:00','+32 470 11 22 33','a'],
   ['phone_a_2','10:30','+32 470 11 22 33','a'],
   ['phone_a_3','11:00','+32470112233','a'],
-  ['phone_a_4_other_format','11:30','0470/11.22.33','b'],
+  ['phone_a_4_other_format','11:30','0470.11.22.33','b'],
   ['phone_b_other_client','12:00','0471 99 88 77','b'],
   ['client_k1_new_phone','12:30','0472 55 44 33','a']];
  i int; res text := '';
