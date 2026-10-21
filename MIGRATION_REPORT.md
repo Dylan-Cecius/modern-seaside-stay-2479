@@ -187,7 +187,7 @@ Non testé : collision réelle avec un rendez-vous existant en base (aucune écr
 ### Limites connues (inchangées)
 - Aucun compte administrateur : le parcours authentifié (agenda, réglages, purge) n'a pas pu être exercé de bout en bout. Procédure : créer le compte dans Cloud → Users → Add user (ou connexion Google/Lovable), puis attribution du rôle admin par intervention privilégiée après vérification d'identité — aucune promotion automatique ni détournement.
 - Collisions simultanées : vérifiées par le calculateur pur (booking_free_starts) et la contrainte d'exclusion ; non exercées avec écritures réelles (instance partagée, aucun faux rendez-vous en production).
-- Purge automatique : non programmée ; le bouton manuel journalisé est la seule voie, et l'interface le dit.
+- Purge automatique : voir section « Purge quotidienne » ci-dessous.
 
 
 ## Correctif anti-abus (21/10/2026, audit propriétaire)
@@ -199,3 +199,11 @@ Non testé : collision réelle avec un rendez-vous existant en base (aucune écr
 - Rétention : entrées de plus de 24 h supprimées à chaque tentative publique ; notice de confidentialité mise à jour. Coordonnées des rendez-vous non touchées.
 - Tests réellement exécutés : `tests/booking-rate-limit.sql` (bloc unique terminé par une exception, donc annulation totale) — 3 réservations même numéro OK, 4e (autre format, autre connexion) RATE_LIMITED, autre numéro OK, même connexion avec 4e numéro RATE_LIMITED, ancienne empreinte purgée, aucune donnée brute, 4 verrous consultatifs tenus. Après test : 0 rendez-vous, 0 coordonnée, 0 empreinte, réservations toujours désactivées. Fonction `booking-public` redéployée ; appel réel refusé (400, réservations fermées), rien écrit. bun test 13/13, booking-security.py PASS, typecheck OK, référence SHA-256 inchangée.
 - Non testé : 4 requêtes réellement simultanées (impossible sans écrire des réservations persistantes) ; la sérialisation est garantie par le verrou mais non observée en parallèle. Une personne changeant de numéro ET de connexion n'est pas bloquée.
+
+## 2026-10-21 — Purge quotidienne automatique
+
+- pg_cron installé dans l'instance Cloud dédiée de ce projet (aucun effet sur d'autres projets). Tâche réellement enregistrée et active : `booking-daily-purge`, chaque jour 02:15 UTC, appel de `system_purge_expired_booking_data()` (exécution retirée à PUBLIC/anon/authenticated/service_role).
+- Effet : supprime toujours les empreintes anti-abus > 24 h ; supprime les coordonnées des rendez-vous terminés depuis plus de `retention_days` uniquement si `privacy_validated=true` et durée > 0 ; journalise chaque purge de coordonnées (`purged_by` NULL = système). La purge manuelle admin est conservée.
+- Test `tests/booking-daily-purge.sql` (bloc annulé) : non validé → 0 coordonnée effacée, empreinte ancienne effacée ; validé à 90 j → seule la fiche de 200 j effacée, journal système 1. Après test : 0 rendez-vous, 0 coordonnée, 0 empreinte, 0 journal ; réglages inchangés (tout désactivé).
+- Case du formulaire : « Je confirme avoir pris connaissance des informations de confidentialité. » (obligatoire), pour ne pas suggérer le consentement comme base légale.
+- Limite : la première exécution réelle aura lieu cette nuit ; non observée.
