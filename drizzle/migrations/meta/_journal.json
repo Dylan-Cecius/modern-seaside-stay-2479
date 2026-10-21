@@ -50,6 +50,13 @@
       "when": 1792587506259,
       "tag": "0006_read_only_slot_helper_check",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1792588613466,
+      "tag": "0007_slot_interval_rate_limit_purge",
+      "breakpoints": true
     }
   ]
 }
