@@ -98,10 +98,10 @@ export default function AgendaTimeline({
           return <div key={'lane-' + day}
             className={styles.dayLane + (!open ? ' ' + styles.closedLane : '')}
             style={{ gridRow: 2, gridColumn: index + 2, height: gridHeight }}>
-            {!open && <span className={styles.emptyLabel}>Fermé</span>}
+            {!open && daily.length === 0 && <span className={styles.emptyLabel}>Fermé</span>}
             {open && daily.length === 0 &&
               <span className={styles.emptyLabel}>Aucun rendez-vous<br />Créneaux libres</span>}
-            {open && daily.map((event) => {
+            {inTestPeriod(day) && daily.map((event) => {
               const position = eventPosition(event.starts_at, event.ends_at, range.from, range.to);
               if (!position) return null;
               const tone = eventTone(event);
