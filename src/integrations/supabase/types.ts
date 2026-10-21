@@ -14,16 +14,221 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      booking_customers: {
+        Row: {
+          consented_at: string | null
+          email: string | null
+          event_id: string
+          first_name: string
+          last_name: string
+          phone: string
+          privacy_version: string
+          source: string
+        }
+        Insert: {
+          consented_at?: string | null
+          email?: string | null
+          event_id: string
+          first_name: string
+          last_name: string
+          phone: string
+          privacy_version?: string
+          source: string
+        }
+        Update: {
+          consented_at?: string | null
+          email?: string | null
+          event_id?: string
+          first_name?: string
+          last_name?: string
+          phone?: string
+          privacy_version?: string
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_customers_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: true
+            referencedRelation: "booking_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      booking_events: {
+        Row: {
+          created_at: string
+          ends_at: string
+          id: string
+          kind: string
+          note: string
+          price_cents: number
+          service_ids: string[]
+          service_names: string
+          starts_at: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at: string
+          id?: string
+          kind: string
+          note?: string
+          price_cents?: number
+          service_ids?: string[]
+          service_names?: string
+          starts_at: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string
+          id?: string
+          kind?: string
+          note?: string
+          price_cents?: number
+          service_ids?: string[]
+          service_names?: string
+          starts_at?: string
+          status?: string
+        }
+        Relationships: []
+      }
+      booking_hours: {
+        Row: {
+          closes: string
+          enabled: boolean
+          opens: string
+          weekday: number
+        }
+        Insert: {
+          closes?: string
+          enabled?: boolean
+          opens?: string
+          weekday: number
+        }
+        Update: {
+          closes?: string
+          enabled?: boolean
+          opens?: string
+          weekday?: number
+        }
+        Relationships: []
+      }
+      booking_services: {
+        Row: {
+          active: boolean
+          duration_minutes: number
+          id: string
+          name: string
+          price_cents: number
+          sort_order: number
+          supplement: boolean
+        }
+        Insert: {
+          active?: boolean
+          duration_minutes?: number
+          id?: string
+          name: string
+          price_cents: number
+          sort_order?: number
+          supplement?: boolean
+        }
+        Update: {
+          active?: boolean
+          duration_minutes?: number
+          id?: string
+          name?: string
+          price_cents?: number
+          sort_order?: number
+          supplement?: boolean
+        }
+        Relationships: []
+      }
+      booking_settings: {
+        Row: {
+          durations_validated: boolean
+          id: boolean
+          privacy_contact: string
+          privacy_validated: boolean
+          public_enabled: boolean
+          retention_days: number
+        }
+        Insert: {
+          durations_validated?: boolean
+          id?: boolean
+          privacy_contact?: string
+          privacy_validated?: boolean
+          public_enabled?: boolean
+          retention_days?: number
+        }
+        Update: {
+          durations_validated?: boolean
+          id?: boolean
+          privacy_contact?: string
+          privacy_validated?: boolean
+          public_enabled?: boolean
+          retention_days?: number
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      admin_block: {
+        Args: { p_end: string; p_note: string; p_start: string }
+        Returns: string
+      }
+      admin_cancel: { Args: { p_id: string }; Returns: undefined }
+      booking_slots: {
+        Args: { p_date: string; p_services: string[] }
+        Returns: {
+          starts_at: string
+        }[]
+      }
+      create_booking: {
+        Args: {
+          p_consent: boolean
+          p_email: string
+          p_first: string
+          p_last: string
+          p_manual?: boolean
+          p_phone: string
+          p_services: string[]
+          p_start: string
+        }
+        Returns: string
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +355,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
