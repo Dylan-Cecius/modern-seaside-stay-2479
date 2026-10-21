@@ -111,7 +111,7 @@
 - Aucun SMS ni email de rendez-vous configuré ; aucun envoi de confirmation prétendu. Les emails d’authentification sont des fonctions Cloud distinctes et leur livraison n’a pas été testée.
 - Confidentialité : contact et conservation doivent être validés par le propriétaire. La valeur initiale de conservation proposée (90 jours) est un paramètre non validé, pas une politique confirmée. Suppression des coordonnées disponible à l’administrateur ; pas d’effacement automatique. L’avis RGPD complet/base juridique demeure à valider avant ouverture.
 - Une seule capacité simultanée ; aucun collaborateur inventé. Pas de protection anti-abus/rate limiting dédiée à ce stade ; les contraintes empêchent le chevauchement, pas le spam de créneaux distincts. À traiter avant une ouverture publique.
-- Le catalogue est provisoirement celui de l’accueil : la nouvelle liste demandée (rasage crâne + barbe à l’ancienne à 30 €, shampoing à 2 €, omission des offres à 28 € et 32 €) nécessite confirmation. Aucun tarif de l’accueil n’a été remplacé.
+- Le propriétaire a confirmé le 21/10/2026 à 12:31 UTC que les sept prestations/tarifs actuels de l’accueil font foi pour les réservations ; aucune autre prestation ajoutée et aucun tarif remplacé.
 
 ### Vérifications réellement exécutées
 - `bun test tests/booking-rules.test.ts` : 5 tests réussis, 18 assertions (décembre uniquement, conversion 10 h Bruxelles → 09 h UTC, frontière de date belge, dates manuelles hors période, champs obligatoires et courriel facultatif).
@@ -127,12 +127,22 @@
 ### Bloquants et contrôles non exécutés
 - Aucun utilisateur d’authentification n’existe encore. Aucun premier admin n’a été inventé ni auto-attribué. Connexion authentifiée, écriture/lecture via agenda, blocage, annulation et réglages n’ont donc pas été vérifiés de bout en bout.
 - Aucune fausse réservation de test créée sur l’instance partagée. Confirmation UI après écriture et collision simultanée restent non vérifiées tant qu’un environnement de test isolé ou une procédure approuvée n’est pas disponible.
-- La liste de prestations de réservation et l’éventuel besoin de profils restent à confirmer ; aucun profil client ajouté, clients sans compte.
+- Le propriétaire a confirmé : aucun profil ni compte client, uniquement les coordonnées nécessaires au rendez-vous ; compte sécurisé pour l’administrateur.
 - Le linter a signalé les fonctions SECURITY DEFINER ; les droits anonymes des fonctions privées ont été explicitement retirés et leur refus testé. La disponibilité publique est intentionnellement SECURITY DEFINER et ne retourne que des heures libres. Les fonctions admin vérifient le rôle et la création publique exige un appel serveur.
 
 ### Mise en service en aperçu (sans publication)
 1. Ouvrir `/admin` dans l’aperçu. Créer le compte propriétaire dans **Cloud → Users → Add user**, ou se connecter avec Google/Lovable pour créer son compte sans lui donner de droits.
 2. Identifier le compte propriétaire et demander l’attribution du rôle admin par opération privilégiée. Ne jamais écrire ce rôle dans un profil, des métadonnées modifiables ou le navigateur.
-3. Confirmer le catalogue de réservation, régler/valider les durées, horaires, contact RGPD et conservation ; activer les réservations uniquement après ces validations.
+3. Le catalogue est confirmé ; régler/valider les durées, horaires, contact RGPD et conservation, puis activer les réservations uniquement après ces validations.
 4. Tester les écritures dans un environnement isolé ; la présente instance est partagée. Ni domaine ni DNS ne doivent être modifiés pour ce test.
 5. Entrées : aperçu du projet + `/reservation`, `/admin`, `/reset-password`. Aucune publication nécessaire pour consulter ces pages.
+
+## Bouton unique et contrôles complémentaires — 21/10/2026, 12:31 UTC
+- Instruction explicite appliquée : les deux liens de `.hero-actions` sont remplacés au rendu par un seul lien **Réserver un rendez-vous**, `/reservation`, avec les classes exactes `button button-blue`. L’ajout voisin et sa feuille CSS ont été supprimés. La référence originale et le HTML source existant restent inchangés ; aucune navigation salon/prestations ailleurs dans la page modifiée.
+- Chromium 1280×1800 et 390×844 : un seul lien dans `.hero-actions`, classe et cible exactes, couleur calculée `rgb(22, 75, 200)`, focus clavier visible de 3 px et navigation Entrée vers réservation. Position avant défilement : x64/y615,84 en desktop ; x24/y501,05 en mobile. Visible dans le premier écran aux deux tailles.
+- Sept prestations réellement chargées depuis Cloud, calendrier décembre désactivé tant que les validations manquent, admin affiché uniquement comme formulaire de connexion sans session, page de récupération et aller-retour 404 → accueil vérifiés. Huit cartes galerie, sept tarifs et WebGL présents ; aucun débordement horizontal ni erreur de page.
+- Captures actualisées : `/tmp/browser/booking-unique/`, desktop et mobile ; captures d’accueil visualisées. Le défilement temporaire du screenshot mobile provient du focus clavier, pas d’un changement de mise en page.
+- Durcissement admin : horaires, durées et activation sont désormais enregistrés dans une seule transaction serveur via `admin_save_booking_settings`. Un échec annule tous les changements ; rôle admin vérifié avant toute modification. Aucun tarif n’est accepté par cette fonction.
+- Contrôles relancés : cinq tests/18 assertions réussis ; tests hébergés de sécurité réussis, incluant le refus public de la nouvelle fonction de réglages ; compilation automatique `build OK` à 12:33:23 UTC.
+- État confirmé par lecture Cloud : **0 compte, 0 administrateur, 0 rendez-vous**. Aucun faux compte ni rendez-vous écrit. Les tests authentifiés de l’agenda, de l’écriture réelle, de l’enregistrement des réglages et des collisions simultanées restent bloqués par l’absence du compte propriétaire et d’un environnement isolé ; ils ne sont pas présentés comme exécutés.
+- Réservation publique toujours désactivée ; durées et confidentialité à valider. Aucune publication/déploiement du site ni modification du domaine/DNS.

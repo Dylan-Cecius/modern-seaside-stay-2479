@@ -29,6 +29,13 @@
       "when": 1792585644968,
       "tag": "0003_explicit_private_booking_access",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792585984757,
+      "tag": "0004_atomic_booking_settings",
+      "breakpoints": true
     }
   ]
 }
