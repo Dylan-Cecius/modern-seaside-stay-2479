@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { isTestDate, localDecemberInstant, brusselsDay, brusselsTime, customerSchema, TIME_ZONE } from './rules';
+import { isTestDate, localDecemberInstant, brusselsDay, brusselsTime, customerSchema, TIME_ZONE } from '../src/booking/rules';
 describe('December 2026 booking rules',()=>{
  test('accepts only actual December 2026 days',()=>{expect(isTestDate('2026-12-01')).toBe(true);expect(isTestDate('2026-12-31')).toBe(true);for(const day of ['2026-11-30','2027-01-01','2025-12-01','2026-12-00','2026-12-32'])expect(isTestDate(day)).toBe(false);});
  test('10:00 Brussels is 09:00 UTC in December',()=>{expect(TIME_ZONE).toBe('Europe/Brussels');expect(localDecemberInstant('2026-12-01','10:00')).toBe('2026-12-01T09:00:00.000Z');expect(brusselsTime('2026-12-01T09:00:00Z')).toBe('10:00');});
