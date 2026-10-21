@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { isTestDate, localDecemberInstant, brusselsDay, brusselsTime, customerSchema, TIME_ZONE, canSelectBookingDay, publicBookingEnabled } from '../src/booking/rules';
+import { isTestDate, localDecemberInstant, brusselsDay, brusselsTime, customerSchema, TIME_ZONE, canSelectBookingDay, publicBookingEnabled, shouldLoadSlots, canConfirmBooking } from '../src/booking/rules';
 describe('December 2026 booking rules',()=>{
  test('demo allows open December dates after service selection without activation',()=>{expect(publicBookingEnabled({public_enabled:false,durations_validated:false,privacy_validated:false})).toBe(false);expect(canSelectBookingDay('2026-12-01','coupe',true)).toBe(true);expect(canSelectBookingDay('2026-12-01','',true)).toBe(false);});
  test('closed Sunday and Monday cannot be selected',()=>{expect(canSelectBookingDay('2026-12-06','coupe',false)).toBe(false);expect(canSelectBookingDay('2026-12-07','coupe',false)).toBe(false);});
@@ -10,4 +10,7 @@ describe('December 2026 booking rules',()=>{
  test('Belgian day boundary is independent of browser timezone',()=>{expect(brusselsDay('2026-11-30T23:00:00Z')).toBe('2026-12-01');expect(brusselsDay('2026-12-31T23:00:00Z')).toBe('2027-01-01');});
  test('rejects manual dates outside the test',()=>{expect(()=>localDecemberInstant('2027-01-01','10:00')).toThrow();});
  test('first and last name and phone are required, email optional',()=>{const valid={first:'Marie',last:'Martin',phone:'+32 470 12 34 56',email:''};expect(customerSchema.safeParse(valid).success).toBe(true);for(const key of ['first','last','phone'])expect(customerSchema.safeParse({...valid,[key]:''}).success).toBe(false);expect(customerSchema.safeParse({...valid,email:'invalid'}).success).toBe(false);});
+ test('free slots load after service and December day, even before activation',()=>{expect(shouldLoadSlots('2026-12-02','coupe')).toBe(true);expect(shouldLoadSlots('2026-12-02','')).toBe(false);expect(shouldLoadSlots('2027-01-02','coupe')).toBe(false);});
+ test('confirmation stays disabled before activation even with a chosen slot',()=>{const base={enabled:false,busy:false,slot:'2026-12-02T09:00:00Z',slots:['2026-12-02T09:00:00Z'],consent:true,manual:false};expect(canConfirmBooking(base)).toBe(false);expect(canConfirmBooking({...base,enabled:true})).toBe(true);});
+ test('stale or missing slot and missing consent block confirmation',()=>{const base={enabled:true,busy:false,slot:'2026-12-02T09:00:00Z',slots:['2026-12-02T09:30:00Z'],consent:true,manual:false};expect(canConfirmBooking(base)).toBe(false);expect(canConfirmBooking({...base,slot:''})).toBe(false);expect(canConfirmBooking({...base,slots:[base.slot],consent:false})).toBe(false);expect(canConfirmBooking({...base,slots:[base.slot],busy:true})).toBe(false);});
 });
