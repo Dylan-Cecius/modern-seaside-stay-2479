@@ -36,6 +36,13 @@
       "when": 1792585984757,
       "tag": "0004_atomic_booking_settings",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792587436465,
+      "tag": "0005_public_free_slot_preview",
+      "breakpoints": true
     }
   ]
 }
