@@ -1,7 +1,8 @@
 # Test de réservation décembre 2026
 
 - [x] Confirmer besoin de profils et liste de prestations — aucun profil client ; les sept prestations et tarifs actuels de l’accueil font foi.
-- [ ] Remplacer les deux actions hero par un seul bouton bleu Réserver un rendez-vous au même emplacement ; vérifier routes et sécurité.
+- [x] Remplacer les deux actions hero par un seul bouton bleu Réserver un rendez-vous au même emplacement ; routes, clavier, mobile et sécurité vérifiés.
+- [x] Rendre l’enregistrement des réglages atomique côté serveur ; vérifier le refus des appels publics.
 - [x] Activer Cloud et préparer stockage privé, règles serveur et contrainte de réservation atomique.
 - [x] Ajouter CTA isolé et parcours /reservation.
 - [x] Ajouter connexion sécurisée et /admin avec agenda et réglages.
